@@ -23,7 +23,7 @@ function AboutUs() {
       <div className="flex flex-col lg:flex-row items-center mb-16">
         {/* Text Content */}
         <div className="lg:w-1/2 w-full px-4 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-800 mb-6">
+          <h2 className="text-3xl font-bold text-gray-700 mb-6">
             Why
             <span
               className="text-[#8AA823]
