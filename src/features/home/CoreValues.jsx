@@ -4,36 +4,36 @@ const CoreValues = () => {
       heading: "Quick follow up, no Nonsense",
       paragraph:
         "ICG Chemicals represents a commitment to uncompromising efficiency.",
-      icon: "🚀", // Replace with your chosen icons or use a library like Font Awesome
+      icon: "./svgs/message.png",
     },
     {
       heading: "Long term partnerships",
       paragraph:
         "We pride ourselves on cultivating long-term partnerships, with a specific emphasis on specific needs.",
-      icon: "🤝",
+      icon: "./svgs/hand-shake.png",
     },
     {
       heading: "Offering the alternative",
       paragraph:
         "We source and create partner-based solutions, products, and services.",
-      icon: "🔄",
+      icon: "./svgs/roundabout.png",
     },
     {
       heading: "Low(est) price guarantee",
       paragraph: "We believe in keeping our company lean and competitive.",
-      icon: "💰",
+      icon: "./svgs/price.png",
     },
     {
       heading: "Local stock",
       paragraph:
         "Local stock ensures that all our top-performing products are readily available.",
-      icon: "📦",
+      icon: "./svgs/stock.png",
     },
     {
       heading: "Global Presence",
       paragraph:
         "Our global presence allows us to handle business directly from our Utrecht headquarters or through local distributors.",
-      icon: "🌍",
+      icon: "./svgs/globe.png",
     },
   ];
 
@@ -63,7 +63,11 @@ const CoreValues = () => {
               className="flex items-center justify-center w-20 h-20 border-[1px] border-[#8AA823] rounded-full"
               style={{ width: "100px", height: "100px" }}
             >
-              <span className="text-white text-3xl ">{value.icon}</span>
+              <img
+                src={value.icon}
+                alt={`${value.heading}`}
+                className="text-white text-3xl "
+              />
             </div>
             <h5
               className="font-bold text-lg text-teal-900"

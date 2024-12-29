@@ -6,6 +6,7 @@ import AboutUs from "./features/home/AboutUs";
 import IcgManagement from "./features/home/IcgManagement";
 import OurHistory from "./features/home/OurHistory";
 import AvailableStock from "./features/home/AvailableStock";
+import ProductDetail from "./features/home/ProductDetail";
 function App() {
   return (
     <div>
@@ -20,10 +21,10 @@ function App() {
           <Route path="/icg-management" element={<IcgManagement />} />
           <Route path="/our-history" element={<OurHistory />} />
           <Route path="/available-stocks" element={<AvailableStock />} />
-          {/* <Route path="/" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/" element={<Home />} /> */}
+          <Route
+            path="/available-stocks/:productId"
+            element={<ProductDetail />}
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
