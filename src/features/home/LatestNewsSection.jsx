@@ -6,7 +6,7 @@ const LatestNewsSection = () => {
         "Exciting news! We are thrilled to announce that we are attending Plast Eurasia 2024",
       location: "New York, USA",
       date: "December 3-5",
-      image: "./assets/adhesive.png",
+      image: "./news1.png",
     },
     {
       id: 2,
@@ -14,7 +14,7 @@ const LatestNewsSection = () => {
         "Chinaplas 2023 Exhibition in Guangzhou, China, the largest international Plastic and Rubber trade fair in Asia.",
       location: "Berlin, Germany",
       date: "December 10-12",
-      image: "./assets/agriculture.png",
+      image: "./news2.png",
     },
     {
       id: 3,
@@ -22,7 +22,7 @@ const LatestNewsSection = () => {
         "Our team will be visiting the exhibition in Guangzhou, China, from December 3–5, and we’re looking forward to connecting with our valued partners.",
       location: "Tokyo, Japan",
       date: "January 15-17",
-      image: "./assets/antioxident.png",
+      image: "./news3.png",
     },
     // Add more objects as needed
   ];

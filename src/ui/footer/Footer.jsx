@@ -7,9 +7,9 @@ function Footer() {
     {
       title: "Our Company",
       items: [
-        { text: "About ICG Chemicals", href: "/AboutPage" },
-        { text: "Management", href: "/CeoMessage" },
-        { text: "Our History", href: "/Timeline" },
+        { text: "About ICG Chemicals", href: "/about-us" },
+        { text: "Management", href: "./icg-management" },
+        { text: "Our History", href: "./our-history" },
       ],
     },
     {
@@ -51,7 +51,7 @@ function Footer() {
           <Link to="/">
             <img
               className="w-24 object-contain"
-              src="assets/logo.png"
+              src="../assets/logo.png"
               alt="ICG Chemicals Logo"
             />
           </Link>

@@ -17,7 +17,7 @@ function Navbar() {
   return (
     <div className="navbar">
       {/* Logo Section */}
-      <img className="logo-img" src="assets/logo.png" alt="Header Logo" />
+      <img className="logo-img" src="../assets/logo.png" alt="Header Logo" />
       <div className="header-logo"></div>
 
       {/* Navbar Items */}
@@ -104,13 +104,13 @@ function Navbar() {
       {/* Search and Icons Section */}
       <div className="icons">
         <div className="icon">
-          <img src="navbar/Vector.png" alt="Search icon" />
+          <img src="../navbar/Vector.png" alt="Search icon" />
         </div>
         <div className="icon">
-          <img src="navbar/earth.png" alt="earth icon" />
+          <img src="../navbar/earth.png" alt="earth icon" />
         </div>
         <div className="icon">
-          <img src="navbar/moon.png" alt="moon icon" />
+          <img src="../navbar/moon.png" alt="moon icon" />
         </div>
       </div>
 
