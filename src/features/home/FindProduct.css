@@ -1,0 +1,104 @@
+.find-product-container {
+  background-image: url("/public/assets/greenflex.png");
+  background-size: cover; /* Ensures the background image covers the container */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 541px; /* Adjust height as needed */
+  padding: 34px 0; /* Top and bottom padding only */
+  display: flex;
+  justify-content: center; /* Center form horizontally */
+  align-items: center; /* Center form vertically */
+}
+
+.find-product-form {
+  background-color: white; /* White background for the form */
+  padding: 34px 50px; /* Adjust padding for form content */
+  box-shadow: 0px 9px 21px rgba(0, 0, 0, 0.07); /* Subtle shadow */
+  border-radius: 10px; /* Rounded corners for better aesthetics */
+  max-width: 70%; /* Form width */
+  width: 100%; /* Ensure responsiveness */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* .search-button:hover {
+  background: #87b52e; /* Slightly darker green on hover */
+/* }  */
+
+.find-product-header {
+  color: #023b3b;
+  font-size: 34.5px;
+  font-family: Arial, sans-serif;
+  font-weight: 700;
+  line-height: 42.56px;
+}
+
+.other-resources {
+  text-align: center;
+  margin-top: 30px;
+  color: black;
+  font-size: 17.73px;
+  font-family: Arial, sans-serif;
+}
+
+.resource-links {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.resource-item {
+  color: #023b3b;
+  font-size: 17.73px;
+  font-family: "Noto Sans", sans-serif;
+  cursor: pointer;
+}
+
+.view-all-products {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 50px;
+  padding: 12px 20px;
+  border: 1px solid #a6ce39;
+  border-radius: 6.65px;
+  cursor: pointer;
+}
+
+.view-all-text {
+  color: #023b3b;
+  font-size: 17.73px;
+  font-family: "Noto Sans", sans-serif;
+}
+
+.view-all-arrow {
+  width: 25px;
+  height: 20px;
+}
+
+.arrow-icon {
+  border: 1.83px solid #a6ce39;
+  transform: rotate(90deg);
+  width: 7px;
+  height: 15px;
+}
+
+.view-all-products:hover {
+  background: #8aa823;
+  color: white;
+}
+
+.view-all-products:hover .view-all-text,
+.view-all-products:hover .arrow-icon {
+  color: white;
+  border-color: white;
+}

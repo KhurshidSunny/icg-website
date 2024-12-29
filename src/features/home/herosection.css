@@ -1,0 +1,198 @@
+/* General Styling */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.landing-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-container {
+  position: relative;
+  height: 100%;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.overlay h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  font-family: "Albert Sans", sans-serif;
+  font-weight: 700;
+  line-height: 41px;
+  text-align: center;
+  -webkit-text-underline-position: from-font; /* Added for Safari support */
+  text-underline-position: from-font;
+}
+
+.overlay p {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Add this to center-align the search bar */
+  width: 100%; /* Set width to 100% for consistency */
+  max-width: 800px; /* Maintain maximum width for responsiveness */
+  margin: 0 auto; /* Ensure the search bar is horizontally centered */
+}
+
+.search-bar input {
+  width: 60%; /* Adjust the width for better alignment */
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 30px;
+  color: black;
+  border: none;
+  text-align: center; /* Optional: Centers placeholder text */
+}
+
+.search-button {
+  padding: 8px;
+  font-size: 1rem;
+  background-color: #8aa823;
+  border: none;
+  color: white;
+  border-radius: 100%;
+  cursor: pointer;
+  margin-left: -40px; /* Keep the button close to the input */
+}
+
+/* Vector Animations */
+.vectors .vector-left,
+.vectors .vector-right {
+  position: absolute;
+  background: #a6ce3959;
+  opacity: 0;
+  transition: opacity 0.3s, transform 0.3s;
+  z-index: 1;
+}
+
+.vectors .vector-left {
+  bottom: 0;
+  left: 0;
+  clip-path: polygon(0 71%, 20% 47%, 76% 100%, 0 100%);
+  width: 800px;
+  height: 300px;
+}
+
+.vectors .vector-right {
+  top: 0;
+  right: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 60%, 74% 69%);
+  width: 800px;
+  height: 550px;
+}
+
+.video-container:hover .vector-left,
+.video-container:hover .vector-right {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* Chatbot Styling */
+.chat-bot {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 100;
+}
+
+.chat-button {
+  background-color: #8aa823;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.chat-window {
+  position: absolute;
+  bottom: 60px;
+  right: 0;
+  width: 300px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+.chat-header {
+  background-color: #8aa823;
+  color: white;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.chat-body {
+  padding: 10px;
+  height: 200px;
+  overflow-y: auto;
+}
+
+.chat-footer {
+  display: flex;
+  border-top: 1px solid #ccc;
+}
+
+.chat-footer input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  outline: none;
+}
+
+.chat-footer button {
+  background-color: #8aa823;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .overlay h1 {
+    font-size: 2rem;
+  }
+
+  .overlay p {
+    font-size: 1rem;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+}

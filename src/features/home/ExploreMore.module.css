@@ -1,0 +1,207 @@
+.exploreContainer {
+  text-align: center;
+  padding: 2rem;
+  background-color: white;
+}
+
+.exploreTitle {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #2b2b2b;
+}
+
+.exploreButtons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.exploreButtons button {
+  color: #000000;
+  font-family: "Noto Sans";
+  font-size: 15.185px;
+  font-style: normal;
+  font-weight: 700;
+  border: none;
+  background-color: white;
+  letter-spacing: 1.424px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.exploreButtons button:hover {
+  color: #8bc53f;
+}
+
+.exploreButtons button.active {
+  color: #8bc53f;
+  border-bottom: 2px solid black;
+}
+
+.tabButton {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  transition: background-color 0.3s;
+}
+
+.tabButton.active {
+  color: white;
+}
+
+/* Container grid for all industry cards */
+.industriesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+/* Individual industry card */
+.industryCard {
+  position: relative;
+  width: 100%;
+  max-width: 363px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.industryCard:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Card background */
+.cardBackground {
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Overlay for gradient effect */
+.cardOverlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 0%,
+    rgba(0, 0, 0, 0.59) 100%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Circle for icon */
+.iconCircle {
+  width: 80px;
+  height: 80px;
+  border: 3px solid white;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+/* Card icon inside the circle */
+.cardIcon {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+/* Title styling */
+.industryTitle {
+  color: white;
+  font-size: 18px;
+  font-family: "Noto Sans", sans-serif;
+  font-weight: 600;
+  line-height: 1.2;
+  margin: 0;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.viewAllBtn {
+  padding: 0.7rem 2rem;
+  background-color: #8bc53f;
+  color: #ffffff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.viewAllBtn:hover {
+  background-color: #6fa82e;
+}
+
+/* Responsive Design */
+/* For tablets and small screens */
+@media (max-width: 768px) {
+  .exploreButtons {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .exploreButtons button {
+    width: 100%;
+    padding: 0.7rem;
+  }
+
+  .industriesGrid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 15px;
+  }
+
+  .industryCard {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 480px) {
+  .exploreTitle {
+    font-size: 1.5rem;
+  }
+
+  .industriesGrid {
+    grid-template-columns: 1fr;
+    padding: 10px;
+  }
+
+  .exploreButtons button {
+    font-size: 14px;
+  }
+
+  .iconCircle {
+    width: 60px;
+    height: 60px;
+  }
+
+  .cardIcon {
+    width: 30px;
+    height: 30px;
+  }
+
+  .industryTitle {
+    font-size: 16px;
+  }
+}
