@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Links } from "react-router-dom";
 import "./navbar.css";
 
 function Navbar() {
@@ -43,7 +43,7 @@ function Navbar() {
               <div className="dropdown-right">
                 <Link to="/about-us">About ICG Chemicals</Link>
                 <Link to="/icg-management">Management</Link>
-                <Link to="/history">Our History</Link>
+                <Link to="/our-history">Our History</Link>
               </div>
             </div>
           )}
@@ -115,7 +115,11 @@ function Navbar() {
       </div>
 
       {/* Available Stocks Button */}
-      <div className="available-stocks">Available stocks</div>
+      <button className="available-stocks">
+        <Link to="/available-stocks" className="text-white">
+          Available Stocks
+        </Link>
+      </button>
     </div>
   );
 }
