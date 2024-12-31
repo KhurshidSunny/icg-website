@@ -121,9 +121,12 @@ const Navbar = () => {
           </div>
 
           {/* Button */}
-          <button className="ml-4 px-4 py-2 bg-[#8AA823] text-white font-bold rounded cursor-pointer">
+          <Link
+            to="/available-stocks"
+            className="ml-4 px-4 py-2 bg-[#8AA823] text-white font-bold rounded cursor-pointer"
+          >
             Available Stocks
-          </button>
+          </Link>
         </div>
       </div>
 
