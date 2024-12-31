@@ -93,7 +93,7 @@
 
 .dropdown-right a {
   text-decoration: none;
-  color: #1a73e8;
+  color: #023b3b;
   padding: 8px 0;
   font-size: 16px;
 }
@@ -229,4 +229,29 @@ Navbar container
 }
 .nav-item:hover .dropdown-menu {
   display: flex;
+}
+
+.nested-dropdown {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  z-index: 1001;
+  display: flex;
+  flex-direction: column;
+}
+
+.nested-dropdown a {
+  text-decoration: none;
+  color: #023b3b;
+  padding: 5px 10px;
+  font-size: 14px;
+}
+
+.nested-dropdown a:hover {
+  color: #8aa823;
+  background-color: #f9f9f9;
 }

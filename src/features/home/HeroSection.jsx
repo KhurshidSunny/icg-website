@@ -2,10 +2,10 @@ import { useState } from "react";
 import "./herosection.css";
 
 function HeroSection() {
-  const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  const toggleChat = () => {
-    setIsChatOpen(!isChatOpen);
+  const toggleSearch = () => {
+    setIsSearchOpen(!isSearchOpen);
   };
 
   return (
@@ -24,47 +24,26 @@ function HeroSection() {
             AT ICG SPECIALTY CHEMICALS FZCO We Aim To Improve The Quality Of
             Your Products By Providing Environmental Friendly Chemicals
           </p>
-          <div className="search-bar">
-            <input
-              type="text"
-              placeholder="Search for CAS no. or Product name"
-            />
-            <button className="search-button">
-              {/* <i className="fas fa-search"></i> */}
-              <img
-                className="searchicon"
-                src="./assets/searchicon.png"
-                alt="icon"
-              ></img>
-              {/* <i className="bi bi-search"></i> */}
+
+          <div className="search-bar-container">
+            <div className={`search-bar ${isSearchOpen ? "active" : ""}`}>
+              <input
+                type="text"
+                placeholder="Search for CAS no. or Product name"
+              />
+              <button className="search-button">
+                <img
+                  className="searchicon"
+                  src="./assets/searchicon.png"
+                  alt="icon"
+                ></img>
+              </button>
+            </div>
+            <button className="mobile-toggle-button" onClick={toggleSearch}>
+              {isSearchOpen ? "Hide Search" : "Show Search"}
             </button>
           </div>
         </div>
-        <div className="vectors">
-          <div className="vector-left"></div>
-          <div className="vector-right"></div>
-        </div>
-      </div>
-
-      <div className="chat-bot">
-        <button className="chat-button" onClick={toggleChat}>
-          Chat With Us
-        </button>
-        {isChatOpen && (
-          <div className="chat-window">
-            <div className="chat-header">
-              <h3>Chatbot</h3>
-              <button onClick={toggleChat}>&times;</button>
-            </div>
-            <div className="chat-body">
-              <p>How can we assist you?</p>
-            </div>
-            <div className="chat-footer">
-              <input type="text" placeholder="Type your message..." />
-              <button>Send</button>
-            </div>
-          </div>
-        )}
       </div>
     </div>
   );
