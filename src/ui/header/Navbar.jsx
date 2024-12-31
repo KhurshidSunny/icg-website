@@ -137,7 +137,7 @@ const Navbar = () => {
             {/* Paragraph Content */}
             {menuData[dropdown].paragraph && (
               <div>
-                <h3 className="font-bold text-gray-700">
+                <h3 className="font-bold text-gray-600">
                   {menuData[dropdown].paragraph.heading}
                 </h3>
                 <p className="text-sm text-gray-600">
