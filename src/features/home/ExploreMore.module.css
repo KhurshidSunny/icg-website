@@ -173,7 +173,7 @@
 
   .industryCard {
     max-width: 100%;
-    height: auto; /* Allow height to adjust based on content */
+    /* height: auto; Allow height to adjust based on content */
   }
 }
 

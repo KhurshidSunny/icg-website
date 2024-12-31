@@ -63,10 +63,11 @@
 }
 
 /* Search bar container */
+/* Search bar container */
 .search-container {
   display: flex;
   align-items: center;
-  width: 100%;
+  width: 100%; /* Matches the width of dropdown-container */
   margin-top: 20px;
   gap: 10px;
 }
@@ -74,31 +75,36 @@
 .search-bar {
   flex: 1;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 
 .search-icon {
   position: absolute;
   left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
   color: #aaa;
+  pointer-events: none;
 }
 
 .search-bar input {
   width: 100%;
-  padding: 10px 10px 10px 40px;
+  padding: 10px 10px 10px 40px; /* Adjust padding to include space for the icon */
   border: 1px solid #ccc;
   border-radius: 5px;
   background-color: #f9f9f9;
 }
 
 .search-button {
-  padding: 10px 20px;
-  background-color: #8aa823;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  /* padding: 0; */
+  /* border: 8px solid red; */
+
+  /* background-color: #8aa823; */
+  /* color: white; */
+  /* border-radius: 5px; */
+  /* cursor: pointer; */
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
 }
 
 .search-button:hover {
@@ -172,6 +178,20 @@
   }
 
   .view-all-products {
+    width: 100%;
+  }
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .search-container {
+    flex-direction: column;
+    gap: 10px;
+    align-items: stretch; /* Adjust alignment for smaller screens */
+  }
+
+  .search-bar,
+  .search-button {
     width: 100%;
   }
 }

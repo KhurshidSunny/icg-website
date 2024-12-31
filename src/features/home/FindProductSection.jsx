@@ -31,15 +31,19 @@ function FindProductSection() {
         </div>
 
         {/* Search bar container */}
-        <div className="search-container">
-          <div className="search-bar">
-            <span className="search-icon">🔍</span>
+        <div className="flex  mt-8 w-full items-center justify-center">
+          <div className="flex items-center w-3/5 border rounded-lg bg-white">
+            <span className=" px-3">🔍</span>
             <input
+              className="w-full px-3 py-2 outline-none"
               type="text"
               placeholder="Search for products, grades or codes"
             />
           </div>
-          <button className="search-button " onClick={handleSearch}>
+          <button
+            className="ml-2 w-20 rounded-lg bg-[#8AA823] text-white h-10 border-2 items-center justify-center"
+            onClick={handleSearch}
+          >
             Search
           </button>
         </div>

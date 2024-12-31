@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from "./ExploreMore.module.css";
+import { useNavigate } from "react-router-dom";
 
 const industries = [
   {
@@ -124,6 +125,8 @@ const categories = [
 function ExploreMore() {
   const [activeTab, setActiveTab] = useState("industries");
 
+  const navigate = useNavigate();
+
   return (
     <div className={styles.exploreContainer}>
       <h2 className={styles.exploreTitle}>Explore Our Expertise</h2>
@@ -152,7 +155,7 @@ function ExploreMore() {
             <div
               className={styles.industryCard}
               key={index}
-              onClick={() => (window.location.href = industry.link)}
+              onClick={() => navigate(industry.link)}
             >
               <div
                 className={styles.cardBackground}
@@ -164,6 +167,7 @@ function ExploreMore() {
                       src={industry.icon}
                       alt={`${industry.title} icon`}
                       className={styles.cardIcon}
+                      loading="lazy"
                     />
                   </div>
                   <h3 className={styles.industryTitle}>{industry.title}</h3>
