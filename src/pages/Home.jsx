@@ -1,3 +1,4 @@
+
 import HomeLayout from "../features/home/HomeLayout";
 
 function Home() {
@@ -6,6 +7,7 @@ function Home() {
       <HomeLayout />
     </div>
   );
+
 }
 
 export default Home;
