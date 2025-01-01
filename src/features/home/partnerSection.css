@@ -1,0 +1,76 @@
+/* Wrapper for the entire section */
+.line-section {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100px; /* Adjust height as needed */
+  padding-left: 80px;
+  background-color: lightgray;
+}
+
+/* Left side text */
+.line-text {
+  font-family: "Montserrat", sans-serif;
+  font-size: 21px;
+  font-weight: 500;
+  color: #023b3b;
+  text-transform: capitalize;
+  white-space: nowrap;
+  margin-right: 20px; /* Add some space before the vertical line */
+}
+
+/* Text highlight color */
+.highlight {
+  color: #a6ce39;
+}
+
+/* Vertical line */
+.vertical-line {
+  width: 2px;
+  height: 100%; /* Adjust to match the height of the section */
+  background: #d9d9d9;
+  margin-right: 20px; /* Space between the line and marquee */
+}
+
+/* Marquee container */
+.marquee {
+  position: relative;
+  overflow: hidden;
+  width: 100%; /* Adjust marquee width as needed */
+  height: 100%;
+  white-space: nowrap;
+  margin-right: 40px;
+  background-color: lightgray;
+  padding-top: 0px;
+}
+
+/* Inner content that will scroll */
+.marquee-content {
+  display: inline-flex;
+  align-items: center;
+  animation: marquee 15s linear infinite;
+  margin-top: 10px;
+}
+
+.marquee-content img {
+  height: 80px; /* Adjust logo size */
+  margin-right: 20px; /* Space between images */
+  object-fit: contain;
+}
+
+/* Marquee animation */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Ensure global styles */
+* {
+  font-family: "Poppins", sans-serif !important;
+  box-sizing: border-box;
+}

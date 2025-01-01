@@ -1,0 +1,142 @@
+/* General Styling */
+body,
+html {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+.landing-page {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.video-container {
+  position: relative;
+  height: 100%;
+}
+
+.background-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 20px;
+}
+
+.overlay h1 {
+  font-size: 42px;
+  margin-bottom: 20px;
+  font-family: "Albert Sans", sans-serif;
+  font-weight: 700;
+  line-height: 41px;
+  text-align: center;
+}
+
+.overlay p {
+  font-size: 1rem;
+  margin-bottom: 30px;
+  max-width: 600px;
+}
+
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 800px;
+}
+
+.search-bar input {
+  width: 60%;
+  padding: 10px;
+  font-size: 1em;
+  border-radius: 30px;
+  color: black;
+  border: none;
+  text-align: center;
+}
+
+.search-button {
+  width: 40px;
+  height: 40px;
+  background-color: #8aa823;
+  border: none;
+  color: white;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-left: -40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.search-button img {
+  width: 20px;
+  height: 20px;
+}
+
+.mobile-toggle-button {
+  display: none;
+  background-color: #8aa823;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 10px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .search-bar {
+    display: none; /* Hide the search bar by default on mobile */
+    flex-direction: column;
+    width: 90%; /* Adjust width for mobile */
+  }
+
+  .search-bar.active {
+    display: flex; /* Show the search bar when active */
+  }
+
+  .search-bar input {
+    width: 100%; /* Full width input on mobile */
+    margin-bottom: 10px; /* Add spacing between input and button */
+  }
+
+  .search-button {
+    width: 30px;
+    height: 30px;
+    margin-left: -35px;
+  }
+
+  .mobile-toggle-button {
+    display: block; /* Show the button to toggle search bar */
+  }
+}
