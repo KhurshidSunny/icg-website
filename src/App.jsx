@@ -2,11 +2,11 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import Navbar from "./ui/header/Navbar";
 import Footer from "./ui/footer/Footer";
-import AboutUs from "./features/home/AboutUs";
-import IcgManagement from "./features/home/IcgManagement";
-import OurHistory from "./features/home/OurHistory";
-import AvailableStock from "./features/home/AvailableStock";
-import ProductDetail from "./features/home/ProductDetail";
+import AboutUs from "./features/our-company/about/AboutUs";
+import IcgManagement from "./features/our-company/icg-management/IcgManagement";
+import OurHistory from "./features/our-company/our-history/OurHistory";
+import AvailableStock from "./features/our-company/available-stocks/AvailableStock";
+import ProductDetail from "./features/our-company/available-stocks/ProductDetail";
 function App() {
   return (
     <div>
