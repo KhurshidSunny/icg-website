@@ -15,7 +15,7 @@ function ICGCareer() {
         <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl"></div>
 
         <h1 className="absolute text-white 2xl:text-[48px] text-lg lg:text-3xl -tracking-tighter font-bold top-[170.32px] left-[658.0px] md:left-[295px] md:text-[25px] lg:left-[360px] xl:left-[480px] 2xl:left-[620px]">
-          Events
+          ICG Career
         </h1>
       </div>
 
