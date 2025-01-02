@@ -9,6 +9,7 @@ import AvailableStock from "./features/home/AvailableStock";
 import ProductDetail from "./features/home/ProductDetail";
 import MediaPage from "./features/media/MediaPage";
 import MediaText from "./features/media/MediaText";
+import MediaEvents from "./features/media/MediaEvents";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/available-stocks" element={<AvailableStock />} />
           <Route path="/media-news" element={<MediaPage />} />
           <Route path="/blog-articles" element={<MediaText />} />
+          <Route path="/media-events" element={<MediaEvents />} />
           <Route
             path="/available-stocks/:productId"
             element={<ProductDetail />}
