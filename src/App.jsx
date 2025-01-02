@@ -7,7 +7,8 @@ import IcgManagement from "./features/home/IcgManagement";
 import OurHistory from "./features/home/OurHistory";
 import AvailableStock from "./features/home/AvailableStock";
 import ProductDetail from "./features/home/ProductDetail";
-import MediaPage from "./features/media/MediaPage";
+import MediaPage from "./features/media/media-and-news/MediaPage";
+import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/our-history" element={<OurHistory />} />
           <Route path="/available-stocks" element={<AvailableStock />} />
           <Route path="/media-news" element={<MediaPage />} />
+          <Route path="/blog-articles" element={<BlogsAndArticles />} />
           <Route
             path="/available-stocks/:productId"
             element={<ProductDetail />}
