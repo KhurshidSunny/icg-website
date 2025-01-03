@@ -15,6 +15,7 @@ import MediaEvents from "./features/media/MediaEvents";
 import Contact from "./features/Contact/Contact";
 import ICGCareer from "./features/Jobs/ICGCareer";
 import Career from "./features/Jobs/Career";
+import Gallery from "./features/media/gallery/Gallery";
 
 function App() {
   return (
@@ -38,10 +39,11 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/life-at-icg" element={<ICGCareer />} />
           <Route path="/career" element={<Career />} />
+          <Route path="/gallery" element={<Gallery />} />
 
           <Route path="/contact" element={<Contact />} />
-         <Route
-          path="/available-stocks/:productId"
+          <Route
+            path="/available-stocks/:productId"
             element={<ProductDetail />}
           />
         </Routes>
