@@ -1,5 +1,11 @@
+import HomeLayout from "../features/our-company/our-company-home/HomeLayout";
+
 function OurCompnay() {
-  return <div>Media page</div>;
+  return (
+    <div>
+      <HomeLayout />
+    </div>
+  );
 }
 
 export default OurCompnay;
