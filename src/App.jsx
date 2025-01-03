@@ -10,7 +10,6 @@ import ProductDetail from "./features/home/ProductDetail";
 import MediaPage from "./features/media/media-and-news/MediaPage";
 import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
 import Blog from "./features/media/blogs-and-articles/Blog";
-import MediaPage from "./features/media/MediaPage";
 import MediaText from "./features/media/MediaText";
 import MediaEvents from "./features/media/MediaEvents";
 import Contact from "./features/Contact/Contact";
