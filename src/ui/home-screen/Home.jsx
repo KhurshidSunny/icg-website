@@ -1,13 +1,11 @@
+import PartnersSection from "./PartnersSection";
 import ExploreMore from "./ExploreMore";
 import FindProductSection from "./FindProductSection";
-import HeroSection from "./HeroSection";
 import LatestNewsSection from "./LatestNewsSection";
-import PartnersSection from "./PartnersSection";
 
-function HomeLayout() {
+function Home() {
   return (
     <div>
-      <HeroSection />
       <PartnersSection />
       <ExploreMore />
       <FindProductSection />
@@ -16,4 +14,4 @@ function HomeLayout() {
   );
 }
 
-export default HomeLayout;
+export default Home;

@@ -1,9 +1,10 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
   const [nestedDropdown, setNestedDropdown] = useState(null);
+  const navigate = useNavigate(); // for programmatically navigating
 
   const handleMouseEnter = (menu) => setDropdown(menu);
   const handleMouseLeave = () => {
@@ -13,6 +14,37 @@ const Navbar = () => {
 
   const handleNestedMouseEnter = (nestedTitle) => {
     setNestedDropdown(nestedTitle);
+  };
+
+  // Function to handle navigation when clicking on menu items
+  const handleMenuItemClick = (menu) => {
+    switch (menu) {
+      case "Our Company":
+        navigate("/our-company");
+        break;
+      case "Products & Solutions":
+        navigate("/products-and-solutions");
+        break;
+      case "Media":
+        navigate("/media");
+        break;
+      case "Career":
+        navigate("/career");
+        break;
+      case "Contact":
+        navigate("/contact");
+        break;
+      default:
+        break;
+    }
+  };
+
+  // handle nested menu item function
+
+  const handleNavigation = (path) => {
+    navigate(
+      `/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`
+    );
   };
 
   const menuData = {
@@ -39,7 +71,7 @@ const Navbar = () => {
           title: "ICG Market",
           nested: [
             "Adhesive and Sealants",
-            "Agriculture, Feed and Food",
+            "Agriculture Feed and Food",
             "Automotive",
             "Building and Construction",
             "Electronics",
@@ -96,26 +128,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50  py-4 ">
+    <nav className="bg-white shadow-md sticky top-0 z-50 py-4">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-evenly items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
             alt="Logo"
-            className="h-16 w-16 object-cover"
+            className="h-16 w-16 object-cover cursor-pointer"
           />
         </div>
 
         {/* Navbar Items */}
-        <div className="hidden md:flex space-x-6  items-center ">
+        <div className="hidden md:flex space-x-6 items-center">
           {Object.keys(menuData).map((menu) => (
             <div
               className="relative"
               onMouseEnter={() => handleMouseEnter(menu)}
               key={menu}
             >
-              <button className="flex items-center text-gray-700 font-bold  hover:text-[#8AA823] focus:outline-none  cursor-pointer">
+              <button
+                className="flex items-center text-gray-700 font-bold hover:text-[#8AA823] focus:outline-none cursor-pointer"
+                onClick={() => handleMenuItemClick(menu)}
+                // onClick={() => setDropdownOpen(!isDropdownOpen)}
+              >
                 {menu}{" "}
                 <span className="ml-1">
                   <img src="../navbar/down-arrow.png" alt="" />
@@ -144,7 +180,7 @@ const Navbar = () => {
       {/* Full-Screen Dropdown */}
       {dropdown && (
         <div
-          className="absolute left-0 top-full w-full bg-white shadow-lg p-8  px-48 "
+          className="absolute left-0 top-full w-full bg-white shadow-lg p-8 px-48"
           onMouseLeave={handleMouseLeave}
         >
           <div className="grid grid-cols-3 gap-6">
@@ -190,7 +226,12 @@ const Navbar = () => {
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
-                            className="text-gray-600 hover:underline hover:text-[#8AA823] cursor-pointer"
+                            className="text-gray-600  hover:underline hover:text-[#8AA823] cursor-pointer"
+                            onClick={() => handleNavigation(nestedItem)}
+                            to={`/icg-market/${nestedItem
+                              .toLowerCase()
+                              .split(" ")
+                              .join("-")}`}
                           >
                             {nestedItem}
                           </div>
