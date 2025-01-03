@@ -34,6 +34,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/life-at-icg" element={<ICGCareer />} />
           <Route path="/career" element={<Career />} />
+          <Route path="/contact" element={<Contact />} />
          <Route
             path="/available-stocks/:productId"
             element={<ProductDetail />}

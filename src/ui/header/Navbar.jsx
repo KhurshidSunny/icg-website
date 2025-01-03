@@ -81,12 +81,17 @@ const Navbar = () => {
       ],
     },
     Contact: {
-      page: true,
+      paragraph: {
+        heading: "Contact",
+        content:
+          "Have questions or need assistance? Reach out to us through our contact page.",
+      },
+      items: [{ title: "Contact", link: "/contact" }],
     },
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50  py-4 ">
+    <nav className="bg-white shadow-md sticky top-0 z-[1000]  py-4 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-evenly items-center">
         {/* Logo */}
         <div className="flex items-center">
