@@ -7,7 +7,9 @@ import IcgManagement from "./features/home/IcgManagement";
 import OurHistory from "./features/home/OurHistory";
 import AvailableStock from "./features/home/AvailableStock";
 import ProductDetail from "./features/home/ProductDetail";
-import MediaPage from "./features/media/MediaPage";
+import MediaPage from "./features/media/media-and-news/MediaPage";
+import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
+import Blog from "./features/media/blogs-and-articles/Blog";
 import MediaText from "./features/media/MediaText";
 import MediaEvents from "./features/media/MediaEvents";
 import Contact from "./features/Contact/Contact";
@@ -29,14 +31,17 @@ function App() {
           <Route path="/our-history" element={<OurHistory />} />
           <Route path="/available-stocks" element={<AvailableStock />} />
           <Route path="/media-news" element={<MediaPage />} />
+          <Route path="/blog-articles" element={<BlogsAndArticles />} />
+          <Route path="/blog-articles/:blogId" element={<Blog />} />
           <Route path="/blog-articles" element={<MediaText />} />
           <Route path="/media-events" element={<MediaEvents />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/life-at-icg" element={<ICGCareer />} />
           <Route path="/career" element={<Career />} />
+
           <Route path="/contact" element={<Contact />} />
          <Route
-            path="/available-stocks/:productId"
+          path="/available-stocks/:productId"
             element={<ProductDetail />}
           />
         </Routes>
