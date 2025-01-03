@@ -66,6 +66,7 @@ const Navbar = () => {
       items: [
         { title: "Media and News", link: "/media-news" },
         { title: "Blog & Articles", link: "/blog-articles" },
+        { title: "Events", link: "/media-events" },
       ],
     },
     Career: {
