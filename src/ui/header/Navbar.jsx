@@ -95,7 +95,7 @@ const Navbar = () => {
             "PPOLYMERS AND RESINS",
             "NUCLEATING AGENTS",
             "MASTERbATCH",
-            "PANTI BLOCKS",
+            "ANTI BLOCKS",
           ],
         },
       ],
@@ -135,9 +135,7 @@ const Navbar = () => {
   };
 
   return (
-
     <nav className="bg-white shadow-md sticky top-0 z-[1000]  py-4 ">
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-evenly items-center">
         {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>

@@ -21,6 +21,16 @@ import AboutUs from "./features/our-company/about/AboutUs";
 import IcgManagement from "./features/our-company/icg-management/IcgManagement";
 import OurHistory from "./features/our-company/our-history/OurHistory";
 import icgMarketData from "../icgMarketData.json";
+import Antioxidant from "./features/category/Antioxidant";
+import HinderedAminLightStabilizers from "./features/category/HinderedAminLightStabilizers";
+import UVAbsorbers from "./features/category/UVAbsorbers";
+import FlameRetardant from "./features/category/FlameRetardant";
+import OpticalBrightner from "./features/category/OpticalBrightner";
+import PigmentDyes from "./features/category/PigmentDyes";
+import PolymersAndResins from "./features/category/PolymersAndResins";
+import NucleactingAgents from "./features/category/NucleactingAgents";
+import MasterBatch from "./features/category/MasterBatch";
+import AntiBlock from "./features/category/AntiBlock";
 
 function App() {
   return (
@@ -46,6 +56,46 @@ function App() {
           <Route path="/life-at-icg" element={<ICGCareer />} />
           <Route path="/career" element={<Career />} />
           <Route path="/gallery" element={<Gallery />} />
+          <Route
+            path="/products-and-solutions/antioxidants-(na)"
+            element={<Antioxidant />}
+          />
+          <Route
+            path="/products-and-solutions/hindered-amine-light-stabilizers-(hals)"
+            element={<HinderedAminLightStabilizers />}
+          />
+          <Route
+            path="/products-and-solutions/uv-absorbers"
+            element={<UVAbsorbers />}
+          />
+          <Route
+            path="/products-and-solutions/flame-retardants"
+            element={<FlameRetardant />}
+          />
+          <Route
+            path="/products-and-solutions/opticalbrighteners(ob)"
+            element={<OpticalBrightner />}
+          />
+          <Route
+            path="/products-and-solutions/pigmentsand-dyes"
+            element={<PigmentDyes />}
+          />
+          <Route
+            path="/products-and-solutions/ppolymers-and-resins"
+            element={<PolymersAndResins />}
+          />
+          <Route
+            path="/products-and-solutions/nucleating-agents"
+            element={<NucleactingAgents />}
+          />
+          <Route
+            path="/products-and-solutions/masterbatch"
+            element={<MasterBatch />}
+          />
+          <Route
+            path="/products-and-solutions/anti-blocks"
+            element={<AntiBlock />}
+          />
 
           <Route path="/contact" element={<Contact />} />
           <Route
