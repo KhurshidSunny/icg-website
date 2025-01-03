@@ -24,6 +24,7 @@ const LatestNewsSection = () => {
       date: "January 15-17",
       image: "./news3.png",
     },
+
     // Add more objects as needed
   ];
 

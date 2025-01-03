@@ -1,5 +1,4 @@
-
-import HomeLayout from "../features/home/HomeLayout";
+import HomeLayout from "../features/our-company/home/HomeLayout";
 
 function Home() {
   return (
@@ -7,7 +6,6 @@ function Home() {
       <HomeLayout />
     </div>
   );
-
 }
 
 export default Home;
