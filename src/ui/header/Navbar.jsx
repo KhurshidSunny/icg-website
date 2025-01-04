@@ -26,7 +26,7 @@ const Navbar = () => {
         navigate("/products-and-solutions");
         break;
       case "Media":
-        navigate("/media");
+        navigate("/media-news");
         break;
       case "Career":
         navigate("/career");
@@ -229,11 +229,11 @@ const Navbar = () => {
 
                     {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48">
+                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
-                            className="text-gray-600  hover:underline hover:text-[#8AA823] cursor-pointer"
+                            className="text-gray-600 hover:underline hover:text-[#8AA823] cursor-pointer"
                             onClick={() => handleNavigation(nestedItem)}
                             to={`/icg-market/${nestedItem
                               .toLowerCase()

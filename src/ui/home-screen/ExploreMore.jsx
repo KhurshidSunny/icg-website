@@ -7,55 +7,55 @@ const industries = [
     title: "Automotive",
     img: "./assets/pexels-maltelu-2244746.png",
     icon: "./assets/gis_car.png",
-    link: "/Automotive",
+    link: "/products-and-solutions/automotive",
   },
   {
     title: "Printing and Packaging",
     img: "./assets/printing.png",
     icon: "./assets/iconoir_printing-page (1).png",
-    link: "/Printing",
+    link: "/products-and-solutions/printing-and-packaging",
   },
   {
     title: "Agriculture, Feed, and Food",
     img: "./assets/agriculture.png",
     icon: "/assets/SVG (9).png",
-    link: "/AgriculturePage",
+    link: "/products-and-solutions/agriculture-feed-and-food",
   },
   {
     title: "Electronics",
     img: "./assets/electronics.png",
     icon: "./assets/SVG (10).png",
-    link: "/Electronics",
+    link: "/products-and-solutions/electronics",
   },
   {
     title: "Personal and Home Care",
     img: "./assets/homebeauty.png",
     icon: "./assets/SVG14.png",
-    link: "/HomeCare",
+    link: "/products-and-solutions/personal-and-home-care",
   },
   {
     title: "Adhesives and Sealants",
     img: "./assets/adhesive.png",
     icon: "./assets/Vector (1).png",
-    link: "/Adhesive",
+    link: "/products-and-solutions/adhesive-and-sealants",
   },
   {
     title: "Paints and Coating",
     img: "./assets/paints.png",
     icon: "./assets/Vector (2).png",
-    link: "/PaintCoating",
+    link: "/products-and-solutions/paints-and-coating",
   },
   {
     title: "Building and Construction",
     img: "./assets/construction.png",
     icon: "./assets/SVG (7).png",
-    link: "/construction",
+    link: "/products-and-solutions/building-and-construction",
   },
   {
     title: "Medical and Pharmaceutical",
     img: "./assets/medical.png",
     icon: "./assets/SVG14.png",
-    link: "/Medical",
+    link: "/products-and-solutions/medical-and-pharmaceutical",
   },
 ];
 
@@ -63,62 +63,62 @@ const categories = [
   {
     title: "Antioxidants",
     img: "./assets/attachment6.png",
-    link: "/AntiOxidants",
+    link: "/products-and-solutions/antioxidants-(na)",
   },
   {
     title: "UV-absorbers",
     img: "./assets/uvab.png",
-    link: "/Absorber",
+    link: "/products-and-solutions/uv-absorbers",
   },
   {
     title: "Flame retardants",
     img: "./assets/fkamere.png",
-    link: "/FlameRetardants",
+    link: "/products-and-solutions/flame-retardants",
   },
   {
     title: "Optical Brightners",
     img: "./assets/opti.png",
-    link: "/OpticalBrightners",
+    link: "/products-and-solutions/opticalbrighteners(ob)",
   },
   {
     title: "Pigments and Dyes",
     img: "./assets/pigmentsdyes.png",
-    link: "/PigmentsDyes",
+    link: "/products-and-solutions/pigmentsand-dyes",
   },
   {
     title: "HALS",
     img: "./assets/hoc.png",
-    link: "/HALS",
+    link: "/products-and-solutions/hindered-amine-light-stabilizers-(hals)",
   },
   {
     title: "Antiblocks",
     img: "./assets/Anti-Block-Masterbatch-scaled1.png",
-    link: "/AntiBlocks",
+    link: "/products-and-solutions/anti-blocks",
   },
   {
     title: "Polymers and Resins",
     img: "./assets/polymers.png",
-    link: "/PolymersAndResins",
+    link: "/products-and-solutions/ppolymers-and-resins",
   },
   {
     title: "Plasticizers",
     img: "./assets/Plastic_Additives_430C_647x3291.png",
-    link: "/Plasticizers",
+    link: "",
   },
   {
     title: "Nucleating Agent",
     img: "./assets/csm_lohtragon-nucleating-agents_923ddb98fc1.png",
-    link: "/NucleatingAgents",
+    link: "/products-and-solutions/nucleating-agents",
   },
   {
     title: "Polymer Processing Additives",
     img: "./assets/polymer-chemistry1.png",
-    link: "/PolymerProcessingAdditives",
+    link: "/products-and-solutions/ppolymers-and-resins",
   },
   {
     title: "Masterbatches",
     img: "./assets/mast.png",
-    link: "/MasterBatches",
+    link: "/products-and-solutions/masterbatch",
   },
 ];
 
@@ -184,7 +184,7 @@ function ExploreMore() {
             <div
               className={styles.industryCard}
               key={index}
-              onClick={() => (window.location.href = category.link)}
+              onClick={() => navigate(category.link)}
             >
               <div
                 className={styles.cardBackground}

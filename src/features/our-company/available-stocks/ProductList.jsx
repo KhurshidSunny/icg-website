@@ -116,9 +116,9 @@ function ProductCards() {
           <Link
             key={index}
             to={`/available-stocks/${product.id}`}
-            className="bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-shadow duration-300"
+            className="bg-white rounded-lg shadow-md  cursor-pointer     transition-transform duration-300 ease-in-out hover:scale-105 hover:shadow-md"
           >
-            <div className="relative h-48 overflow-hidden rounded-t-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300">
+            <div className="relative h-48 overflow-hidden rounded-t-lg ">
               <img
                 src={product.img}
                 alt={product.name}

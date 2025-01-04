@@ -32,6 +32,7 @@ import NucleactingAgents from "./features/category/NucleactingAgents";
 import MasterBatch from "./features/category/MasterBatch";
 import AntiBlock from "./features/category/AntiBlock";
 import MediaEvent from "./features/media/media-and-news/MediaEvent";
+import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
           <Route path="/" element={<OurCompany />} />
 
           {/* redirect /home to / */}
-          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/our-company" element={<Navigate to="/" replace />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/icg-management" element={<IcgManagement />} />
           <Route path="/our-history" element={<OurHistory />} />
@@ -116,6 +117,7 @@ function App() {
             />
           </Route>
           <Route path="*" element={<div>404 - Page Not Found</div>} />
+          <Route path="product-finder" element={<ProductFinderHomePage />} />
         </Routes>
 
         <Footer />
