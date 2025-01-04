@@ -222,7 +222,7 @@ const Navbar = () => {
 
                     {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48">
+                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}

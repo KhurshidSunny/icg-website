@@ -22,7 +22,7 @@ function App() {
           <Route path="/" element={<OurCompany />} />
 
           {/* redirect /home to / */}
-          <Route path="/home" element={<Navigate to="/" replace />} />
+          <Route path="/our-company" element={<Navigate to="/" replace />} />
           <Route path="/about-us" element={<AboutUs />} />
           <Route path="/icg-management" element={<IcgManagement />} />
           <Route path="/our-history" element={<OurHistory />} />
