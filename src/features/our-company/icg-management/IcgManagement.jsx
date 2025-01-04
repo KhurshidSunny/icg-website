@@ -16,7 +16,7 @@ function IcgManagement() {
 
         {/* Text */}
         <h1 className="absolute text-white text-lg lg:text-3xl font-bold top-[193.32px] left-[480.04px]">
-          About ICG
+          ICG Management
         </h1>
       </div>
 
