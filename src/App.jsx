@@ -5,8 +5,8 @@ import Footer from "./ui/footer/Footer";
 import MediaPage from "./features/media/media-and-news/MediaPage";
 import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
 import Blog from "./features/media/blogs-and-articles/Blog";
-import MediaText from "./features/media/MediaText";
-import MediaEvents from "./features/media/MediaEvents";
+import MediaText from "./features/media/media-and-news/MediaText";
+import MediaEvents from "./features/media/media-and-news/MediaEvents";
 import Contact from "./features/Contact/Contact";
 import ICGCareer from "./features/Jobs/ICGCareer";
 import Career from "./features/Jobs/Career";
@@ -31,6 +31,7 @@ import PolymersAndResins from "./features/category/PolymersAndResins";
 import NucleactingAgents from "./features/category/NucleactingAgents";
 import MasterBatch from "./features/category/MasterBatch";
 import AntiBlock from "./features/category/AntiBlock";
+import MediaEvent from "./features/media/media-and-news/MediaEvent";
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path="/blog-articles/:blogId" element={<Blog />} />
           <Route path="/blog-articles" element={<MediaText />} />
           <Route path="/media-events" element={<MediaEvents />} />
+          <Route path="/media-events/:mediaId" element={<MediaEvent />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/life-at-icg" element={<ICGCareer />} />
           <Route path="/career" element={<Career />} />
