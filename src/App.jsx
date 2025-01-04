@@ -11,7 +11,7 @@ import Contact from "./features/Contact/Contact";
 import ICGCareer from "./features/Jobs/ICGCareer";
 import Career from "./features/Jobs/Career";
 import Gallery from "./features/media/gallery/Gallery";
-import Home from "./ui/home-screen/home";
+import Home from "./ui/home-screen/Home";
 import IcgMarketTemplate from "./product-and-solutions/icg-market/IcgMarketTemplate";
 import IcgLayout from "./product-and-solutions/icg-market/IcgLayout";
 import ProductDetail from "./features/our-company/available-stocks/ProductDetail";
