@@ -1,43 +1,38 @@
+import { useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../../../axios";
 import { useQuery } from "@tanstack/react-query";
 
-function MediaPage() {
-  console.log("access", import.meta.env.VITE_ACCESS_TOKEN);
+function AllMediaEvents() {
+  const [searchParams] = useSearchParams();
+  const page = searchParams.get("page");
+  const limit = searchParams.get("limit");
+
+  if (!page || page < 1 || isNaN(page)) page = 1;
+  if (!limit || limit < 10 || isNaN(limit)) limit = 10;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["allNewsAndUpdates"],
+    queryKey: ["newsAndUpdates"],
     queryFn: async () => {
-      const data = await axiosInstance.get("/mediaAndNews/?page=1&limit=10", {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
-        },
-      });
+      const data = await axiosInstance.get(
+        `/mediaAndNews/?page=${page}&limit=${limit}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
+          },
+        }
+      );
       return data.data.data;
     },
   });
 
-  console.log("Query", data);
+  console.log("All media event page");
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
-      <div
-        className="relative mb-16 max-w-[1408.96px] min-h-[427.22px] w-full h-full object-cover object-center flex items-center justify-center"
-        style={{
-          backgroundImage: 'url("./assets/MediaNewsImages/NewsPaperImage.png")',
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-      >
-        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
-        <h1 className="relative z-10 text-white text-lg lg:text-3xl font-bold md:text-[25px]">
-          New Releases
-        </h1>
-      </div>
-
       <div className="flex justify-center ">
         <h1 className="uppercase text-[#8AA823] text-xl font-bold sm:text-[18px] md:text-xl lg:text-xl 2xl:text-xl">
-          Latest News and updates{" "}
+          All News and updates{" "}
         </h1>
       </div>
 
@@ -88,11 +83,11 @@ function MediaPage() {
 
       {data?.mediaAndNews.length > 0 && (
         <div className="flex justify-center items-center mt-20 underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B] sm:text-[20px]">
-          <a href="/all-media-events?page=1&limit=10">See all media and news</a>
+          <a href="/media-events/all">See all media and news</a>
         </div>
       )}
     </div>
   );
 }
 
-export default MediaPage;
+export default AllMediaEvents;
