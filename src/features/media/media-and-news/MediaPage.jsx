@@ -5,7 +5,7 @@ function MediaPage() {
   console.log("access", import.meta.env.VITE_ACCESS_TOKEN);
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["allNewsAndUpdates"],
+    queryKey: ["NewsAndUpdates"],
     queryFn: async () => {
       const data = await axiosInstance.get("/mediaAndNews/?page=1&limit=10", {
         headers: {
