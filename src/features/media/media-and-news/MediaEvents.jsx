@@ -105,7 +105,7 @@ function MediaEvents() {
       <div className="w-full flex flex-col gap-5 mt-10">
         {data?.events?.map((event) => (
           <a
-            href="#"
+            href={`/media-events/${event._id}`}
             key={event._id}
             className="w-full p-5 h-[200px] flex justify-between rounded-[8px] bg-[#F2F2F2] xl:h-[300px ] 2xl:h-[240px]"
           >
