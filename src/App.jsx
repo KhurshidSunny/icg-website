@@ -70,7 +70,7 @@ function App() {
             {/* <Route path="/blog-articles" element={<MediaText />} /> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/life-at-icg" element={<ICGCareer />} />
-            <Route path="/career" element={<Career />} />
+            <Route path="/job/:jobId" element={<Career />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route
               path="/products-and-solutions/antioxidants-(na)"
