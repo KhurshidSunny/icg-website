@@ -3,30 +3,28 @@ import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../../../axios";
 
-export default function Blog() {
-  const { blogId } = useParams();
+export default function Article() {
+  const { articleId } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["single_blog"],
+    queryKey: ["single_article"],
     queryFn: async () => {
-      const data = await axiosInstance.get(`/blogs/${blogId}`, {
+      const data = await axiosInstance.get(`/articles/${articleId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
         },
       });
-      return data.data.data.blog;
+      return data.data.data.article;
     },
   });
-
-  console.log("Single Blog", data);
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
       <div
         className="relative mb-16 max-w-[1408.96px] min-h-[427.22px] w-full h-full object-cover object-center flex items-center justify-center"
         style={{
-          backgroundImage: `url(${data?.featured_image})`,
+          backgroundImage: `url(${data?.banner})`,
           backgroundSize: "cover",
           backgroundPosition: "center",
         }}
@@ -37,7 +35,7 @@ export default function Blog() {
         </h1>
       </div>
 
-      <div className="my-2">{data?.contents}</div>
+      <div className="my-2">{data?.description}</div>
     </div>
   );
 }

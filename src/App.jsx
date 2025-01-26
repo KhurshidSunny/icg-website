@@ -35,6 +35,9 @@ import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllMediaEvents from "./features/media/media-and-news/AllMediaEvents";
+import AllBlogs from "./features/media/blogs-and-articles/AllBlogs";
+import AllArticles from "./features/media/blogs-and-articles/AllArticles";
+import Article from "./features/media/blogs-and-articles/Article";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -61,7 +64,10 @@ function App() {
             <Route path="/media-events/:mediaId" element={<MediaEvent />} />
             <Route path="/blog-articles" element={<BlogsAndArticles />} />
             <Route path="/blog-articles/:blogId" element={<Blog />} />
-            <Route path="/blog-articles" element={<MediaText />} />
+            <Route path="/articles/:articleId" element={<Article />} />
+            <Route path="/all-blogs" element={<AllBlogs />} />
+            <Route path="/all-articles" element={<AllArticles />} />
+            {/* <Route path="/blog-articles" element={<MediaText />} /> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/life-at-icg" element={<ICGCareer />} />
             <Route path="/career" element={<Career />} />

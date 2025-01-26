@@ -2,8 +2,6 @@ import { axiosInstance } from "../../../axios";
 import { useQuery } from "@tanstack/react-query";
 
 function MediaPage() {
-  console.log("access", import.meta.env.VITE_ACCESS_TOKEN);
-
   const { data, isLoading, error } = useQuery({
     queryKey: ["NewsAndUpdates"],
     queryFn: async () => {
