@@ -63,62 +63,62 @@ const categories = [
   {
     title: "Antioxidants",
     img: "./assets/attachment6.png",
-    link: "/AntiOxidants",
+    link: "/products-and-solutions/antioxidants-(na)",
   },
   {
     title: "UV-absorbers",
     img: "./assets/uvab.png",
-    link: "/Absorber",
+    link: "/products-and-solutions/uv-absorbers",
   },
   {
     title: "Flame retardants",
     img: "./assets/fkamere.png",
-    link: "/FlameRetardants",
+    link: "/products-and-solutions/flame-retardants",
   },
   {
     title: "Optical Brightners",
     img: "./assets/opti.png",
-    link: "/OpticalBrightners",
+    link: "/products-and-solutions/opticalbrighteners(ob)",
   },
   {
     title: "Pigments and Dyes",
     img: "./assets/pigmentsdyes.png",
-    link: "/PigmentsDyes",
+    link: "/products-and-solutions/pigmentsand-dyes",
   },
   {
     title: "HALS",
     img: "./assets/hoc.png",
-    link: "/HALS",
+    link: "/products-and-solutions/hindered-amine-light-stabilizers-(hals)",
   },
   {
     title: "Antiblocks",
     img: "./assets/Anti-Block-Masterbatch-scaled1.png",
-    link: "/AntiBlocks",
+    link: "/products-and-solutions/anti-blocks",
   },
   {
     title: "Polymers and Resins",
     img: "./assets/polymers.png",
-    link: "/PolymersAndResins",
+    link: "/products-and-solutions/ppolymers-and-resins",
   },
   {
     title: "Plasticizers",
     img: "./assets/Plastic_Additives_430C_647x3291.png",
-    link: "/Plasticizers",
+    link: "",
   },
   {
     title: "Nucleating Agent",
     img: "./assets/csm_lohtragon-nucleating-agents_923ddb98fc1.png",
-    link: "/NucleatingAgents",
+    link: "/products-and-solutions/nucleating-agents",
   },
   {
     title: "Polymer Processing Additives",
     img: "./assets/polymer-chemistry1.png",
-    link: "/PolymerProcessingAdditives",
+    link: "/products-and-solutions/ppolymers-and-resins",
   },
   {
     title: "Masterbatches",
     img: "./assets/mast.png",
-    link: "/MasterBatches",
+    link: "/products-and-solutions/masterbatch",
   },
 ];
 
@@ -184,7 +184,7 @@ function ExploreMore() {
             <div
               className={styles.industryCard}
               key={index}
-              onClick={() => (window.location.href = category.link)}
+              onClick={() => navigate(category.link)}
             >
               <div
                 className={styles.cardBackground}

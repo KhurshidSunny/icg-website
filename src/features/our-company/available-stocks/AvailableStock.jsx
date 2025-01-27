@@ -18,7 +18,7 @@ function AvailableStock() {
 
         {/* Text */}
         <h1 className="absolute text-white text-lg lg:text-3xl font-bold top-[193.32px] left-[480.04px]">
-          About ICG
+          Available Stock
         </h1>
       </div>
       {/* products */}
