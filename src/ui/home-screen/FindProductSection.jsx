@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import useFetchProducts from "../../hooks/useFetchProducts";
 import debounce from "lodash/debounce"; // Use lodash for debouncing input
 import "./FindProduct.css";
 
 function FindProductSection() {
+  // eslint-disable-next-line no-unused-vars
   const [page, setPage] = useState(1); // Page state
   const [selectedProduct, setSelectedProduct] = useState(null); // Selected product state
   const [searchQuery, setSearchQuery] = useState(""); // Search query state
   const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(""); // Debounced search query state
   const navigate = useNavigate();
 
-  // Using the custom hook to fetch products
-  const { products, isLoading, error } = useFetchProducts(page);
+
 
   // Handle "View All Products" click
   const handleViewAll = () => {
