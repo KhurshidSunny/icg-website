@@ -110,7 +110,7 @@ const Navbar = () => {
         { title: "Media and News", link: "/media-news" },
         { title: "Blog & Articles", link: "/blog-articles" },
         { title: "Events", link: "/media-events" },
-        { title: "Gallery", link: "/gallery" },
+        // { title: "Gallery", link: "/gallery" },
       ],
     },
     Career: {

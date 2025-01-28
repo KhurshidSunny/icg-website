@@ -72,9 +72,10 @@ function App() {
             <Route path="/all-articles" element={<AllArticles />} />
             {/* <Route path="/blog-articles" element={<MediaText />} /> */}
             <Route path="/contact" element={<Contact />} />
-            <Route path="/life-at-icg" element={<ICGCareer />} />
+            <Route path="/life-at-icg" element={<Gallery />} />
+            <Route path="/career" element={<ICGCareer />} />
             <Route path="/job/:jobId" element={<Career />} />
-            <Route path="/gallery" element={<Gallery />} />
+            {/* <Route path="/gallery" element={<Gallery />} /> */}
             <Route
               path="/products-and-solutions/antioxidants-(na)"
               element={<Antioxidant />}
