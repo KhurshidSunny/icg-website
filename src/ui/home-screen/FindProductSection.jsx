@@ -1,9 +1,6 @@
-
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import axios from "axios"
+import axios from "axios";
 import "./FindProduct.css";
 
 const API_URL = "http://208.109.240.175:3000/api/external/products";
@@ -11,41 +8,55 @@ const API_URL = "http://208.109.240.175:3000/api/external/products";
 function FindProductSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  // Fetch products using React Query (v5 syntax)
-  const { data: products = [], isLoading, error } = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => {
+  // Handle search input change
+  const handleSearchChange = async (event) => {
+    setSearchTerm(event.target.value);
+    setSelectedProduct(null); // Reset selected product when search term changes
+
+    if (event.target.value.trim() !== "") {
+      setIsLoading(true);
       try {
         const response = await axios.get(API_URL, {
           headers: {
             "Content-Type": "application/json",
           },
         });
-        return response.data?.data?.products || [];
+
+        if (response.status === 200) {
+          const fetchedProducts = response.data?.data?.products || [];
+          setProducts(fetchedProducts);
+
+          // Filter products based on search term
+          const foundProduct = fetchedProducts.find((p) =>
+            p.name.toLowerCase().includes(event.target.value.toLowerCase())
+          );
+          setSelectedProduct(foundProduct || null); // If no product matches, set to null
+        } else {
+          throw new Error(`Unexpected status code: ${response.status}`);
+        }
       } catch (err) {
-        console.error("Error fetching products:", err.message);
-        throw err; // Re-throw error to handle it in React Query
+        // Specific error handling based on the response error
+        if (err.response) {
+          setError(`Server error: ${err.response.status} - ${err.response.statusText}`);
+          console.error("Error fetching products:", err.response);
+        } else if (err.request) {
+          setError("Network error. Please check your internet connection.");
+          console.error("Error fetching products:", err.request);
+        } else {
+          setError("Error loading products. Please try again later.");
+          console.error("Error fetching products:", err.message);
+        }
+      } finally {
+        setIsLoading(false);
       }
-    },
-  });
-
-  // Search for the product when the search term changes
-  useEffect(() => {
-    if (searchTerm.trim() === "") {
-      setSelectedProduct(null); // Reset the selected product if search term is empty
     } else {
-      const product = products.find((p) =>
-        p.name.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      setSelectedProduct(product || null); // If no product matches, set to null
+      setSelectedProduct(null); // Reset if search term is cleared
     }
-  }, [searchTerm, products]);
-
-  // Handle search input change
-  const handleSearchChange = (event) => {
-    setSearchTerm(event.target.value);
   };
 
   // Handle "View All Products" click
@@ -70,17 +81,18 @@ function FindProductSection() {
               onChange={handleSearchChange}
             />
           </div>
-          <button
-            className="ml-2 w-20 rounded-lg bg-[#8AA823] text-white h-10 border-2 items-center justify-center"
-            onClick={() => console.log("Searching for:", searchTerm)}
-          >
-            Search
-          </button>
         </div>
 
-        {/* Display the selected product */}
-        {selectedProduct && (
-          <div className="selected-product-container">
+        {/* Display the selected product if it matches the search term */}
+        {isLoading && (
+          <div className="text-center mt-4 text-gray-500">
+            Searching for products...
+          </div>
+        )}
+
+        {/* Display product or no product message */}
+        {selectedProduct ? (
+          <div className="search-result-container bg-gray-200 p-4 rounded-lg mt-4 w-3/5 mx-auto">
             <div
               key={selectedProduct.id}
               className="product-card"
@@ -99,16 +111,13 @@ function FindProductSection() {
               </div>
             </div>
           </div>
-        )}
-
-        {isLoading && <div>Loading products...</div>}
-        {error && (
-          <div className="error-message">
-            Error loading products: {error.message}. Please try again later.
-          </div>
-        )}
-        {!selectedProduct && searchTerm && (
-          <div>No product found matching "{searchTerm}".</div>
+        ) : (
+          // Show message when no product is found
+          searchTerm && !isLoading && (
+            <div className="text-center mt-4 text-gray-500">
+              No product found matching "{searchTerm}".
+            </div>
+          )
         )}
 
         {/* Dropdown container */}
