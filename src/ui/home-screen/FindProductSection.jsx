@@ -1,49 +1,57 @@
+
+
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import debounce from "lodash/debounce"; // Use lodash for debouncing input
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios"
 import "./FindProduct.css";
 
+const API_URL = "http://208.109.240.175:3000/api/external/products";
+
 function FindProductSection() {
-  // eslint-disable-next-line no-unused-vars
-  const [page, setPage] = useState(1); // Page state
-  const [selectedProduct, setSelectedProduct] = useState(null); // Selected product state
-  const [searchQuery, setSearchQuery] = useState(""); // Search query state
-  const [debouncedSearchQuery, setDebouncedSearchQuery] = useState(""); // Debounced search query state
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedProduct, setSelectedProduct] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch products using React Query (v5 syntax)
+  const { data: products = [], isLoading, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      try {
+        const response = await axios.get(API_URL, {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        return response.data?.data?.products || [];
+      } catch (err) {
+        console.error("Error fetching products:", err.message);
+        throw err; // Re-throw error to handle it in React Query
+      }
+    },
+  });
 
+  // Search for the product when the search term changes
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setSelectedProduct(null); // Reset the selected product if search term is empty
+    } else {
+      const product = products.find((p) =>
+        p.name.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setSelectedProduct(product || null); // If no product matches, set to null
+    }
+  }, [searchTerm, products]);
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
   // Handle "View All Products" click
   const handleViewAll = () => {
     navigate("/product-finder");
   };
-
-  // Handle product selection
-  const handleProductSelect = (product) => {
-    setSelectedProduct(product);
-  };
-
-  // Handle search input change with debouncing
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
-
-  // Debounce search query to reduce the number of API calls
-  const debouncedSearch = debounce((query) => {
-    setDebouncedSearchQuery(query);
-  }, 500);
-
-  // Effect to handle the debounced search query
-  useEffect(() => {
-    if (searchQuery) {
-      debouncedSearch(searchQuery);
-    }
-  }, [searchQuery]);
-
-  // Filter products based on search query
-  const filteredProducts = products?.filter((product) =>
-    product.name.toLowerCase().includes(debouncedSearchQuery.toLowerCase())
-  );
 
   return (
     <div className="find-product-container">
@@ -58,15 +66,21 @@ function FindProductSection() {
               className="w-full px-3 py-2 outline-none"
               type="text"
               placeholder="Search for products, grades or codes"
+              value={searchTerm}
               onChange={handleSearchChange}
-              value={searchQuery}
             />
           </div>
+          <button
+            className="ml-2 w-20 rounded-lg bg-[#8AA823] text-white h-10 border-2 items-center justify-center"
+            onClick={() => console.log("Searching for:", searchTerm)}
+          >
+            Search
+          </button>
         </div>
 
-        {/* Display the selected product if it matches */}
+        {/* Display the selected product */}
         {selectedProduct && (
-          <div className="search-result-container bg-gray-200 p-4 rounded-lg mt-4 w-3/5 mx-auto">
+          <div className="selected-product-container">
             <div
               key={selectedProduct.id}
               className="product-card"
@@ -87,34 +101,17 @@ function FindProductSection() {
           </div>
         )}
 
-        {/* Show message when no products are found */}
-        {!filteredProducts?.length && debouncedSearchQuery && (
-          <div className="text-center mt-4 text-gray-500">
-            Product cannot be found.
+        {isLoading && <div>Loading products...</div>}
+        {error && (
+          <div className="error-message">
+            Error loading products: {error.message}. Please try again later.
           </div>
         )}
-
-        {/* Show filtered products below search bar */}
-        {filteredProducts?.length > 0 && !selectedProduct && (
-          <div className="products-container">
-            {filteredProducts?.map((product) => (
-              <div key={product.id} className="product-card" onClick={() => handleProductSelect(product)}>
-                <img
-                  src={product.banner}
-                  alt={product.name}
-                  className="product-card-image"
-                />
-                <div className="product-card-content">
-                  <h3 className="product-card-title">{product.name}</h3>
-                  <p className="product-card-description">
-                    {product.description.substring(0, 80)}...
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+        {!selectedProduct && searchTerm && (
+          <div>No product found matching "{searchTerm}".</div>
         )}
 
+        {/* Dropdown container */}
         <div className="dropdown-container">
           <div className="dropdown-item">
             <label htmlFor="industries">Industries</label>
