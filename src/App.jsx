@@ -54,6 +54,16 @@ function App() {
           <Routes>
             <Route path="/" element={<OurCompany />} />
 
+          {/* redirect /home to / */}
+          <Route path="/our-company" element={<Navigate to="/" replace />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/icg-management" element={<IcgManagement />} />
+          <Route path="/our-history" element={<OurHistory />} />
+          <Route path="/available-stocks" element={<AvailableStock />} />
+          <Route
+            path="/available-stocks/:productId"
+            element={<ProductDetail />}
+          />
             {/* redirect /home to / */}
             <Route path="/our-company" element={<Navigate to="/" replace />} />
             <Route path="/about-us" element={<AboutUs />} />
@@ -135,6 +145,7 @@ function App() {
             </Route>
             <Route path="*" element={<div>404 - Page Not Found</div>} />
             <Route path="product-finder" element={<ProductFinderHomePage />} />
+            <Route path="product/productId" element={<ProductDetail />} />
           </Routes>
 
           <Footer />
