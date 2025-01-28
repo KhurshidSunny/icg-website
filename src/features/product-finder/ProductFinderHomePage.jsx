@@ -1,21 +1,9 @@
-import { useState } from "react";
 import { BiRightArrowAlt } from "react-icons/bi";
-import { PiCaretUpDownFill } from "react-icons/pi";
+
 import ProductList from "../our-company/available-stocks/ProductList";
 
 function ProductFinderHomePage() {
-  const [industry, setIndustry] = useState("");
-  const [category, setCategory] = useState("");
-  const [search, setSearch] = useState("");
-  const [market, setMarket] = useState("");
-  const [sortOrder, setSortOrder] = useState("A-Z");
 
-  // eslint-disable-next-line no-unused-vars
-  const handleIndustryChange = (event) => setIndustry(event.target.value);
-  const handleCategoryChange = (event) => setCategory(event.target.value);
-  const handleSearchChange = (event) => setSearch(event.target.value);
-  const handleMarketChange = (event) => setMarket(event.target.value);
-  const handleSortOrderChange = (event) => setSortOrder(event.target.value);
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
@@ -41,59 +29,9 @@ function ProductFinderHomePage() {
         </div>
       </div>
 
-      {/* Filter Box */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 py-4">
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px]">
-          <select
-            value={sortOrder}
-            onChange={handleSortOrderChange}
-            className="w-full"
-          >
-            <option value="A-Z">A-Z</option>
-            <option value="Z-A">Z-A</option>
-          </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px]">
-          <input
-            placeholder="Search Product"
-            value={search}
-            onChange={handleSearchChange}
-            className="w-full"
-          />
-        </div>
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px]">
-          <select
-            value={market}
-            onChange={handleMarketChange}
-            className="w-full"
-          >
-            <option value="Market1">Market1</option>
-            <option value="Market2">Market2</option>
-          </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px]">
-          <select
-            value={category}
-            onChange={handleCategoryChange}
-            className="w-full"
-          >
-            <option value="">Select Category</option>
-            <option value="Category">Category</option>
-            <option value="Industry">Industry</option>
-          </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-      </div>
+      
 
-      <ProductList
-        industry={industry}
-        category={category}
-        search={search}
-        market={market}
-        sortOrder={sortOrder}
-      />
+      <ProductList />
     </div>
   );
 }
