@@ -1,67 +1,51 @@
+/* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { useNavigate, Link } from "react-router-dom";  // Import Link for navigation
+import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
 import "./FindProduct.css";
 
-const API_URL = "http://208.109.240.175:3000/api/external/products";
+const API_URL = "/products";
 
 function FindProductSection() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState(null);
+  const [products, setProducts] = useState([]); // All fetched products
+  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products based on search
   const navigate = useNavigate();
 
-  // Handle search input change
-  const handleSearchChange = async (event) => {
-    setSearchTerm(event.target.value);
-    setSelectedProduct(null); // Reset selected product when search term changes
-
-    if (event.target.value.trim() !== "") {
-      setIsLoading(true);
+  // Fetch all products on component load
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
-        const response = await axios.get(API_URL, {
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const response = await axiosInstance.get(API_URL, {
+          params: { page: 1, limit: 50 }, // Required parameters
         });
-
         if (response.status === 200) {
-          const fetchedProducts = response.data?.data?.products || [];
-          setProducts(fetchedProducts);
-
-          // Filter products based on search term
-          const foundProduct = fetchedProducts.find((p) =>
-            p.name.toLowerCase().includes(event.target.value.toLowerCase())
-          );
-          setSelectedProduct(foundProduct || null); // If no product matches, set to null
+          setProducts(response.data?.data?.products || []); // Save all fetched products
         } else {
-          throw new Error(`Unexpected status code: ${response.status}`);
+          console.error(`Unexpected status code: ${response.status}`);
         }
       } catch (err) {
-        // Specific error handling based on the response error
-        if (err.response) {
-          setError(`Server error: ${err.response.status} - ${err.response.statusText}`);
-          console.error("Error fetching products:", err.response);
-        } else if (err.request) {
-          setError("Network error. Please check your internet connection.");
-          console.error("Error fetching products:", err.request);
-        } else {
-          setError("Error loading products. Please try again later.");
-          console.error("Error fetching products:", err.message);
-        }
-      } finally {
-        setIsLoading(false);
+        console.error("Error fetching products:", err.message);
       }
-    } else {
-      setSelectedProduct(null); // Reset if search term is cleared
-    }
-  };
+    };
 
-  // Handle "View All Products" click
-  const handleViewAll = () => {
-    navigate("/product-finder");
+    fetchProducts();
+  }, []);
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const term = event.target.value.trim().toLowerCase();
+    setSearchTerm(term);
+
+    if (term) {
+      // Filter products based on search term
+      const matchedProducts = products.filter((p) =>
+        p.name.toLowerCase().includes(term)
+      );
+      setFilteredProducts(matchedProducts);
+    } else {
+      setFilteredProducts([]); // Reset filtered products if search is cleared
+    }
   };
 
   return (
@@ -83,41 +67,41 @@ function FindProductSection() {
           </div>
         </div>
 
-        {/* Display the selected product if it matches the search term */}
-        {isLoading && (
-          <div className="text-center mt-4 text-gray-500">
-            Searching for products...
+        {/* Display filtered products */}
+        {filteredProducts.length > 0 && (
+          <div className="search-result-container bg-slate-200 p-4 rounded-lg mt-4 w-3/5 mx-auto space-y-4">
+            {filteredProducts.map((product) => (
+               <Link
+               key={product._id}
+               to={`/available-stocks/${product._id}`} // Link to ProductDetails page with product ID
+               className="w-[45%]  border  rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg mb-4 p-4"
+             >
+               {/* Image Container */}
+               <div className="bg-white rounded-t-lg overflow-hidden">
+                 <img
+                   src={product.banner}
+                   alt={product.name}
+                   className="w-full h-32 object-cover"
+                 />
+               </div>
+         
+               {/* Product Info */}
+               <div className="py-4 text-center">
+                 <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
+                 <p className="text-sm text-gray-600">{product.chemical_name}</p>
+               </div>
+             </Link>
+          
+            
+            ))}
           </div>
         )}
 
-        {/* Display product or no product message */}
-        {selectedProduct ? (
-          <div className="search-result-container bg-gray-200 p-4 rounded-lg mt-4 w-3/5 mx-auto">
-            <div
-              key={selectedProduct.id}
-              className="product-card"
-              onClick={() => navigate(`/product-details/${selectedProduct.id}`)}
-            >
-              <img
-                src={selectedProduct.banner}
-                alt={selectedProduct.name}
-                className="product-card-image"
-              />
-              <div className="product-card-content">
-                <h3 className="product-card-title">{selectedProduct.name}</h3>
-                <p className="product-card-description">
-                  {selectedProduct.description.substring(0, 80)}...
-                </p>
-              </div>
-            </div>
+        {/* Show message if no product matches */}
+        {searchTerm && filteredProducts.length === 0 && (
+          <div className="text-center mt-4 text-gray-500">
+            No product found matching "{searchTerm}".
           </div>
-        ) : (
-          // Show message when no product is found
-          searchTerm && !isLoading && (
-            <div className="text-center mt-4 text-gray-500">
-              No product found matching "{searchTerm}".
-            </div>
-          )
         )}
 
         {/* Dropdown container */}
@@ -126,12 +110,33 @@ function FindProductSection() {
             <label htmlFor="industries">Industries</label>
             <select id="industries">
               <option value="select industries">Select industries</option>
+              <option value="Automotive">Automotive</option>
+              <option value="Printing and Packaging">Printing and Packaging</option>
+              <option value="Agriculture, Feed, and Food">Agriculture, Feed, and Food</option>
+              <option value="Electronics">Electronics</option>
+              <option value="Personal and Home Care">Personal and Home Care</option>
+              <option value="Adhesives and Sealants">Adhesives and Sealants</option>
+              <option value="Paints and Coating">Paints and Coating</option>
+              <option value="Building and Construction">Building and Construction</option>
+              <option value="Medical and Pharmaceutical">Medical and Pharmaceutical</option>
             </select>
           </div>
           <div className="dropdown-item">
             <label htmlFor="solutions">Chemical Solutions</label>
             <select id="solutions">
-              <option value="select solution">Select solution</option>
+              <option value="select category">Select category</option>
+              <option value="Antioxidants">Antioxidants</option>
+              <option value="UV-absorbers">UV-absorbers</option>
+              <option value="Flame retardants">Flame retardants</option>
+              <option value="Optical Brightners">Optical Brightners</option>
+              <option value="Pigments and Dyes">Pigments and Dyes</option>
+              <option value="HALS">HALS</option>
+              <option value="Antiblocks">Antiblocks</option>
+              <option value="Polymers and Resins">Polymers and Resins</option>
+              <option value="Plasticizers">Plasticizers</option>
+              <option value="Nucleating Agent">Nucleating Agent</option>
+              <option value="Polymer Processing Additives">Polymer Processing Additives</option>
+              <option value="Masterbatches">Masterbatches</option>
             </select>
           </div>
         </div>
@@ -146,7 +151,7 @@ function FindProductSection() {
           <div className="resource-item">Product Brochures</div>
         </div>
 
-        <div className="view-all-products" onClick={handleViewAll}>
+        <div className="view-all-products" onClick={() => navigate("/product-finder")}>
           <div className="view-all-text">View All Products</div>
         </div>
       </div>
