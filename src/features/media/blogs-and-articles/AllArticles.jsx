@@ -2,7 +2,7 @@ import { useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../../../axios";
 import { useQuery } from "@tanstack/react-query";
 
-function AllMediaEvents() {
+function AllArticles() {
   const [searchParams, setSearchParams] = useSearchParams();
   let page = parseInt(searchParams.get("page")) || 1;
   let limit = parseInt(searchParams.get("limit")) || 10;
@@ -11,10 +11,10 @@ function AllMediaEvents() {
   if (isNaN(limit) || limit < 10) limit = 10;
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["AllnewsAndUpdates", page, limit],
+    queryKey: ["allArticles", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/mediaAndNews/?page=${page}&limit=${limit}`,
+        `/articles/?page=${page}&limit=${limit}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -32,20 +32,20 @@ function AllMediaEvents() {
     setSearchParams({ page: newPage, limit });
   };
 
-  console.log("All media event page");
+  console.log("All Articles");
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
       <div className="flex justify-center ">
         <h1 className="uppercase text-[#8AA823] text-xl font-bold sm:text-[18px] md:text-xl lg:text-xl 2xl:text-xl">
-          All News and updates{" "}
+          All Articles
         </h1>
       </div>
 
       {isLoading && <h1 className="text-center mt-10">Loading...</h1>}
 
       <div className="grid mt-10 sm:grid-cols-1 gap-x-4 gap-y-5 md:grid-cols-2 2xl:grid-cols-4 2xl:gap-x-6 2xl:gap-y-6">
-        {data?.mediaAndNews.map((item) => (
+        {data?.articles.map((item) => (
           <div
             className="relative h-[400px] w-full bg-[#FFFFFF] rounded-3xl shadow-lg"
             key={item._id}
@@ -64,7 +64,7 @@ function AllMediaEvents() {
               </p>
               <a
                 className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
-                href={`/media-events/${item._id}`}
+                href={`/articles/${item._id}`}
               >
                 Read me
               </a>
@@ -76,7 +76,7 @@ function AllMediaEvents() {
         ))}
       </div>
 
-      {data?.mediaAndNews.length === 0 && (
+      {data?.articles.length === 0 && (
         <div className="flex justify-center items-center text-center mt-20 underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B] sm:text-[20px]">
           <p className="text-center">No data available</p>
         </div>
@@ -114,4 +114,4 @@ function AllMediaEvents() {
   );
 }
 
-export default AllMediaEvents;
+export default AllArticles;

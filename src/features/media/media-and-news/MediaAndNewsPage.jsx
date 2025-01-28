@@ -1,9 +1,7 @@
 import { axiosInstance } from "../../../axios";
 import { useQuery } from "@tanstack/react-query";
 
-function MediaPage() {
-  console.log("access", import.meta.env.VITE_ACCESS_TOKEN);
-
+function MediaAndNewsPage() {
   const { data, isLoading, error } = useQuery({
     queryKey: ["NewsAndUpdates"],
     queryFn: async () => {
@@ -63,7 +61,7 @@ function MediaPage() {
               </p>
               <a
                 className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
-                href={`/media-events/${item._id}`}
+                href={`/media-news/${item._id}`}
               >
                 Read me
               </a>
@@ -88,11 +86,13 @@ function MediaPage() {
 
       {data?.mediaAndNews.length > 0 && (
         <div className="flex justify-center items-center mt-20 underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B] sm:text-[20px]">
-          <a href="/all-media-events?page=1&limit=10">See all media and news</a>
+          <a href="/all-media-and-news?page=1&limit=10">
+            See all media and news
+          </a>
         </div>
       )}
     </div>
   );
 }
 
-export default MediaPage;
+export default MediaAndNewsPage;

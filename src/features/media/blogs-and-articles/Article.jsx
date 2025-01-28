@@ -3,23 +3,21 @@ import React from "react";
 import { useParams, useSearchParams } from "react-router-dom";
 import { axiosInstance } from "../../../axios";
 
-export default function MediaEvent() {
-  const { eventId } = useParams();
+export default function Article() {
+  const { articleId } = useParams();
 
   const { data, isLoading, error } = useQuery({
-    queryKey: ["single_event"],
+    queryKey: ["single_article"],
     queryFn: async () => {
-      const data = await axiosInstance.get(`/events/${eventId}`, {
+      const data = await axiosInstance.get(`/articles/${articleId}`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
         },
       });
-      return data.data.data.event;
+      return data.data.data.article;
     },
   });
-
-  console.log("Single event", data);
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
@@ -33,16 +31,11 @@ export default function MediaEvent() {
       >
         <div className="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
         <h1 className="relative z-10 text-white text-lg lg:text-3xl font-bold md:text-[25px]">
-          {data?.name}
+          {data?.title}
         </h1>
       </div>
 
-      <div>
-        <h2 className=" text-2xl font-bold mb-4">
-          Event <span className="text-[#8AA323]">Name:</span> {data?.name}
-        </h2>
-        <p>{data?.description}</p>
-      </div>
+      <div className="my-2">{data?.description}</div>
     </div>
   );
 }
