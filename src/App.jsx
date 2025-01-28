@@ -33,15 +33,21 @@ import MasterBatch from "./features/category/MasterBatch";
 import AntiBlock from "./features/category/AntiBlock";
 import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import AllMediaEvents from "./features/media/media-and-news/AllMediaEvents";
+
+// Create a client
+const queryClient = new QueryClient();
 
 function App() {
   return (
     <div>
-      <BrowserRouter>
-        <Navbar />
+      <QueryClientProvider client={queryClient}>
+        <BrowserRouter>
+          <Navbar />
 
-        <Routes>
-          <Route path="/" element={<OurCompany />} />
+          <Routes>
+            <Route path="/" element={<OurCompany />} />
 
           {/* redirect /home to / */}
           <Route path="/our-company" element={<Navigate to="/" replace />} />
@@ -49,79 +55,92 @@ function App() {
           <Route path="/icg-management" element={<IcgManagement />} />
           <Route path="/our-history" element={<OurHistory />} />
           <Route path="/available-stocks" element={<AvailableStock />} />
-          <Route path="/media-news" element={<MediaPage />} />
-          <Route path="/blog-articles" element={<BlogsAndArticles />} />
-          <Route path="/blog-articles/:blogId" element={<Blog />} />
-          <Route path="/blog-articles" element={<MediaText />} />
-          <Route path="/media-events" element={<MediaEvents />} />
-          <Route path="/media-events/:mediaId" element={<MediaEvent />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/life-at-icg" element={<ICGCareer />} />
-          <Route path="/career" element={<Career />} />
-          <Route path="/gallery" element={<Gallery />} />
-          <Route
-            path="/products-and-solutions/antioxidants-(na)"
-            element={<Antioxidant />}
-          />
-          <Route
-            path="/products-and-solutions/hindered-amine-light-stabilizers-(hals)"
-            element={<HinderedAminLightStabilizers />}
-          />
-          <Route
-            path="/products-and-solutions/uv-absorbers"
-            element={<UVAbsorbers />}
-          />
-          <Route
-            path="/products-and-solutions/flame-retardants"
-            element={<FlameRetardant />}
-          />
-          <Route
-            path="/products-and-solutions/opticalbrighteners(ob)"
-            element={<OpticalBrightner />}
-          />
-          <Route
-            path="/products-and-solutions/pigmentsand-dyes"
-            element={<PigmentDyes />}
-          />
-          <Route
-            path="/products-and-solutions/ppolymers-and-resins"
-            element={<PolymersAndResins />}
-          />
-          <Route
-            path="/products-and-solutions/nucleating-agents"
-            element={<NucleactingAgents />}
-          />
-          <Route
-            path="/products-and-solutions/masterbatch"
-            element={<MasterBatch />}
-          />
-          <Route
-            path="/products-and-solutions/anti-blocks"
-            element={<AntiBlock />}
-          />
-
-          <Route path="/contact" element={<Contact />} />
           <Route
             path="/available-stocks/:productId"
             element={<ProductDetail />}
           />
-
-          {/* ICG Market */}
-          <Route path="/products-and-solutions" element={<IcgLayout />}>
-            <Route index element={<Home />} />
+            {/* redirect /home to / */}
+            <Route path="/our-company" element={<Navigate to="/" replace />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/icg-management" element={<IcgManagement />} />
+            <Route path="/our-history" element={<OurHistory />} />
+            <Route path="/available-stocks" element={<AvailableStock />} />
+            <Route path="/media-news" element={<MediaPage />} />
+            <Route path="/media-events" element={<MediaEvents />} />
+            <Route path="/all-media-events" element={<AllMediaEvents />} />
+            <Route path="/media-events/:mediaId" element={<MediaEvent />} />
+            <Route path="/blog-articles" element={<BlogsAndArticles />} />
+            <Route path="/blog-articles/:blogId" element={<Blog />} />
+            <Route path="/blog-articles" element={<MediaText />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/life-at-icg" element={<ICGCareer />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route
-              path=":pageName"
-              element={
-                <IcgMarketTemplate icgMarketData={icgMarketData.icgMarket} />
-              }
+              path="/products-and-solutions/antioxidants-(na)"
+              element={<Antioxidant />}
             />
-          </Route>
-          <Route path="*" element={<div>404 - Page Not Found</div>} />
-          <Route path="product-finder" element={<ProductFinderHomePage />} />
-        </Routes>
+            <Route
+              path="/products-and-solutions/hindered-amine-light-stabilizers-(hals)"
+              element={<HinderedAminLightStabilizers />}
+            />
+            <Route
+              path="/products-and-solutions/uv-absorbers"
+              element={<UVAbsorbers />}
+            />
+            <Route
+              path="/products-and-solutions/flame-retardants"
+              element={<FlameRetardant />}
+            />
+            <Route
+              path="/products-and-solutions/opticalbrighteners(ob)"
+              element={<OpticalBrightner />}
+            />
+            <Route
+              path="/products-and-solutions/pigmentsand-dyes"
+              element={<PigmentDyes />}
+            />
+            <Route
+              path="/products-and-solutions/ppolymers-and-resins"
+              element={<PolymersAndResins />}
+            />
+            <Route
+              path="/products-and-solutions/nucleating-agents"
+              element={<NucleactingAgents />}
+            />
+            <Route
+              path="/products-and-solutions/masterbatch"
+              element={<MasterBatch />}
+            />
+            <Route
+              path="/products-and-solutions/anti-blocks"
+              element={<AntiBlock />}
+            />
 
-        <Footer />
-      </BrowserRouter>
+            <Route path="/contact" element={<Contact />} />
+            <Route
+              path="/available-stocks/:productId"
+              element={<ProductDetail />}
+            />
+
+            {/* ICG Market */}
+            <Route path="/products-and-solutions" element={<IcgLayout />}>
+              <Route index element={<Home />} />
+              <Route
+                path=":pageName"
+                element={
+                  <IcgMarketTemplate icgMarketData={icgMarketData.icgMarket} />
+                }
+              />
+            </Route>
+            <Route path="*" element={<div>404 - Page Not Found</div>} />
+            <Route path="product-finder" element={<ProductFinderHomePage />} />
+            <Route path="product/productId" element={<ProductDetail />} />
+          </Routes>
+
+          <Footer />
+        </BrowserRouter>
+      </QueryClientProvider>
     </div>
   );
 }
