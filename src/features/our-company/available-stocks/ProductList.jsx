@@ -9,7 +9,6 @@ import { PiCaretUpDownFill } from "react-icons/pi";
 // Function to fetch products from the API
 const fetchProducts = async ({ queryKey }) => {
   const [, { page, limit }] = queryKey;
-
   const url = `http://208.109.240.175:3000/api/external/products?page=${page}&limit=${limit}`;
   const response = await fetch(url);
 
@@ -23,14 +22,14 @@ const fetchProducts = async ({ queryKey }) => {
 
 const ProductList = () => {
   const [page, setPage] = useState(1);
-  const [sortAZ, setSortAZ] = useState(false); // Separate state for A-Z
-  const [sortZA, setSortZA] = useState(false); // Separate state for Z-A
+  const [sortAZ, setSortAZ] = useState(false);
+  const [sortZA, setSortZA] = useState(false);
   const [market, setMarket] = useState("");
   const [category, setCategory] = useState("");
 
-  const limit = 10;
+  const limit = 3; // Set limit to 3 products per page
 
-  // Fetch products with query params, triggered by changes in page, market, or category
+  // Fetch products with query params
   const { data, error, isLoading, isFetching, refetch } = useQuery({
     queryKey: ["products", { page, limit }],
     queryFn: fetchProducts,
@@ -38,7 +37,7 @@ const ProductList = () => {
     refetchOnWindowFocus: false,
   });
 
-  const { products, totalPages } = data?.data || {};
+  const { products = [], totalPages = 1 } = data?.data || {};
 
   useEffect(() => {
     refetch(); // Refetch data if market or category changes
@@ -52,13 +51,13 @@ const ProductList = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  // Function to handle sorting based on sortOrder
+  // Sorting function
   const sortProducts = (products) => {
     if (sortAZ) {
-      return [...products].sort((a, b) => a.name.localeCompare(b.name)); // Ascending A-Z
+      return [...products].sort((a, b) => a.name.localeCompare(b.name));
     }
     if (sortZA) {
-      return [...products].sort((a, b) => b.name.localeCompare(a.name)); // Descending Z-A
+      return [...products].sort((a, b) => b.name.localeCompare(a.name));
     }
     return products;
   };
@@ -66,17 +65,17 @@ const ProductList = () => {
   const sortedAndFilteredProducts = sortProducts(products);
 
   return (
-    <div>
+    <div className="max-w-6xl mx-auto p-4">
       {/* Filter Box */}
       <div className="flex items-center space-x-4 py-4 mb-8 w-full">
         <h3 className="text-lg font-semibold">Filter</h3>
 
         {/* A-Z Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px] focus:outline-none flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md flex-grow min-w-[120px]">
           <button
             onClick={() => {
-              setSortAZ(true);  // Set A-Z state to true
-              setSortZA(false); // Set Z-A state to false
+              setSortAZ(true);
+              setSortZA(false);
             }}
             className="w-full focus:outline-none"
           >
@@ -86,11 +85,11 @@ const ProductList = () => {
         </div>
 
         {/* Z-A Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px] focus:outline-none flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md flex-grow min-w-[120px]">
           <button
             onClick={() => {
-              setSortZA(true); // Set Z-A state to true
-              setSortAZ(false); // Set A-Z state to false
+              setSortZA(true);
+              setSortAZ(false);
             }}
             className="w-full focus:outline-none"
           >
@@ -100,12 +99,10 @@ const ProductList = () => {
         </div>
 
         {/* Market */}
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px] w-full min-w-[150px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
           <select
             value={market}
-            onChange={(e) => {
-              setMarket(e.target.value); // Update market
-            }}
+            onChange={(e) => setMarket(e.target.value)}
             className="w-full focus:outline-none"
           >
             <option value="">Select Market</option>
@@ -113,13 +110,11 @@ const ProductList = () => {
           <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
         </div>
 
-        {/* Category/Industry */}
-        <div className="flex items-center border-gray-300 border-2 py-[5px] px-2 rounded-[4px] w-full min-w-[150px]">
+        {/* Category */}
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
           <select
             value={category}
-            onChange={(e) => {
-              setCategory(e.target.value); // Update category
-            }}
+            onChange={(e) => setCategory(e.target.value)}
             className="w-full focus:outline-none"
           >
             <option value="">Select Category</option>
@@ -131,12 +126,12 @@ const ProductList = () => {
       </div>
 
       {/* Product List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {sortedAndFilteredProducts && sortedAndFilteredProducts.length > 0 ? (
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedAndFilteredProducts.length > 0 ? (
           sortedAndFilteredProducts.map((product) => (
             <Link
               key={product._id}
-              to={`/available-stocks/${product._id}`} // Link to ProductDetails page with product ID
+              to={`/available-stocks/${product._id}`}
               className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
             >
               <img
@@ -144,14 +139,14 @@ const ProductList = () => {
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-t-lg"
               />
-              <div className="py-4">
-                <h3 className="text-lg font-semibold mt-4 text-center">{product.name}</h3>
-                <p className="text-sm text-gray-600 text-center">{product.chemical_name}</p>
+              <div className="py-4 text-center">
+                <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
+                <p className="text-sm text-gray-600">{product.chemical_name}</p>
               </div>
             </Link>
           ))
         ) : (
-          <div>No products available.</div>
+          <div className="text-center col-span-3">No products available.</div>
         )}
       </div>
 

@@ -1,6 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";  // Import Link for navigation
+import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
 import "./FindProduct.css";
 
@@ -69,31 +69,32 @@ function FindProductSection() {
 
         {/* Display filtered products */}
         {filteredProducts.length > 0 && (
-          <div className="search-result-container bg-slate-200 p-4 rounded-lg mt-4 w-3/5 mx-auto space-y-4">
-            {filteredProducts.map((product) => (
-               <Link
-               key={product._id}
-               to={`/available-stocks/${product._id}`} // Link to ProductDetails page with product ID
-               className="w-[45%]  border  rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg mb-4 p-4"
-             >
-               {/* Image Container */}
-               <div className="bg-white rounded-t-lg overflow-hidden">
-                 <img
-                   src={product.banner}
-                   alt={product.name}
-                   className="w-full h-32 object-cover"
-                 />
-               </div>
-         
-               {/* Product Info */}
-               <div className="py-4 text-center">
-                 <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
-                 <p className="text-sm text-gray-600">{product.chemical_name}</p>
-               </div>
-             </Link>
-          
-            
-            ))}
+          <div className="search-result-container bg-slate-200 p-4 rounded-lg mt-4 w-3/5 mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid for 2 per row */}
+              {filteredProducts.map((product) => (
+                <Link
+                  key={product._id}
+                  to={`/available-stocks/${product._id}`} // Link to ProductDetails page with product ID
+                  className="flex flex-col w-full border rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg p-4"
+                  style={{ aspectRatio: "1 / 1" }} // Making each card square
+                >
+                  {/* Image Container */}
+                  <div className="bg-white rounded-t-lg overflow-hidden flex-grow">
+                    <img
+                      src={product.banner}
+                      alt={product.name}
+                      className="w-full h-32 object-cover"
+                    />
+                  </div>
+
+                  {/* Product Info */}
+                  <div className="py-4 text-center">
+                    <h3 className="text-lg font-semibold mt-2">{product.name}</h3>
+                    <p className="text-sm text-gray-600">{product.chemical_name}</p>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         )}
 
