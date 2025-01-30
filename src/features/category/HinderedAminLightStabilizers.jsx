@@ -1,6 +1,39 @@
 import { FaArrowRightLong } from "react-icons/fa6";
+import { useQuery } from "@tanstack/react-query";
+import React from "react";
+import { axiosInstance } from "../../axios";
+import { useSearchParams } from "react-router-dom";
 
 function HinderedAminLightStabilizers() {
+  const [searchParams, setSearchParams] = useSearchParams();
+  let page = parseInt(searchParams.get("page")) || 1;
+  let limit = parseInt(searchParams.get("limit")) || 10;
+
+  if (isNaN(page) || page < 1) page = 1;
+  if (isNaN(limit) || limit < 10) limit = 10;
+
+  const { data, isLoading, error } = useQuery({
+    queryKey: ["hals", page, limit],
+    queryFn: async () => {
+      const data = await axiosInstance.get(
+        `/products/?page=${page}&limit=${limit}&categoryName=hals`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${import.meta.env.VITE_ACCESS_TOKEN}`,
+          },
+        }
+      );
+      return data.data.data;
+    },
+  });
+
+  // Function to handle page change
+  const handlePageChange = (newPage) => {
+    if (newPage < 1 || newPage > data.totalPages) return;
+    setSearchParams({ page: newPage, limit });
+  };
+
   return (
     <div>
       <div
@@ -58,25 +91,45 @@ function HinderedAminLightStabilizers() {
           </button>
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {[
-            { name: "OMNIQUAN 123", cas: "129757-67-1" },
-            { name: "OMNIQUAN 292", cas: "129757-67-14" },
-            { name: "OMNIQUAN LS 119", cas: "106990-43-6" },
-            { name: "OMNIQUAN 622", cas: "65447-77-0" },
-            { name: "OMNIQUAN 770", cas: "52829-07-9" },
-            { name: "OMNIQUAN 944", cas: "71878-19-8" },
-            { name: "OMNIQUAN 119", cas: "106990-43-6" },
-            { name: "OMNIQUAN LS 144", cas: "63843-89-0" },
-          ].map((product, index) => (
+          {data?.products?.map((product, index) => (
             <div
-              key={index}
+              key={product._id}
               className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
             >
               <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-              <p className="text-gray-600">{product.cas}</p>
+              <p className="text-gray-600">{product.cas_no}</p>
             </div>
           ))}
         </div>
+
+        {data?.products?.length === 0 && (
+          <div className="flex justify-center items-center mt-10">
+            <p className="text-2xl font-semibold">No Products Found</p>
+          </div>
+        )}
+
+        {/* Pagination Controls */}
+        {data && data.totalPages > 1 && (
+          <div className="flex justify-center items-center mt-10 gap-4">
+            <button
+              onClick={() => handlePageChange(page - 1)}
+              disabled={page === 1}
+              className="px-4 py-2 bg-[#8AA823] text-white rounded disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <span>
+              Page {page} of {data.totalPages}
+            </span>
+            <button
+              onClick={() => handlePageChange(page + 1)}
+              disabled={page === data.totalPages}
+              className="px-4 py-2 bg-[#8AA823] text-white rounded disabled:opacity-50"
+            >
+              Next
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
