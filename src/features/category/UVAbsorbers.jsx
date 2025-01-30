@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRight } from "react-icons/fa";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
@@ -7,11 +7,14 @@ import { useSearchParams } from "react-router-dom";
 
 function UVAbsorbers() {
   const [searchParams, setSearchParams] = useSearchParams();
-  let page = parseInt(searchParams.get("page")) || 1;
-  let limit = parseInt(searchParams.get("limit")) || 10;
 
-  if (isNaN(page) || page < 1) page = 1;
-  if (isNaN(limit) || limit < 10) limit = 10;
+  const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+
+  useEffect(() => {
+    if (page < 1 || isNaN(page)) setPage(1);
+    if (limit < 1 || isNaN(limit)) setLimit(10);
+  }, [page, limit]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["uvabsorbers", page, limit],
@@ -33,6 +36,7 @@ function UVAbsorbers() {
   const handlePageChange = (newPage) => {
     if (newPage < 1 || newPage > data.totalPages) return;
     setSearchParams({ page: newPage, limit });
+    setPage(newPage);
   };
 
   return (
@@ -126,7 +130,14 @@ function UVAbsorbers() {
         <div className="px-20 pb-10">
           <div className="flex justify-between pt-10 pb-10">
             <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-            <button className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded">
+            <button
+              className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded"
+              onClick={() => {
+                setLimit(limit + 100);
+                setSearchParams({ page: page, limit: limit + 100 });
+                // queryClient.invalidateQueries(["uvabsorbers"]);
+              }}
+            >
               View All <FaArrowRightLong className="text-[#8AA823]" />
             </button>
           </div>
