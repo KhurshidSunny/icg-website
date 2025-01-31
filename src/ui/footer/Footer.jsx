@@ -15,28 +15,28 @@ function Footer() {
     {
       title: "Most Sold",
       items: [
-        { text: "UV Absorbers", href: "/Absorber" },
-        { text: "Light Stabilizers (HALS)", href: "/HALS" },
-        { text: "Optical Brighteners", href: "/OpticalBrightners" },
-        { text: "Our Products", href: "/products" },
+        { text: "UV Absorbers", href: "/products-and-solutions/uv-absorbers" },
+        { text: "Light Stabilizers (HALS)", href: "/products-and-solutions/hindered-amine-light-stabilizers-(hals)" },
+        { text: "Optical Brighteners", href: "/products-and-solutions/opticalbrighteners(ob)" },
+        { text: "Our Products", href: "/product-finder" },
       ],
     },
     {
       title: "Media & Events",
       items: [
-        { text: "News", href: "/news" },
-        { text: "Events", href: "/events" },
-        { text: "Social", href: "/social" },
+        { text: "News", href: "/media-news" },
+        { text: "Events", href: "/media-events" },
+        { text: "Social", href: "/blog-articles" },
       ],
     },
     {
       title: "Contact us",
       items: [
-        { text: "Jebel Ali, Dubai UAE", href: "/offices" },
-        { text: "00971 4887 6111", href: "tel:00971488761111" },
+        { text: "Jebel Ali, Dubai UAE", href: "/contact" },
+        { text: "00971 4887 6111", href: "/contact" },
         {
           text: "info@icgchemicals.com",
-          href: "mailto:info@icgchemicals.com",
+          href: "/contact",
           external: true,
         },
       ],

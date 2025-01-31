@@ -1,9 +1,12 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
   const [nestedDropdown, setNestedDropdown] = useState(null);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
+  const [mobileNestedDropdown, setMobileNestedDropdown] = useState(null); // State for nested menus in mobile
+  const navigate = useNavigate();
 
   const handleMouseEnter = (menu) => setDropdown(menu);
   const handleMouseLeave = () => {
@@ -13,6 +16,45 @@ const Navbar = () => {
 
   const handleNestedMouseEnter = (nestedTitle) => {
     setNestedDropdown(nestedTitle);
+  };
+
+  const handleMenuItemClick = (menu) => {
+    switch (menu) {
+      case "Our Company":
+        navigate("/our-company");
+        break;
+      case "Products & Solutions":
+        navigate("/products-and-solutions");
+        break;
+      case "Media":
+        navigate("/media-news");
+        break;
+      case "Career":
+        navigate("/career");
+        break;
+      case "Contact":
+        navigate("/contact");
+        break;
+      default:
+        break;
+    }
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  };
+
+  const handleNavigation = (path) => {
+    navigate(
+      `/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`
+    );
+    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
+    setMobileNestedDropdown(null); // Reset nested dropdown when toggling mobile menu
+  };
+
+  const handleMobileNestedMenu = (title) => {
+    setMobileNestedDropdown(mobileNestedDropdown === title ? null : title);
   };
 
   const menuData = {
@@ -39,7 +81,7 @@ const Navbar = () => {
           title: "ICG Market",
           nested: [
             "Adhesive and Sealants",
-            "Agriculture, Feed and Food",
+            "Agriculture Feed and Food",
             "Automotive",
             "Building and Construction",
             "Electronics",
@@ -52,7 +94,6 @@ const Navbar = () => {
         { title: "Product Finder", link: "/product-finder" },
         {
           title: "Chemical Categories",
-
           nested: [
             "Antioxidants (NA)",
             "Hindered Amine Light Stabilizers (HALS)",
@@ -63,7 +104,7 @@ const Navbar = () => {
             "PPOLYMERS AND RESINS",
             "NUCLEATING AGENTS",
             "MASTERbATCH",
-            "PANTI BLOCKS",
+            "ANTI BLOCKS",
           ],
         },
       ],
@@ -77,6 +118,7 @@ const Navbar = () => {
       items: [
         { title: "Media and News", link: "/media-news" },
         { title: "Blog & Articles", link: "/blog-articles" },
+        { title: "Events", link: "/media-events" },
       ],
     },
     Career: {
@@ -91,31 +133,79 @@ const Navbar = () => {
       ],
     },
     Contact: {
-      page: true,
+      paragraph: {
+        heading: "Contact",
+        content:
+          "Have questions or need assistance? Reach out to us through our contact page.",
+      },
+      items: [{ title: "Contact", link: "/contact" }],
     },
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50  py-4 ">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-evenly items-center">
+    <nav className="bg-white shadow-md sticky top-0 z-[1000] py-4">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
             alt="Logo"
-            className="h-16 w-16 object-cover"
+            className="h-16 w-16 object-cover cursor-pointer"
           />
         </div>
 
-        {/* Navbar Items */}
-        <div className="hidden md:flex space-x-6  items-center ">
+        {/* Hamburger Menu Button (Mobile) */}
+        <div className="md:hidden">
+          <button
+            onClick={toggleMobileMenu}
+            className="text-gray-700 focus:outline-none"
+          >
+            {isMobileMenuOpen ? (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            ) : (
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M4 6h16M4 12h16m-7 6h7"
+                />
+              </svg>
+            )}
+          </button>
+        </div>
+
+        {/* Desktop Navbar Items */}
+        <div className="hidden md:flex space-x-6 items-center">
           {Object.keys(menuData).map((menu) => (
             <div
               className="relative"
               onMouseEnter={() => handleMouseEnter(menu)}
               key={menu}
             >
-              <button className="flex items-center text-gray-700 font-bold  hover:text-[#8AA823] focus:outline-none  cursor-pointer">
+              <button
+                className="flex items-center text-gray-700 font-bold hover:text-[#8AA823] focus:outline-none cursor-pointer"
+                onClick={() => handleMenuItemClick(menu)}
+              >
                 {menu}{" "}
                 <span className="ml-1">
                   <img src="../navbar/down-arrow.png" alt="" />
@@ -141,10 +231,94 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Full-Screen Dropdown */}
+      {/* Mobile Menu */}
+      <div
+        className={`md:hidden fixed inset-0 overflow-y-auto bg-white z-[1000] transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
+      >
+        <div className="p-6 space-y-6">
+          {/* Close Button */}
+          <div className="flex justify-end">
+            <button
+              onClick={toggleMobileMenu}
+              className="text-gray-700 focus:outline-none"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-8 w-8"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M6 18L18 6M6 6l12 12"
+                />
+              </svg>
+            </button>
+          </div>
+
+          {/* Menu Items */}
+          {Object.keys(menuData).map((menu) => (
+            <div key={menu}>
+              <button
+                className="text-gray-700 font-bold text-lg w-full text-left"
+                onClick={() => handleMenuItemClick(menu)}
+              >
+                {menu}
+              </button>
+              {menuData[menu].items && (
+                <div className="pl-4 mt-2 space-y-2">
+                  {menuData[menu].items.map((item, index) => (
+                    <div key={index}>
+                      {item.link ? (
+                        <Link
+                          to={item.link}
+                          className="text-gray-600 hover:text-[#8AA823]"
+                          onClick={() => setIsMobileMenuOpen(false)} // Close mobile menu on click
+                        >
+                          {item.title}
+                        </Link>
+                      ) : (
+                        <div>
+                          <button
+                            className="text-gray-600 hover:text-[#8AA823] cursor-pointer w-full text-left"
+                            onClick={() => handleMobileNestedMenu(item.title)}
+                          >
+                            {item.title}{" "}
+                            {item.nested && <span className="ml-2">→</span>}
+                          </button>
+                          {mobileNestedDropdown === item.title && item.nested && (
+                            <div className="pl-4 mt-2 space-y-2">
+                              {item.nested.map((nestedItem, nestedIndex) => (
+                                <div
+                                  key={nestedIndex}
+                                  className="text-gray-600 hover:text-[#8AA823] cursor-pointer"
+                                  onClick={() => handleNavigation(nestedItem)}
+                                >
+                                  {nestedItem}
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Full-Screen Dropdown (Desktop) */}
       {dropdown && (
         <div
-          className="absolute left-0 top-full w-full bg-white shadow-lg p-8  px-48 "
+          className="absolute left-0 top-full w-full bg-white shadow-lg p-8 px-48"
           onMouseLeave={handleMouseLeave}
         >
           <div className="grid grid-cols-3 gap-6">
@@ -186,11 +360,12 @@ const Navbar = () => {
 
                     {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48">
+                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
                             className="text-gray-600 hover:underline hover:text-[#8AA823] cursor-pointer"
+                            onClick={() => handleNavigation(nestedItem)}
                           >
                             {nestedItem}
                           </div>
