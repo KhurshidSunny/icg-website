@@ -12,12 +12,12 @@ function ProductFinderHomePage() {
           src="./product-finder.png"
           alt="About ICG"
           className="w-full rounded-xl object-cover object-center h-full"
-          style={{ width: "1235.96px", height: "427.22px" }}
+          style={{ width: "1235.96px", height: "180px" }}
         />
-        <h1 className="absolute text-white text-lg lg:text-3xl font-bold top-[93.32px] left-[80.04px]">
+        <h1 className="absolute text-white text-lg lg:text-3xl font-bold top-[93.32px] left-[350px]">
           What are you looking for?
         </h1>
-        <div className="absolute text-white text-2xl top-[193.32px] left-[80.04px] flex flex-col gap-4">
+        {/* <div className="absolute text-white text-2xl top-[193.32px] left-[80.04px] flex flex-col gap-4">
           <button className="w-full px-4 py-4 text-left flex items-center justify-between gap-36 border-b-[1px] border-gray-300 bg-transparent hover:bg-[rgba(200,200,200,0.1)] transition-colors duration-200">
             <span>Select Industry</span>
             <BiRightArrowAlt className="text-white" size={36} />
@@ -26,7 +26,7 @@ function ProductFinderHomePage() {
             <span>Select Category</span>
             <BiRightArrowAlt className="text-white" size={36} />
           </button>
-        </div>
+        </div> */}
       </div>
 
       

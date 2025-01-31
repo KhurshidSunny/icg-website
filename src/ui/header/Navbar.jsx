@@ -278,6 +278,7 @@ const Navbar = () => {
                         <Link
                           to={item.link}
                           className="text-gray-600 hover:text-[#8AA823]"
+                          onClick={() => setIsMobileMenuOpen(false)} // Close mobile menu on click
                         >
                           {item.title}
                         </Link>
