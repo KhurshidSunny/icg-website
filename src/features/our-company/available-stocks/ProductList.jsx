@@ -27,7 +27,7 @@ const ProductList = () => {
   const [market, setMarket] = useState("");
   const [category, setCategory] = useState("");
 
-  const limit = 3; // Set limit to 3 products per page
+  const limit = 6; // Set limit to 6 products per page
 
   // Fetch products with query params
   const { data, error, isLoading, isFetching, refetch } = useQuery({
@@ -67,11 +67,11 @@ const ProductList = () => {
   return (
     <div className="max-w-6xl mx-auto p-4">
       {/* Filter Box */}
-      <div className="flex items-center space-x-4 py-4 mb-8 w-full">
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
         <h3 className="text-lg font-semibold">Filter</h3>
 
         {/* A-Z Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
           <button
             onClick={() => {
               setSortAZ(true);
@@ -85,7 +85,7 @@ const ProductList = () => {
         </div>
 
         {/* Z-A Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
           <button
             onClick={() => {
               setSortZA(true);
@@ -152,7 +152,7 @@ const ProductList = () => {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex items-center justify-center mt-8 space-x-4">
+        <div className="flex flex-wrap items-center justify-center mt-8 mx-4 space-x-2 space-y-2">
           <button
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
@@ -161,7 +161,7 @@ const ProductList = () => {
             <FaArrowLeft className="text-gray-600" />
           </button>
 
-          <div className="flex items-center space-x-2">
+          <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2">
             {Array.from({ length: totalPages }, (_, index) => (
               <button
                 key={index}

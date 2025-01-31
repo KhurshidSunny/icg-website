@@ -53,7 +53,7 @@ const industries = [
   },
   {
     title: "Medical and Pharmaceutical",
-    img: "./assets/medical.png",
+    img: "./medical.png",
     icon: "./assets/medical_svg.png",
     link: "/products-and-solutions/medical-and-pharmaceutical",
   },
