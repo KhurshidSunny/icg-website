@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import Home from "./pages/Home";
 import Navbar from "./ui/header/Navbar";
 import Footer from "./ui/footer/Footer";
-// import MediaPage from "./features/media/media-and-news/MediaAndNewsPage";
+// import MediaPage from "./features/media/media-and-news/MediaPage";
 import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
 import Blog from "./features/media/blogs-and-articles/Blog";
 import MediaText from "./features/media/media-and-news/MediaText";
@@ -31,15 +31,10 @@ import PolymersAndResins from "./features/category/PolymersAndResins";
 import NucleactingAgents from "./features/category/NucleactingAgents";
 import MasterBatch from "./features/category/MasterBatch";
 import AntiBlock from "./features/category/AntiBlock";
+import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AllBlogs from "./features/media/blogs-and-articles/AllBlogs";
-import AllArticles from "./features/media/blogs-and-articles/AllArticles";
-import Article from "./features/media/blogs-and-articles/Article";
-import MediaAndNewsPage from "./features/media/media-and-news/MediaAndNewsPage";
-import AllMediaAndNews from "./features/media/media-and-news/AllMediaAndNews";
-import MediaAndNews from "./features/media/media-and-news/MediaAndNews";
-import MediaEvent from "./features/media/media-and-news/MediaEvent";
+// import AllMediaEvents from "./features/media/media-and-news/AllMediaEvents";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -54,38 +49,33 @@ function App() {
           <Routes>
             <Route path="/" element={<OurCompany />} />
 
+          {/* redirect /home to / */}
+          <Route path="/our-company" element={<Navigate to="/" replace />} />
+          <Route path="/about-us" element={<AboutUs />} />
+          <Route path="/icg-management" element={<IcgManagement />} />
+          <Route path="/our-history" element={<OurHistory />} />
+          <Route path="/available-stocks" element={<AvailableStock />} />
+          <Route
+            path="/available-stocks/:productId"
+            element={<ProductDetail />}
+          />
             {/* redirect /home to / */}
             <Route path="/our-company" element={<Navigate to="/" replace />} />
             <Route path="/about-us" element={<AboutUs />} />
             <Route path="/icg-management" element={<IcgManagement />} />
             <Route path="/our-history" element={<OurHistory />} />
             <Route path="/available-stocks" element={<AvailableStock />} />
-            <Route
-              path="/available-stocks/:productId"
-              element={<ProductDetail />}
-            />
-            {/* redirect /home to / */}
-            <Route path="/our-company" element={<Navigate to="/" replace />} />
-            <Route path="/about-us" element={<AboutUs />} />
-            <Route path="/icg-management" element={<IcgManagement />} />
-            <Route path="/our-history" element={<OurHistory />} />
-            <Route path="/available-stocks" element={<AvailableStock />} />
-            <Route path="/media-news" element={<MediaAndNewsPage />} />
-            <Route path="/all-media-and-news" element={<AllMediaAndNews />} />
-            <Route path="/media-news/:mediaId" element={<MediaAndNews />} />
+            {/* <Route path="/media-news" element={<MediaPage />} /> */}
             <Route path="/media-events" element={<MediaEvents />} />
-            <Route path="/media-events/:eventId" element={<MediaEvent />} />
+            {/* <Route path="/all-media-events" element={<AllMediaEvents />} /> */}
+            <Route path="/media-events/:mediaId" element={<MediaEvent />} />
             <Route path="/blog-articles" element={<BlogsAndArticles />} />
             <Route path="/blog-articles/:blogId" element={<Blog />} />
-            <Route path="/articles/:articleId" element={<Article />} />
-            <Route path="/all-blogs" element={<AllBlogs />} />
-            <Route path="/all-articles" element={<AllArticles />} />
-            {/* <Route path="/blog-articles" element={<MediaText />} /> */}
+            <Route path="/blog-articles" element={<MediaText />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/life-at-icg" element={<Gallery />} />
-            <Route path="/career" element={<ICGCareer />} />
-            <Route path="/job/:jobId" element={<Career />} />
-            {/* <Route path="/gallery" element={<Gallery />} /> */}
+            <Route path="/life-at-icg" element={<ICGCareer />} />
+            <Route path="/career" element={<Career />} />
+            <Route path="/gallery" element={<Gallery />} />
             <Route
               path="/products-and-solutions/antioxidants-(na)"
               element={<Antioxidant />}
@@ -145,7 +135,6 @@ function App() {
             </Route>
             <Route path="*" element={<div>404 - Page Not Found</div>} />
             <Route path="product-finder" element={<ProductFinderHomePage />} />
-            <Route path="product/productId" element={<ProductDetail />} />
           </Routes>
 
           <Footer />

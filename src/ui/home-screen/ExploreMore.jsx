@@ -12,7 +12,7 @@ const industries = [
   {
     title: "Printing and Packaging",
     img: "./assets/printing.png",
-    icon: "./assets/iconoir_printing-page (1).png",
+    icon: "./assets/printing_svg.png",
     link: "/products-and-solutions/printing-and-packaging",
   },
   {
@@ -30,7 +30,7 @@ const industries = [
   {
     title: "Personal and Home Care",
     img: "./assets/homebeauty.png",
-    icon: "./assets/SVG14.png",
+    icon: "./assets/personal_svg.png",
     link: "/products-and-solutions/personal-and-home-care",
   },
   {
@@ -54,7 +54,7 @@ const industries = [
   {
     title: "Medical and Pharmaceutical",
     img: "./assets/medical.png",
-    icon: "./assets/SVG14.png",
+    icon: "./assets/medical_svg.png",
     link: "/products-and-solutions/medical-and-pharmaceutical",
   },
 ];
