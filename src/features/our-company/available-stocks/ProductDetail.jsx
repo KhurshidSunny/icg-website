@@ -1,11 +1,7 @@
-
-
-
-
-
 import { useQuery } from "@tanstack/react-query";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useState } from "react";
+import RequestFileForm from "./RequestFileForm"; // Import the RequestFileForm component
 
 // Fetch product details based on the productId
 const fetchProductDetails = async ({ queryKey }) => {
@@ -41,14 +37,15 @@ const ProductDetails = () => {
 
   const product = data?.data.product;
 
+  // Function to handle TDS button click
+  const handleTDSDownload = () => {
+    setFormOpen(true); // Open the form modal
+  };
+
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10 mb-8">
       {/* Product Banner */}
-      <Link
-        className="relative mb-16"
-        onClick={() => setFormOpen(true)}
-        
-      >
+      <div className="relative mb-16">
         <img
           src={product?.banner}
           alt={product?.name}
@@ -58,7 +55,7 @@ const ProductDetails = () => {
         <h1 className="absolute text-white text-lg lg:text-3xl font-bold inset-0 flex items-center justify-center">
           {product?.name}
         </h1>
-      </Link>
+      </div>
 
       {/* Product Details */}
       <div className="flex flex-col items-start">
@@ -107,19 +104,20 @@ const ProductDetails = () => {
             </a>
           )}
           {product?.TDS && (
-            <a
-              href={product?.TDS}
-              target="_blank"
-              rel="noopener noreferrer"
+            <button
+              onClick={handleTDSDownload}
               className="bg-[#023B3B] text-white px-24 py-2 text-lg rounded-lg w-full sm:w-auto text-center"
             >
               Download TDS
-            </a>
+            </button>
           )}
         </div>
       </div>
 
-      
+      {/* Render RequestFileForm as a Modal */}
+      {isFormOpen && (
+        <RequestFileForm product={product} onClose={() => setFormOpen(false)} />
+      )}
     </div>
   );
 };

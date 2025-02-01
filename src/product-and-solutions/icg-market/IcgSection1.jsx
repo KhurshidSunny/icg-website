@@ -9,20 +9,22 @@ function IcgSection1({
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between mb-16 gap-16">
       {/* Left Box */}
-      <div className="flex flex-col space-y-6 w-full lg:w-1/2 gap-y-8 ">
+      <div className="flex flex-col w-full lg:w-1/2 gap-y-8 self-start">
         {/* Content 1 */}
-        <div>
-          <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-4">
-            {section1Heading1}
-            {/* <span className="text-[#8AA823]">Construction Solutions</span> */}
-          </h2>
+        <div className={section1Heading1 ? "space-y-2" : ""}>
+          {section1Heading1 && (
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800">
+              {section1Heading1}
+            </h2>
+          )}
           <p className="text-sm lg:text-base text-gray-600 text-justify">
             {section1Paragraph1}
           </p>
         </div>
+
         {/* Content 2 */}
         <div>
-          <h2 className="text-xl lg:text-2xl font-bold  text-gray-800 mb-4">
+          <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
             {section1Heading2}
           </h2>
           <p className="text-sm lg:text-base text-gray-600 text-justify">

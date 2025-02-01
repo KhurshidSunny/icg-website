@@ -35,6 +35,7 @@ import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllMediaEvents from "./features/media/media-and-news/MediaEvents"
+import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm"
 
 // Create a client
 const queryClient = new QueryClient();
@@ -135,6 +136,7 @@ function App() {
             </Route>
             <Route path="*" element={<div>404 - Page Not Found</div>} />
             <Route path="product-finder" element={<ProductFinderHomePage />} />
+            <Route path="/request-file-form" element={<RequestFileForm />} />
           </Routes>
 
           <Footer />
