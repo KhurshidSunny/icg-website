@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types, no-unused-vars
-function IcgHeaderSection({ title, titleImage }) {
+function IcgHeaderSection({ pageTitle, titleImage }) {
   console.log(titleImage);
   return (
     <div className="relative mb-16">
@@ -14,7 +14,7 @@ function IcgHeaderSection({ title, titleImage }) {
       <div className="absolute inset-0 bg-black bg-opacity-50 rounded-xl"></div>
       {/* Text */}
       <h1 className="absolute text-white text-lg lg:text-3xl font-bold top-[193.32px] left-[480.04px]">
-        {title}
+        {pageTitle}
       </h1>
     </div>
   );

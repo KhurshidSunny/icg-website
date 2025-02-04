@@ -15,7 +15,9 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
     return <div className="p-4">Page not found.</div>;
   }
 
+
   const {
+    pageName:pageTitle,
     titleImage,
     image1,
     image2,
@@ -35,7 +37,7 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
-      <IcgHeaderSection titleImage={titleImage} />
+      <IcgHeaderSection titleImage={titleImage} pageTitle={pageTitle}  />
       <IcgSection1
         section1Heading1={section1Heading1}
         section1Paragraph1={section1Paragraph1}
