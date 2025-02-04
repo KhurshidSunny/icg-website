@@ -2,7 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 // import Home from "./pages/Home";
 import Navbar from "./ui/header/Navbar";
 import Footer from "./ui/footer/Footer";
-import MediaPage from "./features/media/media-and-news/MediaAndNewsPage"
+import MediaPage from "./features/media/media-and-news/MediaAndNewsPage";
 import BlogsAndArticles from "./features/media/blogs-and-articles/BlogsAndArticles";
 import Blog from "./features/media/blogs-and-articles/Blog";
 import MediaText from "./features/media/media-and-news/MediaText";
@@ -34,8 +34,8 @@ import AntiBlock from "./features/category/AntiBlock";
 import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AllMediaEvents from "./features/media/media-and-news/MediaEvents"
-import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm"
+import AllMediaEvents from "./features/media/media-and-news/MediaEvents";
+import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -50,16 +50,16 @@ function App() {
           <Routes>
             <Route path="/" element={<OurCompany />} />
 
-          {/* redirect /home to / */}
-          <Route path="/our-company" element={<Navigate to="/" replace />} />
-          <Route path="/about-us" element={<AboutUs />} />
-          <Route path="/icg-management" element={<IcgManagement />} />
-          <Route path="/our-history" element={<OurHistory />} />
-          <Route path="/available-stocks" element={<AvailableStock />} />
-          <Route
-            path="/available-stocks/:productId"
-            element={<ProductDetail />}
-          />
+            {/* redirect /home to / */}
+            <Route path="/our-company" element={<Navigate to="/" replace />} />
+            <Route path="/about-us" element={<AboutUs />} />
+            <Route path="/icg-management" element={<IcgManagement />} />
+            <Route path="/our-history" element={<OurHistory />} />
+            <Route path="/available-stocks" element={<AvailableStock />} />
+            <Route
+              path="/available-stocks/:productId"
+              element={<ProductDetail />}
+            />
             {/* redirect /home to / */}
             <Route path="/our-company" element={<Navigate to="/" replace />} />
             <Route path="/about-us" element={<AboutUs />} />
@@ -74,8 +74,8 @@ function App() {
             <Route path="/blog-articles/:blogId" element={<Blog />} />
             <Route path="/blog-articles" element={<MediaText />} />
             <Route path="/contact" element={<Contact />} />
-            <Route path="/life-at-icg" element={<ICGCareer />} />
-            <Route path="/career" element={<Career />} />
+            <Route path="/icg-career" element={<ICGCareer />} />
+            <Route path="/job/:jobId" element={<Career />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route
               path="/products-and-solutions/antioxidants-(na)"

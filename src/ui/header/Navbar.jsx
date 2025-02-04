@@ -96,15 +96,15 @@ const Navbar = () => {
           title: "Chemical Categories",
           nested: [
             "Antioxidants (NA)",
-  "Hindered Amine Light Stabilizers (HALS)",
-  "UV Absorbers",
-  "Flame Retardants",
-  "Optical Brighteners (OB)",
-  "Pigments and Dyes",
-  "Polymers and Resins",
-  "Nucleating Agents",
-  "Masterbatch",
-  "Anti Blocks"
+            "Hindered Amine Light Stabilizers (HALS)",
+            "UV Absorbers",
+            "Flame Retardants",
+            "Optical Brighteners (OB)",
+            "Pigments and Dyes",
+            "Polymers and Resins",
+            "Nucleating Agents",
+            "Masterbatch",
+            "Anti Blocks",
           ],
         },
       ],
@@ -129,7 +129,7 @@ const Navbar = () => {
       },
       items: [
         { title: "Life at ICG", link: "/life-at-icg" },
-        { title: "Career", link: "/career" },
+        { title: "Career", link: "/icg-career" },
       ],
     },
     Contact: {
@@ -291,19 +291,20 @@ const Navbar = () => {
                             {item.title}{" "}
                             {item.nested && <span className="ml-2">→</span>}
                           </button>
-                          {mobileNestedDropdown === item.title && item.nested && (
-                            <div className="pl-4 mt-2 space-y-2">
-                              {item.nested.map((nestedItem, nestedIndex) => (
-                                <div
-                                  key={nestedIndex}
-                                  className="text-gray-600 hover:text-[#8AA823] cursor-pointer"
-                                  onClick={() => handleNavigation(nestedItem)}
-                                >
-                                  {nestedItem}
-                                </div>
-                              ))}
-                            </div>
-                          )}
+                          {mobileNestedDropdown === item.title &&
+                            item.nested && (
+                              <div className="pl-4 mt-2 space-y-2">
+                                {item.nested.map((nestedItem, nestedIndex) => (
+                                  <div
+                                    key={nestedIndex}
+                                    className="text-gray-600 hover:text-[#8AA823] cursor-pointer"
+                                    onClick={() => handleNavigation(nestedItem)}
+                                  >
+                                    {nestedItem}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
                         </div>
                       )}
                     </div>
