@@ -51,43 +51,41 @@ function Footer() {
           <Link to="/">
             <img
               className="w-24 object-contain"
-              src="../assets/logo.png"
+              src="../logo-white.png"
               alt="ICG Chemicals Logo"
             />
           </Link>
           <div className="text-white">Follow Us:</div>
           <div className="flex space-x-4">
-            {/* {socialIcons.map((icon, index) => (
-              <SocialIcon
-                key={index}
-                src={icon.src}
-                alt={icon.alt}
-                href={icon.href}
-                className="rounded-full"
-              />
-            ))} */}
-            <SocialIcon
+
+            <img src="../social icons/facebook.png" className="w-[32px] h-[32px]" />
+            <img src="../social icons/Twitter.png" className="w-[32px] h-[32px]" />
+            <img src="../social icons/insta.png" className="w-[32px] h-[32px]" />
+            <img src="../social icons/linkedin.png" className="w-[32px] h-[32px]" />
+            <img src="../social icons/pinterest.png" className="w-[32px] h-[32px]" />
+          
+            {/* <SocialIcon
               url="https://facebook.com"
               style={{
                 width: "32px", // Smaller size
                 height: "32px", // Smaller size
               }}
-            />
-            <SocialIcon
+            /> */}
+            {/* <SocialIcon
               url="https://x.com"
               style={{
                 width: "32px", // Smaller size
                 height: "32px", // Smaller size
               }}
-            />
-            <SocialIcon
+            /> */}
+            {/* <SocialIcon
               url="https://instagram.com"
               style={{
                 width: "32px", // Smaller size
                 height: "32px", // Smaller size
               }}
-            />
-            <SocialIcon
+            /> */}
+            {/* <SocialIcon
               url="https://linkedin.com"
               style={{
                 width: "32px", // Smaller size
@@ -100,7 +98,7 @@ function Footer() {
                 width: "32px", // Smaller size
                 height: "32px", // Smaller size
               }}
-            />
+            /> */}
           </div>
         </div>
 
