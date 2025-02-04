@@ -61,14 +61,14 @@ export default function Gallery() {
         />
       </div>
 
-      <div className="mt-10 text-center">
+      {/* <div className="mt-10 text-center">
         <button
           to="/available-stocks"
           className="mx-auto  px-4 py-2 bg-[#8AA823] text-white font-bold rounded cursor-pointer"
         >
           Sell All Pictures
         </button>
-      </div>
+      </div> */}
     </div>
   );
 }
