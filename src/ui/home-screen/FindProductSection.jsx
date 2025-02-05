@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
 import "./FindProduct.css";
+import { BiSearchAlt2 } from "react-icons/bi";
 
 const API_URL = "/products";
 
@@ -56,7 +57,9 @@ function FindProductSection() {
         {/* Search bar container */}
         <div className="flex mt-8 w-full items-center justify-center">
           <div className="flex items-center w-3/5 border rounded-lg bg-white">
-            <span className="px-3">🔍</span>
+            <span className="px-3">
+              <BiSearchAlt2 color="#a6ce39" size={24} />
+            </span>
             <input
               className="w-full px-3 py-2 outline-none"
               type="text"
