@@ -31,11 +31,12 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
     section2Heading3,
     section2Paragraph3,
     finalParagraph,
+    pageName: title,
   } = pageData;
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10">
-      <IcgHeaderSection titleImage={titleImage} />
+      <IcgHeaderSection titleImage={titleImage} title={title} />
       <IcgSection1
         section1Heading1={section1Heading1}
         section1Paragraph1={section1Paragraph1}
