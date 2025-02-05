@@ -39,24 +39,19 @@ function Antioxidant() {
     setPage(newPage);
   };
   return (
-    <div>
+    <div className="container mx-auto px-6 lg:px-16 py-10">
       <div
-        className="relative rounded-xl mt-12 m-auto w-11/12 h-[419px] bg-repeat bg-cover bg-center"
-        style={{ backgroundImage: `url('/assets/attachment6.png')` }}
+        className="relative mb-16 max-w-[1408.96px] min-h-[427.22px] w-full h-full object-cover object-center flex items-center justify-center"
+        style={{
+          backgroundImage: `url('/assets/attachment6.png')`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
       >
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#000000] opacity-40 rounded-xl"></div>
-
-        {/* Boxes */}
-        <div className="flex flex-col gap-2">
-          <div className="absolute w-48 h-36 bottom-[-40px] left-[-40px] border-white border-[1px] rounded-3xl"></div>
-          <div className="absolute w-36 h-36 bottom-[-70px] left-[-35px] border-white border-opacity-[17%] border-[1px] rounded-3xl"></div>
-        </div>
-
-        {/* Centered Content */}
-        <div className="absolute inset-0 flex justify-center items-center">
-          <h3 className="text-4xl text-white">Antioxidants (AN)</h3>
-        </div>
+        <div className="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
+        <h1 className="relative z-10 text-white text-lg lg:text-3xl font-bold md:text-[25px]">
+          Antioxidants (AN)
+        </h1>
       </div>
 
       {/* Below Content */}

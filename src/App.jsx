@@ -96,15 +96,15 @@ function App() {
               element={<FlameRetardant />}
             />
             <Route
-              path="/products-and-solutions/opticalbrighteners(ob)"
+              path="/products-and-solutions/optical-brighteners-(ob)"
               element={<OpticalBrightner />}
             />
             <Route
-              path="/products-and-solutions/pigmentsand-dyes"
+              path="/products-and-solutions/pigments-and-dyes"
               element={<PigmentDyes />}
             />
             <Route
-              path="/products-and-solutions/ppolymers-and-resins"
+              path="/products-and-solutions/polymers-and-resins"
               element={<PolymersAndResins />}
             />
             <Route
