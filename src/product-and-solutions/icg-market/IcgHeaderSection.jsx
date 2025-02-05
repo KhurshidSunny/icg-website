@@ -1,5 +1,5 @@
 // eslint-disable-next-line react/prop-types, no-unused-vars
-function IcgHeaderSection({ pageTitle, titleImage }) {
+function IcgHeaderSection({ title, titleImage }) {
   console.log(titleImage);
   console.log("Title", title);
   return (
