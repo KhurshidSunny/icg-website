@@ -62,7 +62,29 @@ const ProductList = () => {
     return products;
   };
 
-  const sortedAndFilteredProducts = sortProducts(products);
+  // Filter products based on selected market and category
+  const filterProducts = (products) => {
+    let filtered = products;
+
+    // Filter by selected market (industry_name)
+    if (market) {
+      filtered = filtered.filter(
+        (product) => product.industry_name?.toLowerCase() === market.toLowerCase()
+      );
+    }
+
+    // Filter by selected category (chemical_name)
+    if (category) {
+      filtered = filtered.filter(
+        (product) => product.chemical_name?.toLowerCase() === category.toLowerCase()
+      );
+    }
+
+    return filtered;
+  };
+
+  // Apply sorting and filtering
+  const sortedAndFilteredProducts = filterProducts(sortProducts(products));
 
   return (
     <div className="max-w-6xl mx-auto p-4">
@@ -106,6 +128,15 @@ const ProductList = () => {
             className="w-full focus:outline-none"
           >
             <option value="">Select Market</option>
+            <option value="automotive">Automotive</option>
+            <option value="printing and packaging">Printing and Packaging</option>
+            <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
+            <option value="electronics">Electronics</option>
+            <option value="personal and home care">Personal and Home Care</option>
+            <option value="adhesives and sealants">Adhesives and Sealants</option>
+            <option value="paints and coating">Paints and Coating</option>
+            <option value="building and construction">Building and Construction</option>
+            <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
         </div>
@@ -118,8 +149,18 @@ const ProductList = () => {
             className="w-full focus:outline-none"
           >
             <option value="">Select Category</option>
-            <option value="Category">Category</option>
-            <option value="Industry">Industry</option>
+            <option value="antioxidants">Antioxidants</option>
+            <option value="uv-absorbers">UV-absorbers</option>
+            <option value="flame retardants">Flame retardants</option>
+            <option value="optical brightners">Optical Brightners</option>
+            <option value="pigments and dyes">Pigments and Dyes</option>
+            <option value="hals">HALS</option>
+            <option value="antiblocks">Antiblocks</option>
+            <option value="polymers and resins">Polymers and Resins</option>
+            <option value="plasticizers">Plasticizers</option>
+            <option value="nucleating agent">Nucleating Agent</option>
+            <option value="polymer processing additives">Polymer Processing Additives</option>
+            <option value="masterbatches">Masterbatches</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
         </div>
