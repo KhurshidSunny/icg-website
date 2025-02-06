@@ -16,7 +16,7 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
   }
 
   const {
-    pageName: pageTitle,
+    
     titleImage,
     image1,
     image2,
