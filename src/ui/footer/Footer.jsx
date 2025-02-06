@@ -1,6 +1,5 @@
 import { FooterColumn } from "./FooterColumn";
 import { Link } from "react-router-dom";
-import { SocialIcon } from "react-social-icons";
 
 function Footer() {
   const columnData = [
@@ -64,48 +63,12 @@ function Footer() {
             <img src="../social icons/linkedin.png" className="w-[32px] h-[32px]" />
             <img src="../social icons/pinterest.png" className="w-[32px] h-[32px]" />
           
-            {/* <SocialIcon
-              url="https://facebook.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            /> */}
-            {/* <SocialIcon
-              url="https://x.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            /> */}
-            {/* <SocialIcon
-              url="https://instagram.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            /> */}
-            {/* <SocialIcon
-              url="https://linkedin.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
-            <SocialIcon
-              url="https://pinterest.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            /> */}
           </div>
         </div>
 
         {/* Column 2: Our Company */}
         <FooterColumn title="Our Company" items={columnData[0].items} />
 
-        {/* Column 3: Most Sold */}
         <FooterColumn title="Most Sold" items={columnData[1].items} />
 
         {/* Column 4: Media & Events */}
