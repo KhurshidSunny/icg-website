@@ -154,11 +154,7 @@ const Navbar = () => {
           <img
             src="../logo.png"
             alt="Logo"
-<<<<<<< HEAD
             className="h-full w-16 object-cover cursor-pointer"
-=======
-            className=" w-16 object-cover cursor-pointer"
->>>>>>> 2ed0474dbde1fbe079ff16e4973ed3563165864c
           />
         </div>
         {/* <img src="../logo.png" /> */}
