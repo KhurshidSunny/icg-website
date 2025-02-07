@@ -11,6 +11,8 @@ function FindProductSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]); // All fetched products
   const [filteredProducts, setFilteredProducts] = useState([]); // Matched products based on search
+  const [selectedIndustry, setSelectedIndustry] = useState("select industries");
+  const [selectedChemicalSolution, setSelectedChemicalSolution] = useState("select category");
   const navigate = useNavigate();
 
   // Fetch all products on component load
@@ -37,16 +39,49 @@ function FindProductSection() {
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
+    filterProducts(term, selectedIndustry, selectedChemicalSolution);
+  };
 
+  // Handle industry selection change
+  const handleIndustryChange = (event) => {
+    const industry = event.target.value.toLowerCase(); // Convert to lowercase
+    setSelectedIndustry(industry);
+    filterProducts(searchTerm, industry, selectedChemicalSolution);
+  };
+
+  // Handle chemical solution selection change
+  const handleChemicalSolutionChange = (event) => {
+    const chemicalSolution = event.target.value.toLowerCase(); // Convert to lowercase
+    setSelectedChemicalSolution(chemicalSolution);
+    filterProducts(searchTerm, selectedIndustry, chemicalSolution);
+  };
+
+  // Filter products based on search term, industry, and chemical solution
+  const filterProducts = (term, industry, chemicalSolution) => {
+    let matchedProducts = products;
+
+    // Filter by search term
     if (term) {
-      // Filter products based on search term
-      const matchedProducts = products.filter((p) =>
-        p.name.toLowerCase().includes(term)
+      matchedProducts = matchedProducts.filter((p) =>
+        p.name?.toLowerCase().includes(term)
       );
-      setFilteredProducts(matchedProducts);
-    } else {
-      setFilteredProducts([]); // Reset filtered products if search is cleared
     }
+
+    // Filter by selected industry
+    if (industry !== "select industries") {
+      matchedProducts = matchedProducts.filter((p) =>
+        p.industry_name?.toLowerCase() === industry
+      );
+    }
+
+    // Filter by selected chemical solution
+    if (chemicalSolution !== "select category") {
+      matchedProducts = matchedProducts.filter((p) =>
+        p.chemical_name?.toLowerCase() === chemicalSolution
+      );
+    }
+
+    setFilteredProducts(matchedProducts);
   };
 
   return (
@@ -112,35 +147,35 @@ function FindProductSection() {
         <div className="dropdown-container">
           <div className="dropdown-item">
             <label htmlFor="industries">Industries</label>
-            <select id="industries">
+            <select id="industries" value={selectedIndustry} onChange={handleIndustryChange}>
               <option value="select industries">Select industries</option>
-              <option value="Automotive">Automotive</option>
-              <option value="Printing and Packaging">Printing and Packaging</option>
-              <option value="Agriculture, Feed, and Food">Agriculture, Feed, and Food</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Personal and Home Care">Personal and Home Care</option>
-              <option value="Adhesives and Sealants">Adhesives and Sealants</option>
-              <option value="Paints and Coating">Paints and Coating</option>
-              <option value="Building and Construction">Building and Construction</option>
-              <option value="Medical and Pharmaceutical">Medical and Pharmaceutical</option>
+              <option value="automotive">Automotive</option>
+              <option value="printing and packaging">Printing and Packaging</option>
+              <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
+              <option value="electronics">Electronics</option>
+              <option value="personal and home care">Personal and Home Care</option>
+              <option value="adhesives and sealants">Adhesives and Sealants</option>
+              <option value="paints and coating">Paints and Coating</option>
+              <option value="building and construction">Building and Construction</option>
+              <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
             </select>
           </div>
           <div className="dropdown-item">
             <label htmlFor="solutions">Chemical Solutions</label>
-            <select id="solutions">
+            <select id="solutions" value={selectedChemicalSolution} onChange={handleChemicalSolutionChange}>
               <option value="select category">Select category</option>
-              <option value="Antioxidants">Antioxidants</option>
-              <option value="UV-absorbers">UV-absorbers</option>
-              <option value="Flame retardants">Flame retardants</option>
-              <option value="Optical Brightners">Optical Brightners</option>
-              <option value="Pigments and Dyes">Pigments and Dyes</option>
-              <option value="HALS">HALS</option>
-              <option value="Antiblocks">Antiblocks</option>
-              <option value="Polymers and Resins">Polymers and Resins</option>
-              <option value="Plasticizers">Plasticizers</option>
-              <option value="Nucleating Agent">Nucleating Agent</option>
-              <option value="Polymer Processing Additives">Polymer Processing Additives</option>
-              <option value="Masterbatches">Masterbatches</option>
+              <option value="antioxidants">Antioxidants</option>
+              <option value="uv-absorbers">UV-absorbers</option>
+              <option value="flame retardants">Flame retardants</option>
+              <option value="optical brightners">Optical Brightners</option>
+              <option value="pigments and dyes">Pigments and Dyes</option>
+              <option value="hals">HALS</option>
+              <option value="antiblocks">Antiblocks</option>
+              <option value="polymers and resins">Polymers and Resins</option>
+              <option value="plasticizers">Plasticizers</option>
+              <option value="nucleating agent">Nucleating Agent</option>
+              <option value="polymer processing additives">Polymer Processing Additives</option>
+              <option value="masterbatches">Masterbatches</option>
             </select>
           </div>
         </div>
