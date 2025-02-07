@@ -148,15 +148,20 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-[1000] py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
             alt="Logo"
+<<<<<<< HEAD
             className="h-full w-16 object-cover cursor-pointer"
+=======
+            className=" w-16 object-cover cursor-pointer"
+>>>>>>> 2ed0474dbde1fbe079ff16e4973ed3563165864c
           />
         </div>
+        {/* <img src="../logo.png" /> */}
 
         {/* Hamburger Menu Button (Mobile) */}
         <div className="md:hidden">

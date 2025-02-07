@@ -5,7 +5,7 @@ function IcgManagement() {
       <div className="relative mb-16">
         {/* Image */}
         <img
-          src="./managment-image.png"
+          src="./icg-management-image.png"
           alt="About ICG"
           className="w-full rounded-xl object-cover object-center h-full"
           style={{ width: "1235.96px", height: "427.22px" }}
