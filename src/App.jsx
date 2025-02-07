@@ -39,6 +39,7 @@ import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePa
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllMediaEvents from "./features/media/media-and-news/MediaEvents";
 import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm";
+import WhatsAppButton from "./WhatsappButton";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div>
+      <WhatsAppButton />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Navbar />
