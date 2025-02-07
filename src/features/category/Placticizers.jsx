@@ -25,46 +25,143 @@ function Plasticizers() {
             {/* Below Content */}
             <div className="pt-8 px-20 leading-loose">
                 <div className="pt-8 pb-6">
+                    <h3 className="text-xl font-bold pb-4 text-[#023B3B] ">Placticizers</h3>
                     <p className="pt-6">
-                        Plasticizers are chemical additives used to enhance the flexibility, workability, and durability of polymers, especially plastics. They reduce intermolecular forces between polymer chains, making materials more pliable and improving their mechanical properties.
+                        Plasticizers are essential chemical additives used to enhance the flexibility, workability, and
+                        durability of polymer materials, particularly in plastics. Their primary function is to reduce
+                        the intermolecular forces within the polymer chains, increasing the material's plasticity and
+                        improving its mechanical properties.
                     </p>
                 </div>
                 <div className="pt-8 pb-6">
                     <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Key Applications:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Flexible PVC: Plasticizers (e.g., DOP, TOTM) make PVC flexible for products like cables, flooring, and synthetic leather.</li>
-                        <li>Rubbers & Elastomers: Improve elasticity and processability for items like tires and gaskets.</li>
-                        <li>Coatings & Adhesives: Enhance application and adhesion properties in construction and automotive sectors.</li>
-                        <li>Plastic Films & Sheets: Used in packaging, agricultural films, and shrink wraps, with plasticizers like DOTP for environmental compliance.</li>
-                        <li>Medical Devices: Ensure flexibility and biocompatibility in medical products like IV tubing and catheters.</li>
-                    </ul>
+                    <ol className="list-decimal list-inside space-y-4 font-bold">
+                        <li>
+                            Flexible PVC (Polyvinyl Chloride) Production
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    Plasticizers are vital in the manufacturing of flexible PVC, transforming it from
+                                    a rigid polymer into a malleable material used in products such as cables,
+                                    hoses, and vinyl flooring. By embedding plasticizers, PVC can achieve
+                                    enhanced elongation, flexibility, and resilience. One of the most widely used
+                                    general-purpose plasticizers, <span className="font-bold">DOP</span> offers <span className="font-bold">excellent flexibility</span> and <span className="font-bold">low volatility</span>, making it ideal for soft PVC applications such as wire and cable
+                                    insulation, flooring, and synthetic leather.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Elastomers and Rubbers
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    In the <span className="font-bold">rubber industry</span>, plasticizers are integrated into elastomeric
+                                    compounds to enhance their <span className="font-bold">processability</span> and <span className="font-bold">elasticity.</span> These
+                                    compounds are widely used in automotive components like tires, seals, and
+                                    gaskets, where superior flexibility under dynamic stress is required.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Coatings and Adhesives
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    Plasticizers improve the <span className="font-bold">rheological properties</span> of coatings and adhesives,
+                                    allowing for easier application and improved adhesion to substrates. In
+                                    industries like <span className="font-bold">construction</span> and <span className="font-bold">automotive,</span> they help provide durable
+                                    finishes and high-performance bonding solutions.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Plastic Films and Sheets
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    In the production of films used for <span className="font-bold">packaging</span> and <span className="font-bold">agricultural applications,</span>
+                                    plasticizers impart flexibility, tear resistance, and enhanced transparency.
+                                    They enable materials to endure deformation without breaking, ideal for shrink
+                                    wraps, greenhouse films, and food packaging. <span className="font-bold">DPHP</span> is recognized for
+                                    providing <span className="font-bold">excellent weatherability</span> and <span>UV resistance</span> in outdoor
+                                    applications. Its low volatility and <span className="font-bold">long-term flexibility</span> make it ideal for
+                                    roofing membranes, coated fabrics, and automotive components exposed to
+                                    sunlight and environmental elements.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Medical Devices
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    In medical applications, plasticizers are used in products such as <span className="font-bold">IV tubing,</span>
+                                    <span className="font-bold">blood bags,</span> and <span className="font-bold">catheters,</span> where flexible, biocompatible materials are
+                                    critical. The use of specialized, non-toxic plasticizers in medical-grade
+                                    plastics ensures compliance with stringent health and safety regulations.
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
                 </div>
                 <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Industries Benefiting:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Automotive: Used in interior parts, flexible materials, and cold-resistant applications.</li>
-                        <li>Construction: Improve PVC pipes, flooring, waterproofing, and fire-resistant cables.</li>
-                        <li>Medical: Provide safe, flexible materials for medical devices and packaging.</li>
-                        <li>Enhance flexibility in synthetic fibers for protective clothing and upholstery.</li>
-                    </ul>
+                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Key Applications:</h3>
+                    <ol className="list-decimal list-inside space-y-4 font-bold">
+                        <li>
+                            Enhanced Flexibility:
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    By reducing the rigidity of polymers, plasticizers impart significant flexural
+                                    strength, enabling the material to be used in dynamic applications without
+                                    cracking or breaking.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Improved Durability:
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    Plasticizers increase a polymer's ability to resist wear, fatigue, and
+                                    degradation under mechanical stress, UV exposure, and extreme
+                                    temperatures, prolonging the lifespan of the material.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Optimized Processing:
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    During the extrusion, molding, or calendering of polymers, plasticizers act
+                                    as process aids by lowering the glass transition temperature and enhancing
+                                    the flow characteristics, leading to faster cycle times and energy efficiency.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Customization of Mechanical Properties:
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    Depending on the formulation and dosage, plasticizers can be fine-tuned to
+                                    deliver specific mechanical properties such as impact resistance, tensile
+                                    strength, and modulus of elasticity, allowing precise customization to suit
+                                    diverse industrial needs.
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            Cost Efficiency:
+                            <ul className="list-[circle] list-inside space-y-4 font-normal">
+                                <li>
+                                    The incorporation of plasticizers allows manufacturers to reduce material
+                                    costs by replacing more expensive polymers with cost-effective, flexible
+                                    alternatives without compromising on performance.
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
                 </div>
-                <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Benefits:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>Flexibility: Reduces rigidity, allowing materials to bend and stretch without cracking.</li>
-                        <li>Durability: Increases resistance to wear, UV, and temperature extremes.</li>
-                        <li>Processing: Improves flow properties during production, reducing energy costs.</li>
-                        <li>Customization: Allows tailored mechanical properties for specific needs.</li>
-                        <li>Cost Efficiency: Reduces material costs while maintaining performance.</li>
-                    </ul>
-                </div>
-                <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Types of Plasticizers:</h3>
-                    <ul className="list-disc list-inside">
-                        <li>DOP, TOTM: Common for PVC and high-performance applications.</li>
-                        <li>DINP, DOTP, DPHP: Used for specific applications like medical devices, food packaging, and outdoor materials.</li>
-                    </ul>
-                </div>
+                <h3 className="text-xl font-bold pb-4 text-[#023B3B] ">Uses of Pigments and Dyes</h3>
+                <ul className="list-disc list-inside space-y-4 pb-4 font-bold">
+                    <li>Automotive</li>
+                    <li>Construction</li>
+                    <li>Medical and Healthcare</li>
+                    <li>Textiles</li>
+                </ul>
             </div>
 
             {/* Products */}

@@ -55,7 +55,7 @@ function OpticalBrightner() {
 
         {/* Centered Content */}
         <div className="absolute inset-0 flex justify-center items-center">
-          <h3 className="text-4xl text-white"> Optical Brightners</h3>
+          <h3 className="text-4xl text-white"> Optical Brightners (OB)</h3>
         </div>
       </div>
 
@@ -63,55 +63,45 @@ function OpticalBrightner() {
       <div className="pt-8 px-20 leading-loose">
         <div className="pt-8 pb-6">
           <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
-            Optical Brighteners
+            Optical Brighteners (OB)
           </h3>
           <p className="pt-6">
-            Optical brighteners, also known as optical brightening agents (OBAs)
-            are specialized chemical compounds designed to enhance the luminance
-            and visual appeal of materials. By absorbing ultraviolet light and
-            re-emitting it as visible blue light, these agents create a
-            perception of increased whiteness and brightness, transforming the
+            Optical brighteners, also known as optical brightening agents (OBAs) are specialized
+            chemical compounds designed to enhance the luminance and visual appeal of
+            materials. By absorbing ultraviolet light and re-emitting it as visible blue light, these
+            agents create a perception of increased whiteness and brightness, transforming the
             aesthetics of various products.
           </p>
         </div>
-        <div className="pb-10">
-          <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
-            Key Benefits
-          </h3>
-          <ul className="list-disc list-inside p-5">
-            <li className="p-2">
-              <strong className="text-xl text-[#023B3B]">
-                Enhanced Aesthetic Appeal:
-              </strong>
-              <span>
-                {" "}
-                Optical brighteners significantly improve the visual quality of
-                products, imparting a vibrant and pristine appearance.
-              </span>
-            </li>
-            <li className="p-2">
-              <strong className="text-xl text-[#023B3B]">
-                Value Addition:
-              </strong>
-              <span>
-                {" "}
-                Products treated with OBAs often enjoy higher market valuation
-                due to their enhanced aesthetics.
-              </span>
-            </li>
-            <li className="p-2">
-              <strong className="text-xl text-[#023B3B]">
-                Cost Efficiency:
-              </strong>
-              <span>
-                {" "}
-                The integration of optical brighteners can enhance product
-                quality without necessitating major alterations in manufacturing
-                processes.
-              </span>
-            </li>
-          </ul>
-        </div>
+        <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+          Key benifits
+        </h3>
+        <ul className="pl-4 list-disc list-inside space-y-4">
+          <li className="py-2"><span className="font-bold">Enhanced Aesthetic Appeal</span> Optical brighteners significantly improve the visual
+            quality of products, imparting a vibrant and pristine appearance.
+
+          </li>
+          <li className="py-2"><span className="font-bold">Value Addition</span> Products treated with OBAs often enjoy higher market valuation due
+            to their enhanced aesthetics.
+          </li>
+          <li className="py-2"> <span className="font-bold">Versatility Across Industries</span> Their applicability across diverse sectors makes
+            optical brighteners invaluable to manufacturers.
+          </li>
+          <li className="py-2"> <span className="font-bold">Cost Efficiency</span> The integration of optical brighteners can enhance product quality
+            without necessitating major alterations in manufacturing processes.
+          </li>
+        </ul>
+        <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+          Applications
+        </h3>
+        <ul className="pl-4 list-disc list-inside space-y-4">
+          <li className="py-2">Textile Manufacturing</li>
+          <li className="py-2">Paper and Packaging Industries</li>
+          <li className="py-2">Household Cleaning and Detergent Products</li>
+          <li className="py-2">Cosmetics and Personal Care Formulations</li>
+          <li className="py-2">Plastics and Polymer Production</li>
+          <li className="py-2">Industrial Coatings and Inks</li>
+        </ul>
       </div>
 
       {/* Products */}

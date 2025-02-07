@@ -31,6 +31,9 @@ import PolymersAndResins from "./features/category/PolymersAndResins";
 import NucleactingAgents from "./features/category/NucleactingAgents";
 import MasterBatch from "./features/category/MasterBatch";
 import AntiBlock from "./features/category/AntiBlock";
+import Plasticizers from "./features/category/Placticizers";
+import PolymerAdditives from "./features/category/PolymerAdditives";
+import Compound from "./features/category/Compound";
 import MediaEvent from "./features/media/media-and-news/MediaEvent";
 import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -118,6 +121,18 @@ function App() {
             <Route
               path="/products-and-solutions/anti-blocks"
               element={<AntiBlock />}
+            />
+            <Route
+              path="/products-and-solutions/plasticizers"
+              element={<Plasticizers />}
+            />
+            <Route
+              path="/products-and-solutions/polymer-additives"
+              element={<PolymerAdditives />}
+            />
+            <Route
+              path="/products-and-solutions/compound"
+              element={<Compound />}
             />
 
             <Route path="/contact" element={<Contact />} />

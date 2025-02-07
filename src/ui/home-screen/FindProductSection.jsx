@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
-import "./FindProduct.css";
+// import "./FindProduct.css";
 import { BiSearchAlt2 } from "react-icons/bi";
 
 const API_URL = "/products";
@@ -50,13 +50,14 @@ function FindProductSection() {
   };
 
   return (
-    <div className="find-product-container">
-      <div className="find-product-form">
-        <div className="find-product-header">Find a Product</div>
+    <div className="bg-cover bg-center bg-no-repeat min-h-[541px] py-[34px] flex justify-center items-center px-[20px]"
+      style={{ backgroundImage: "url('/assets/greenflex.png')" }}>
+      <div className="bg-white py-[34px] px-[20px] sm:px-[50px] shadow-[0px_9px_21px_rgba(0,_0,_0,_0.07)] rounded-[10px] max-w-full sm:max-w-[70%] w-full flex flex-col items-center">
+        <div className="text-[#023b3b] text-[34.5px] font-bold leading-[42.56px] text-center">Find a Product</div>
 
         {/* Search bar container */}
         <div className="flex mt-8 w-full items-center justify-center">
-          <div className="flex items-center w-3/5 border rounded-lg bg-white">
+          <div className="flex items-center w-full sm:w-3/5 border rounded-lg bg-white">
             <span className="px-3">
               <BiSearchAlt2 color="#a6ce39" size={24} />
             </span>
@@ -72,8 +73,8 @@ function FindProductSection() {
 
         {/* Display filtered products */}
         {filteredProducts.length > 0 && (
-          <div className="search-result-container bg-slate-200 p-4 rounded-lg mt-4 w-3/5 mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4"> {/* Grid for 2 per row */}
+          <div className="search-result-container bg-slate-200 p-4 rounded-lg mt-4 w-full sm:w-3/5 mx-auto">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4"> {/* Grid for 2 per row */}
               {filteredProducts.map((product) => (
                 <Link
                   key={product._id}
@@ -109,10 +110,10 @@ function FindProductSection() {
         )}
 
         {/* Dropdown container */}
-        <div className="dropdown-container">
-          <div className="dropdown-item">
-            <label htmlFor="industries">Industries</label>
-            <select id="industries">
+        <div className="flex flex-col sm:flex-row justify-between w-full gap-[10px] mt-[20px]">
+          <div className="flex-1 flex flex-col">
+            <label className="text-[#333] font-bold mb-[5px]" htmlFor="industries">Industries</label>
+            <select className="text-[#333] font-bold mb-[5px]" id="industries">
               <option value="select industries">Select industries</option>
               <option value="Automotive">Automotive</option>
               <option value="Printing and Packaging">Printing and Packaging</option>
@@ -125,9 +126,9 @@ function FindProductSection() {
               <option value="Medical and Pharmaceutical">Medical and Pharmaceutical</option>
             </select>
           </div>
-          <div className="dropdown-item">
-            <label htmlFor="solutions">Chemical Solutions</label>
-            <select id="solutions">
+          <div className="flex-1 flex flex-col">
+            <label className="text-[#333] font-bold mb-[5px]" htmlFor="solutions">Chemical Solutions</label>
+            <select className="text-[#333] font-bold mb-[5px]" id="solutions">
               <option value="select category">Select category</option>
               <option value="Antioxidants">Antioxidants</option>
               <option value="UV-absorbers">UV-absorbers</option>
@@ -145,17 +146,24 @@ function FindProductSection() {
           </div>
         </div>
 
-        <div className="other-resources">
+        <div className="text-center mt-[30px] text-black text-[16px]">
           Looking for other resources? Select an item below.
         </div>
 
-        <div className="resource-links">
-          <div className="resource-item">Safety Data Sheets</div>
-          <div className="resource-item">Technical Data Sheets</div>
-          <div className="resource-item">Product Brochures</div>
+        <div className="flex flex-wrap justify-center gap-[10px] mt-[20px]">
+          <div className="text-[#023b3b] text-[16px] font-bold cursor-pointer">
+            Safety Data Sheets
+          </div>
+          <div className="text-[#023b3b] text-[16px] font-bold cursor-pointer">
+            Technical Data Sheets
+          </div>
+          <div className="text-[#023b3b] text-[16px] font-bold cursor-pointer">
+            Product Brochures
+          </div>
         </div>
 
-        <div className="view-all-products" onClick={() => navigate("/product-finder")}>
+        <div className="mt-[30px] py-[10px] px-[20px] border border-[#a6ce39] rounded-[5px] cursor-pointer text-center bg-white transition-all duration-300 hover:bg-[#8aa823] hover:text-white"
+          onClick={() => navigate("/product-finder")}>
           <div className="view-all-text">View All Products</div>
         </div>
       </div>

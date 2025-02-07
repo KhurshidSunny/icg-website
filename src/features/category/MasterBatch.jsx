@@ -62,53 +62,122 @@ function MasterBatch() {
       {/* Below Content */}
       <div className="pt-8 px-20 leading-loose">
         <div className="pt-8 pb-6">
-          <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
-            Masterbatches: Essential Additives for Enhanced Color and
-            Performance
+          <h3 className="text-3xl font-bold pb-4 text-[#023B3B]">
+            Masterbatches
           </h3>
           <p className="pt-6">
-            Masterbatches are crucial additives in the plastics and polymer
-            industries, providing vibrant color, improved properties, and
-            optimized processing. ICG Specialty Chemicals offers a diverse range
-            of Masterbatch solutions tailored to meet specific industry needs,
-            delivering consistent quality and performance. Designed to boost
-            durability, aesthetic appeal, and functionality, our Masterbatches
-            are invaluable to manufacturers across sectors such as automotive,
-            packaging, electronics, and construction.
+            Masterbatches are essential additives used in the plastics and polymer industries to impart
+            color, enhance properties, and optimize processing. ICG Specialty Chemicals offers a wide
+            range of masterbatches tailored for specific industrial applications, delivering unmatched
+            quality and consistency. Our masterbatch products are designed to enhance durability,
+            improve aesthetic appeal, and optimize performance, making them indispensable for
+            manufacturers across a variety of industries.
           </p>
         </div>
-        <div className="pt-8 pb-6">
-          <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
-            Diverse Masterbatch Solutions for Industry-Specific Applications{" "}
+        <div>
+          <h3 className="text-xl font-bold pb-4 text-[#023B3B]">
+            Key Masterbatch Products
           </h3>
-          <p className="pt-6">
-            Our product lineup includes specialized solutions like the
-            Liquid/Paste Masterbatch, which provides deep, consistent black
-            tones ideal for applications requiring high dispersion, such as
-            automotive parts, packaging films, and electronics. The solid
-            Masterbatch enhances UV stability, opacity, and mechanical strength,
-            making it ideal for outdoor applications, including agricultural
-            films and automotive trims. Additionally, the Moisture Absorber (AB)
-            Masterbatch eliminates excess moisture during processing, essential
-            for recycled materials and preventing defects in injection molding
-            and extrusion.
-          </p>
         </div>
-        <div className="pt-8 pb-6">
-          <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
-            Technical Advantages and Sustainable Benefits{" "}
+        <div>
+          <h3 className="text-xl font-bold pb-4 text-[#023B3B]">
+            1. Liquid/Paste Black Masterbatch
           </h3>
-          <p className="pt-6">
-            ICG Masterbatches are designed for even dispersion within polymers,
-            reducing the need for additional mixing and enhancing
-            processability. Their concentrated formulations require minimal
-            dosages, offering a cost-effective way to achieve desired results.
-            With solutions tailored for using recycled materials, these
-            Masterbatches also support more sustainable production practices.
-            Consistent color distribution ensures high aesthetic standards,
-            enabling manufacturers to produce uniform, visually appealing
-            products across large production runs.
+          <p>
+            Liquid/Paste Black Masterbatch is a concentrated colorant formulated for easy dispersion
+            into a variety of plastic resins. This product offers superior color consistency and is ideal for
+            applications that require deep, rich black tones with minimal usage levels. Its paste form
+            makes it convenient to mix directly into liquid or semi-liquid processing environments.
           </p>
+          <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
+          <ul className="list-[circle] list-inside space-y-4 p-4">
+            <li>
+              Excellent dispersion and coverage.
+            </li>
+            <li>
+              High pigment concentration, allowing lower dosages.
+            </li>
+            <li>
+              Suitable for injection molding, extrusion, and film applications.
+            </li>
+            <li>
+              Provides UV resistance, enhancing outdoor weatherability.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-xl font-bold pb-4 text-[#023B3B]">
+            2. Black Masterbatch
+          </h3>
+          <p>
+            Black Masterbatch is a versatile, solid concentrate of carbon black pigments designed for
+            efficient and uniform coloring of plastic materials. It provides excellent opacity, UV stability,
+            and mechanical performance enhancement. Black masterbatch by ICG Specialty
+            Chemicals is specifically formulated to meet the stringent demands of sectors that require
+            robust coloration with added strength and protection.
+          </p>
+          <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
+          <ul className="list-[circle] list-inside space-y-4 p-4">
+            <li>
+              High opacity and color strength, reducing usage rates.
+            </li>
+            <li>
+              Exceptional UV resistance, protecting against weathering.
+            </li>
+            <li>
+              Enhances mechanical properties like tensile strength.
+            </li>
+            <li>
+              Heat-resistant, making it suitable for high-temperature applications.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-xl font-bold pb-4 text-[#023B3B]">
+            3.Moisture Absorber (AB)
+          </h3>
+          <p>
+            Moisture Absorber (AB) masterbatch is engineered to effectively remove excess moisture
+            from recycled or virgin polymers during processing. It ensures improved product quality by
+            preventing moisture-related defects like voids, bubbles, and surface blemishes in plastic
+            parts. This masterbatch is essential for improving the processing efficiency of hygroscopic
+            materials, reducing downtime, and ensuring consistent output.
+          </p>
+          <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
+          <ul className="list-[circle] list-inside space-y-4 p-4">
+            <li>
+              Absorbs excess moisture from resins, reducing defects.
+            </li>
+            <li>
+              Improves the quality of finished products by preventing splay and streaking.
+            </li>
+            <li>
+              Enhances mechanical properties and surface finish.
+            </li>
+            <li>
+              Cost-effective solution for processing recycled materials.
+            </li>
+          </ul>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold text-[#023B3B] ">Key Industries of Nucleacting Agents:</h3>
+          <ul className="list-disc list-inside space-y-4 py-4">
+            <li>
+              Automotive:
+            </li>
+            <li>
+              Packaging:
+            </li>
+            <li>
+              Construction
+            </li>
+            <li>
+              Electronics:
+            </li>
+            <li>
+              Recycling
+            </li>
+          </ul>
         </div>
 
         {/* Products */}

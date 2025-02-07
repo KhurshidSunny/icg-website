@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
+
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
   const [nestedDropdown, setNestedDropdown] = useState(null);
@@ -105,6 +106,9 @@ const Navbar = () => {
             "Nucleating Agents",
             "Masterbatch",
             "Anti Blocks",
+            "Polymer Additives",
+            "Plasticizers",
+            "Compound"
           ],
         },
       ],
@@ -150,7 +154,7 @@ const Navbar = () => {
           <img
             src="../logo.png"
             alt="Logo"
-            className="h-16 w-16 object-cover cursor-pointer"
+            className="h-full w-16 object-cover cursor-pointer"
           />
         </div>
 
@@ -233,9 +237,8 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed inset-0 overflow-y-auto bg-white z-[1000] transform transition-transform duration-300 ease-in-out ${
-          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-        }`}
+        className={`md:hidden fixed inset-0 overflow-y-auto bg-white z-[1000] transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
       >
         <div className="p-6 space-y-6">
           {/* Close Button */}

@@ -55,85 +55,50 @@ function PigmentDyes() {
         </h1>
       </div>
 
-      <p className="font-normal text-[#000000] mb-6">
-        Pigments and dyes are essential colorants used across various
-        industries, with distinct properties and applications:
+      <h3 className="text-xl font-bold pb-4 text-[#023B3B] ">Pigments and Dyes</h3>
+      <p className="pb-4">
+        Color plays a vital role in human perception and aesthetics, impacting our daily lives,
+        industries, and cultural expressions. At the core of this colorful world are pigments
+        and dyes—two fundamental categories of colorants that are indispensable in various
+        applications.
       </p>
+      <p className="pb-4"><span className="font-bold">Pigments</span> are finely ground, insoluble substances that provide color to materials by
+        scattering light. They do not dissolve in the medium and are typically used in coatings,
+        paints, plastics, inks, and construction materials. Pigments are prized for their
+        stability, opacity, and durability.</p>
+      <p className="pb-4"><span className="font-bold">Dyes,</span> in contrast, are soluble compounds that impart color to materials through a
+        process called dyeing. When applied, dyes penetrate the substrate, creating a
+        chemical bond that offers vivid and often longer-lasting color. Dyes are primarily
+        utilized in textiles, paper, and certain types of plastics.</p>
 
-      <h3 className="text-xl font-bold mb-4 text-[#023B3B] ">Pigments</h3>
-      <p className="font-normal text-[#000000] mb-6">
-        are insoluble, finely ground substances that provide color by scattering
-        light. They are used in coatings, paints, plastics, inks, and
-        construction materials, valued for their stability, opacity, and
-        durability.
-      </p>
-
-      <h3 className="text-xl font-bold mb-4 text-[#023B3B] ">Dyes</h3>
-      <p className="font-normal text-[#000000] mb-6">
-        are soluble compounds that chemically bond with materials, providing
-        vivid, long-lasting color. They are commonly used in textiles, paper,
-        and certain plastics.
-      </p>
-
-      <h3 className="text-xl font-bold mb-2 text-[#023B3B] ">
-        Key Differences:{" "}
-      </h3>
-      <ul className="list-disc list-inside mb-6">
-        <li className="font-semibold text-[#023B3B] ">
-          Solubility:{" "}
-          <p className="font-normal text-[#000000]">
-            Pigments are insoluble; dyes are soluble.
-          </p>
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Application:{" "}
-          <p className="font-normal text-[#000000]">
-            Pigments are dispersed in a medium, while dyes require a dyeing
-            process.
-          </p>{" "}
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Color Intensity:{" "}
-          <p className="font-normal text-[#000000]">
-            Dyes offer intense color; pigments provide opacity and durability.
-          </p>
-        </li>
+      <h3 className="text-xl font-bold pb-4 text-[#023B3B] ">Key Differences of Pigments and Dyes</h3>
+      <ul className="list-disc list-inside space-y-4 pb-4">
+        <li><span className="font-bold">Solubility</span> Pigments are insoluble; dyes are soluble.</li>
+        <li><span className="font-bold">Application Method</span> Pigments are dispersed in a medium; dyes require a dyeing
+          process.</li>
+        <li><span className="font-bold">Color Intensity</span> Dyes tend to provide more intense colors, while pigments offer
+          opacity and durability</li>
+        <li>Typically, pigments have been classified into inorganic and organic pigments and
+          dyes are classified as Acid , base , solvent, Disperse , Reactive and VAT dyes. </li>
       </ul>
 
-      <h3 className="text-xl font-bold mb-2 text-[#023B3B] ">Types: </h3>
-      <ul className="list-disc list-inside mb-6">
-        <li className="font-semibold text-[#023B3B] ">
-          Pigments:
-          <p className="font-normal text-[#000000]">Inorganic and organic.</p>
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Dyes:{" "}
-          <p className="font-normal text-[#000000]">
-            Acid, base, solvent, disperse, reactive, and vat dyes.
-          </p>{" "}
-        </li>
+      <h3 className="text-xl font-bold pb-4 text-[#023B3B] ">Uses of Pigments and Dyes</h3>
+      <ul className="list-dics list-inside space-y-4 pb-4">
+        <li>Coloring</li>
+        <li>Enhancement of Aesthetics</li>
+        <li>Functional Properties</li>
       </ul>
 
-      <h3 className="text-xl font-bold mb-2 text-[#023B3B] ">Applications: </h3>
-      <ul className="list-disc list-inside mb-6">
-        <li className="font-normal text-[#000000] ">Textile industry </li>
-        <li className="font-normal text-[#000000] ">Coatings and paints </li>
-        <li className="font-normal text-[#000000] ">Plastics and polymers</li>
-        <li className="font-normal text-[#000000] ">Inks</li>
-        <li className="font-normal text-[#000000] ">
-          Cosmetics and personal care{" "}
-        </li>
-        <li className="font-normal text-[#000000] ">
-          Construction and building materials
-        </li>
-        <li className="font-normal text-[#000000] ">Automotive </li>
-        <li className="font-normal text-[#000000] ">
-          Food and pharmaceuticals{" "}
-        </li>
-        <li className="font-normal text-[#000000] ">
-          Pigments and dyes are critical for coloring, enhancing aesthetics, and
-          adding functional properties to products across diverse sectors.
-        </li>
+      <h3 className="text-xl font-bold mpb-4 text-[#023B3B] ">Key Industries of Pigments and Dyes</h3>
+      <ul className="list-disc list-inside space-y-4 pb-4">
+        <li>Textile Industry</li>
+        <li>Coatings and Paints</li>
+        <li>Plastics and Polymers</li>
+        <li>Inks</li>
+        <li>Cosmetics and Personal Care</li>
+        <li>Construction and Building Materials</li>
+        <li>Automotive</li>
+        <li>Food and Pharmaceuticals</li>
       </ul>
 
       {/* Products */}

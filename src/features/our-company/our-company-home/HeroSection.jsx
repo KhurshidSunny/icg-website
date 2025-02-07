@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom"; // Import Link for navigation
 import { axiosInstance } from "../../../axios"; // API instance for consistency
-import "./herosection.css";
+// import "./herosection.css";
 
 function HeroSection() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -52,40 +52,41 @@ function HeroSection() {
   };
 
   return (
-    <div className="landing-page relative">
-      <div className="video-container">
-        <video autoPlay muted loop className="background-video">
+    <div className="relative h-screen overflow-hidden">
+      <div className="relative h-full">
+        <video autoPlay muted loop className="w-full h-full object-cover">
           <source
             src="./assets/3191916-uhd_3840_2160_25fps.mp4"
             type="video/mp4"
           />
           Your browser does not support the video tag.
         </video>
-        <div className="overlay">
-          <h1>SERVING CHEMICALS</h1>
-          <p>
+        <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-40 flex flex-col items-center justify-center text-center text-white p-5">
+          <h1 className="text-4xl mb-5 font-bold leading-[41px] text-center">SERVING CHEMICALS</h1>
+          <p className="text-base mb-7 max-w-[600px]">
             AT ICG SPECIALTY CHEMICALS FZCO We Aim To Improve The Quality Of
             Your Products By Providing Environmental Friendly Chemicals
           </p>
 
           {/* Search bar container */}
-          <div className="search-bar-container relative">
-            <div className={`mb-4 search-bar ${isSearchOpen ? "active" : ""}`}>
+          <div className="flex items-center justify-center w-full max-w-3xl mx-auto flex-col relative">
+            <div className={`mb-4 flex items-center justify-center w-full max-w-3xl ${isSearchOpen ? "active" : ""}`}>
               <input
                 type="text"
+                className="w-[60%] p-2 text-base rounded-full border-none text-center"
                 placeholder="Search for CAS no. or Product name"
                 value={searchTerm}
                 onChange={handleSearchChange}
               />
-              <button className="search-button">
+              <button className="w-10 h-10 bg-[#8aa823] rounded-full text-white flex items-center justify-center -ml-10 cursor-pointer">
                 <img
-                  className="searchicon"
+                  className="w-5 h-5"
                   src="./assets/searchicon.png"
                   alt="icon"
                 />
               </button>
             </div>
-            <button className="mobile-toggle-button" onClick={toggleSearch}>
+            <button className="hidden bg-[#8aa823] text-white border-none py-2 px-5 rounded-full cursor-pointer text-base mt-2 md:hidden" onClick={toggleSearch}>
               {isSearchOpen ? "Hide Search" : "Show Search"}
             </button>
 
