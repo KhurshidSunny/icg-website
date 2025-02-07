@@ -1,6 +1,6 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { axiosInstance } from "../../axios";
 import { useSearchParams } from "react-router-dom";
 
@@ -63,7 +63,7 @@ function HinderedAminLightStabilizers() {
 
       {/* Below Content */}
       <div className="pt-8 px-20 leading-loose">
-        <div className="pt-8 pb-6">
+        {/* <div className="pt-8 pb-6">
           <p className="pt-6">
             Hindered Amine Light Stabilizers (HALS) are compounds that protect
             polymers from UV radiation by scavenging free radicals generated
@@ -72,16 +72,43 @@ function HinderedAminLightStabilizers() {
             stability, enhancing durability, and ensuring the longevity of these
             materials in various applications.
           </p>
-        </div>
+        </div> */}
         <div className="">
           <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
             Hindered Amine Light Stabilizers (HALS)
           </h3>
           <p className="">
-            Although not technically UV absorbers, HALS play a complementary
-            role by scavenging free radicals formed during UV exposure, thus
-            preventing further degradation of materials.
+            Although not technically UV absorbers, HALS play a complementary role by
+            scavenging free radicals formed during UV exposure, thus preventing further
+            degradation of materials. <span className="font-bold">Omniquan LS 944</span> is a high molecular weight HALS that is
+            effective in polyolefin applications such as agricultural films, outdoor furniture, and
+            other plastic products. It provides long-lasting UV protection and reduces photooxidation. <span className="font-bold">Omniquan LS 770</span> is a well-known HALS product, it is highly effective in
+            preventing the degradation of plastics and coatings exposed to UV radiation. It is
+            commonly used in polyolefins, polyurethanes, and styrene.
+
           </p>
+          <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
+            Key benifits
+          </h3>
+          <ol className="pl-4">
+            <li>1. Protection from UV Degradation</li>
+            <li>2. Enhancing Product Lifespan</li>
+            <li>3. Preserving Color and Appearance</li>
+            <li>4. Improving Stability</li>
+          </ol>
+          <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
+            Key Industries
+          </h3>
+          <ul className="pl-4">
+            <li>• Agriculture</li>
+            <li>• Packaging</li>
+            <li>• Furniture</li>
+            <li>• Automotive</li>
+            <li>• Coatings</li>
+            <li>• Textiles</li>
+            <li>• Construction</li>
+            <li>• Sports & Recreation</li>
+          </ul>
         </div>
       </div>
 

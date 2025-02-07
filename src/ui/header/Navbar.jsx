@@ -105,6 +105,9 @@ const Navbar = () => {
             "Nucleating Agents",
             "Masterbatch",
             "Anti Blocks",
+            "Polymer Additives",
+            "Plasticizers",
+            "Compound",
           ],
         },
       ],
@@ -144,15 +147,17 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-md sticky top-0 z-[1000] py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
             alt="Logo"
-            className="h-16 w-16 object-cover cursor-pointer"
+            className="h-full w-16 object-cover cursor-pointer"
+            // className=" w-16 object-cover cursor-pointer"
           />
         </div>
+        {/* <img src="../logo.png" /> */}
 
         {/* Hamburger Menu Button (Mobile) */}
         <div className="md:hidden">

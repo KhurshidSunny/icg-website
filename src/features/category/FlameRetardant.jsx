@@ -56,53 +56,118 @@ function FlameRetardant() {
         </h1>
       </div>
 
-      <p className="font-normal text-[#000000] mb-6">
-        Flame retardants are chemicals added to materials to prevent or slow the
-        spread of fire, enhancing safety across various industries. These
-        substances are classified based on their chemical composition and action
-        mechanism, including:
-      </p>
+      <h3 className="text-2xl font-semibold text-[#023B3B] pb-6">
+        Flame Retardants
+      </h3>
 
-      <ul className="list-disc list-inside mb-6">
-        <li className="font-semibold text-[#023B3B] ">
-          Halogenated{" "}
-          <p className="font-normal text-[#000000]">
-            (e.g OMNIQUAN DBDPE and OMNIQUAN FR130) – Contain halogens (chlorine
-            or bromine) to suppress combustion, ideal for electronics and
-            textiles.
-          </p>
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Non-Halogenated
-          <p className="font-normal text-[#000000]">
-            (e.g, OMNIQUAN DOPO, OMNIQUAN Dicumene) – Environmentally friendly,
-            form a protective char layer to inhibit fire spread.
-          </p>{" "}
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Phosphorus-Based{" "}
-          <p className="font-normal text-[#000000]">
-            (e.g, OMNIQUAN FR TBEP, OMNIQUAN PHT4) – Promote char formation to
-            prevent gas release, used in polymers and coatings.
-          </p>
-        </li>
-        <li className="font-semibold text-[#023B3B]">
-          Inorganic {" "}
-          <p className="font-normal text-[#000000]">
-            (e.g., ALUMINIUM HYDROXIDE, Zinc Borate) – Release water vapor to
-            cool and dilute flames, used in construction, textiles, and
-            plastics.
-          </p>{" "}
-        </li>
+      <p className="font-normal text-[#000000] mb-6">
+        Flame retardants are chemical substances that are added to materials to prevent
+        the start of a fire or to slow its progression. Flame retardants play a critical role in
+        protecting materials and products from the risk of fire, reducing the rate of ignition,
+        slowing the spread of flames, and preventing catastrophic damage. We serve
+        industries ranging from construction and automotive to electronics, textiles, and
+        beyond, with flame retardants tailored to meet specific material needs.
+        Flame retardants can be categorized into several types based on their chemical
+        composition and mechanism of action:
+      </p>
+      <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">
+        Types
+      </h3>
+      <ol className="list-decimal list-inside space-y-4 py-2">
+        <li> Halogenated Flame Retardants</li>
+        <li> Brominated Flame Retardants</li>
+        <li> Non-Halogenated Flame retardants</li>
+        <li> Phosphorous-Based</li>
+        <li> Inorganic Flame Retardants</li>
+      </ol>
+      <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+        1. Halogenated Flame Retardants
+      </h3>
+      <ul className="list-inside">
+        <li className="p-2"><span className="font-bold">OMNIQUAN MPP:</span> Methylphosphonic acid-based flame retardant, ideal for
+          use in thermoplastics and engineering resins.</li>
+        <li className="p-2"><span className="font-bold">OMNIQUAN DEPAL:</span> A halogen-free flame retardant, used for highperformance applications in polyamides and polyesters.</li>
       </ul>
 
-      <p className="font-normal text-[#000000] mb-6">
-        Applications span construction, electronics, textiles, automotive, and
-        furniture, offering key benefits like enhanced safety, regulatory
-        compliance, material longevity, and versatility. Flame retardants are
-        critical for meeting fire safety standards and protecting lives and
-        property.
+      <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+        2. Brominated Flame Retardants
+      </h3>
+      <ul className="list-inside">
+        <li className="p-2"><span className="font-bold">OMNIQUAN DBDPE:</span> Decabromodiphenyl ethane flame retardant, ideal for
+          high-temperature thermoplastics and electrical insulation.</li>
+        <li className="p-2"><span className="font-bold">OMNIQUAN DEPAL:</span> A halogen-free flame retardant, used for highperformance applications in polyamides and polyesters.</li>
+      </ul>
+      <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+        3. Non-Halogenated Flame retardants
+      </h3>
+      <p className="p-2">These do not contain halogen elements
+        and are often considered more environmentally friendly. They work by forming a
+        protective char layer on the material surface, slowing down heat and flame
+        spread.
       </p>
+      <ul className="list-inside">
+        <li className="p-2"><span className="font-bold">OMNIQUAN DBDPE:</span> Decabromodiphenyl ethane flame retardant, ideal for
+          high-temperature thermoplastics and electrical insulation.</li>
+        <li className="p-2"><span className="font-bold">OMNIQUAN BDDP:</span> BDDP is an advanced, high-efficiency additive flame
+          retardant characterized by the presence of both aromatic and aliphatic
+          bromine. </li>
+      </ul>
+      <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+        4. Phosphorous-Based
+      </h3>
+      <p className="p-2">
+        Promote char formation to inhibit flammable gas release,
+        widely used in polymers and coatings.
+      </p>
+      <ul className="list-inside">
+        <li className="p-2"><span className="font-bold">OMNIQUAN FR TBEP:</span> Phosphate flame retardant, commonly used in flexible
+          polyurethane foams and coatings.</li>
+        <li className="p-2"><span className="font-bold">OMNIQUAN FR TCPP:</span> Phosphate flame retardant for use in flexible and rigid
+          polyurethane foams, as well as thermoplastics.</li>
+      </ul>
+      <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
+        5. Inorganic Flame Retardants
+      </h3>
+      <p className="p-2">
+        These are minerals and metal-based compounds
+        that act as flame retardants. They release water vapor when heated, which cools
+        the material and dilutes flammable gases
+      </p>
+      <ul className="list-inside">
+        <li className="p-2"><span className="font-bold">ALUMINIUM HYDROXIDE (ATH):</span> A widely used inorganic flame retardant for
+          construction, electronics, and textile applications.</li>
+        <li className="p-2"><span className="font-bold">Zinc Borate:</span> It is an inorganic flame retardant known for its excellent fire
+          resistance and smoke suppression properties. Suitable for use in various
+          applications, including plastics, coatings, and textiles, ZB is an
+          environmentally friendly option that meets safety regulations without
+          compromising performance.</li>
+      </ul>
+      <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
+        Key benifits
+      </h3>
+      <ul className="pl-4 list-disc list-inside space-y-4">
+        <li className="py-2"><span className="font-bold">Enhanced Safety</span> Significantly reduces fire hazards, protecting lives and
+          property.
+        </li>
+        <li className="py-2"><span className="font-bold">Regulatory Compliance: </span> : Helps meet stringent fire safety standards.
+        </li>
+        <li className="py-2"><span className="font-bold">Material Longevity:</span> Increases durability against heat exposure.
+        </li>
+        <li className="py-2"><span className="font-bold">Versatility:</span> Suitable for a diverse range of applications.
+        </li>
+      </ul>
+      <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
+        Industries Served
+      </h3>
+      <p className="px-4">Flame retardants are indispensable in:
+      </p>
+      <ul className="pl-4 list-disc list-inside space-y-4">
+        <li className="py-2"><span className="font-bold">Construction: </span>Insulation, wallboards, and roofing materials.</li>
+        <li className="py-2"><span className="font-bold">Electronics: </span>Circuit boards and device housings.</li>
+        <li className="py-2"><span className="font-bold">Textiles: </span>Upholstery, curtains, and fire-resistant clothing.</li>
+        <li className="py-2"><span className="font-bold">Automotive: </span>Interior materials and wiring.</li>
+        <li className="py-2"><span className="font-bold">Furniture: </span>Foams and wood products that meet fire safety standards.</li>
+      </ul>
 
       {/* Products */}
       <div className="px-20 pb-10">
@@ -160,7 +225,7 @@ function FlameRetardant() {
           </div>
         )}
       </div>
-    </div>
+    </div >
   );
 }
 

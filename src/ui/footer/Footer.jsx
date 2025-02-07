@@ -56,19 +56,82 @@ function Footer() {
           </Link>
           <div className="text-white">Follow Us:</div>
           <div className="flex space-x-4">
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/facebook.png"
+                className="w-[32px] h-[32px]"
+                alt="Facebook"
+              />
+            </a>
 
-            <img src="../social icons/facebook.png" className="w-[32px] h-[32px]" />
-            <img src="../social icons/Twitter.png" className="w-[32px] h-[32px]" />
-            <img src="../social icons/insta.png" className="w-[32px] h-[32px]" />
-            <img src="../social icons/linkedin.png" className="w-[32px] h-[32px]" />
-            <img src="../social icons/pinterest.png" className="w-[32px] h-[32px]" />
-          
+            {/* Twitter */}
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/Twitter.png"
+                className="w-[32px] h-[32px]"
+                alt="Twitter"
+              />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/insta.png"
+                className="w-[32px] h-[32px]"
+                alt="Instagram"
+              />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/linkedin.png"
+                className="w-[32px] h-[32px]"
+                alt="LinkedIn"
+              />
+            </a>
+
+            {/* Pinterest */}
+            <a
+              href="https://www.pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/pinterest.png"
+                className="w-[32px] h-[32px]"
+                alt="Pinterest"
+              />
+            </a>
           </div>
         </div>
 
         {/* Column 2: Our Company */}
         <FooterColumn title="Our Company" items={columnData[0].items} />
 
+        {/* Column 3: Most Sold */}
         <FooterColumn title="Most Sold" items={columnData[1].items} />
 
         {/* Column 4: Media & Events */}
@@ -79,7 +142,7 @@ function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="mt-12 border-t  pt-8">
+      <div className="mt-12 border-t pt-8">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="text-white text-sm">
             ©2024 Powered By{" "}

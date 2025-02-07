@@ -25,22 +25,91 @@ function PolymerAdditives() {
             {/* Below Content */}
             <div className="pt-8 px-20 leading-loose">
                 <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Polymer Processing Additives: Enhancing Efficiency in Polymer Manufacturing</h3>
+                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Polymer Processing Additives PPA</h3>
                     <p className="pt-6">
-                        In the competitive world of polymer manufacturing, Omniquan Polymer Processing Additives (PPAs) offer a solution for optimizing production efficiency and quality. Designed to improve flow, reduce viscosity, and facilitate smoother processing, Omniquan PPAs enable consistent, high-quality results in every batch. These specialized additives are key for manufacturers aiming to reduce operational costs while delivering superior polymer products with enhanced processing characteristics.
+                        In the competitive landscape of polymer manufacturing, achieving optimal performance
+                        during processing is crucial for creating high-quality end products. Omniquan Processing
+                        Aids (PPAs) stand out as essential additives designed to enhance the processing
+                        characteristics of polymers, ensuring efficiency and consistency throughout production.
+                        <br />
+                        <span className="font-bold">Omniquan Polymer Processing Aids (PPAs)</span> are specialized additives formulated to
+                        improve the flow characteristics, reduce melt viscosity, and facilitate easier processing of
+                        various polymer materials. These aids modify the rheological properties of polymers,
+                        enabling smoother processing and enhancing the overall performance of polymer products.
+                        <br />
+                        <span className="font-bold">Omniquan PPA 5920,</span> this processing aid is designed for enhanced flow and reduced
+                        viscosity, making it ideal for applications requiring improved processing efficiency.
+                        <span className="font-bold">Omniquan PPA 5922</span> is aimed at optimizing the extrusion and injection molding processes,
+                        PPA 5922 significantly reduces cycle times while enhancing product quality. <span className="font-bold">OmniquanPPA 5927 </span>
+                        excels in providing excellent compatibility with various polymers, improving
+                        mechanical properties and processing behavior. <span className="font-bold">Omniquan PPA 9613</span> is especially
+                        formulated for demanding applications, this processing aid offers superior thermal stability
+                        and enhanced processing performance across a range of temperatures. <span className="font-bold">Omniquan Zero Moisture: </span>
+                        A groundbreaking addition, <span className="font-bold">Omniquan Zero Moisture</span> is engineered to minimize
+                        moisture absorption during processing, ensuring consistent quality and performance in the
+                        final products. This innovative processing aid enhances the durability and longevity of the
+                        polymers, making it particularly valuable in applications where moisture resistance is
+                        critical.
                     </p>
                 </div>
                 <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Tailored Solutions for Diverse Applications</h3>
+                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Uses of Polymers Processing Additives</h3>
                     <p className="">
-                        Omniquan PPAs come in tailored formulations to meet specific processing needs. For example, Omniquan PPA 5920 enhances flow for efficient processing, while Omniquan PPA 5922 optimizes extrusion and injection molding, reducing cycle times and boosting product quality. Omniquan PPA 5927 improves compatibility across polymers, enhancing mechanical properties, while Omniquan PPA 9613 provides thermal stability for high-temperature applications. Additionally, Omniquan Zero Moisture minimizes moisture absorption, ensuring consistent quality in moisture-sensitive applications, extending product durability and resistance.
-                    </p>
+                        <span className="font-bold">Omniquan PPAs</span> are crucial in various processing techniques, including:
+                    </p> <br />
+                    <p className="">
+                        <span className="font-bold">Extrusion:</span> Enhancing polymer flow to prevent die drool and improve surface finish.
+                    </p> <br />
+                    <p className="">
+                        <span className="font-bold">Injection Molding:</span> Reducing cycle times and enhancing mold filling for consistent part
+                        quality.
+                    </p> <br />
+                    <p className="">
+                        <span className="font-bold">Blow Molding:</span> Ensuring uniform wall thickness and reducing defects in blow-molded
+                        components.
+                    </p> <br />
+                    <p className="">
+                        <span className="font-bold">Film Processing:</span> Improving clarity and mechanical properties of films while minimizing
+                        stickiness and enhancing handling.
+                    </p> <br />
                 </div>
                 <div className="pt-8 pb-6">
-                    <h3 className="text-2xl font-semibold pb-4 text-[#023B3B]">Key Benefits Across Industries</h3>
-                    <p className="">
-                        With Omniquan PPAs, manufacturers benefit from reduced processing temperatures and energy use, leading to significant cost savings. The additives also improve product quality by minimizing defects and achieving a superior finish. Faster cycle times and reduced downtime contribute to higher output and enhanced efficiency. Omniquan PPAs support various polymer processing techniques—extrusion, injection molding, blow molding, and film processing—serving industries like plastics, consumer goods, medical devices, and textiles, where consistent quality and performance are paramount.
-                    </p>
+                    <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">Key Benefits</h3>
+                    <ol className="list-decimal list-inside space-y-4 p-4">
+                        <li>
+                            <span className="font-bold">Improved Process Efficiency:</span> Reduced processing temperatures and energy
+                            consumption lead to significant cost savings.
+                        </li>
+                        <li>
+                            <span className="font-bold">Enhanced Product Quality:</span> Optimized flow characteristics minimize defects,
+                            ensuring a superior finish.
+                        </li>
+                        <li>
+                            <span className="font-bold">Increased Output:</span> Faster cycle times and reduced downtime enhance production
+                            rates and overall efficiency
+                        </li>
+                        <li>
+                            <span className="font-bold">Better Material Compatibility:</span> Improved compatibility of polymer blends enhances
+                            the mechanical properties of the final products.
+                        </li>
+                    </ol>
+                </div>
+                <div className="pt-8 pb-6">
+                    <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">Key Industries</h3>
+                    <ul className="list-disc list-inside space-y-4 p-4">
+                        <li>
+                            Plastics and Composites:
+                        </li>
+                        <li>
+                            Consumer Goods:
+                        </li>
+                        <li>
+                            Medical Devices:
+                        </li>
+                        <li>
+                            Textiles:
+                        </li>
+                    </ul>
                 </div>
             </div>
 
