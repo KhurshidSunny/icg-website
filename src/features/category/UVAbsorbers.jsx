@@ -57,61 +57,76 @@ function UVAbsorbers() {
 
       <div>
         {/* Description */}
-        <h2 className="text-2xl font-bold mb-4 text-[#023B3B]">
-          UV-Absorbers
-        </h2>
+        <h2 className="text-2xl font-bold mb-4 text-[#023B3B]">UV-Absorbers</h2>
         <p className="font-normal text-[#000000] mb-6">
-          UV absorbers are specialized compounds designed to absorb harmful ultraviolet (UV)
-          radiation from sunlight or artificial light sources. They help protect materials,
-          products, and surfaces from the detrimental effects of UV rays, which can cause
-          degradation, discoloration, and loss of mechanical properties. UV absorbers are
-          widely used in industries such as plastics, coatings, textiles, and personal care to
-          ensure the longevity and stability of products.
+          UV absorbers are specialized compounds designed to absorb harmful
+          ultraviolet (UV) radiation from sunlight or artificial light sources.
+          They help protect materials, products, and surfaces from the
+          detrimental effects of UV rays, which can cause degradation,
+          discoloration, and loss of mechanical properties. UV absorbers are
+          widely used in industries such as plastics, coatings, textiles, and
+          personal care to ensure the longevity and stability of products.
         </p>
 
         {/* Types of UV Absorbers */}
         <h3 className="text-xl font-bold mb-2 text-[#023B3B] ">
           Types of UV Absorbers:
         </h3>
-        <ul className="list-inside space-y-4">
-          <li className="p-2"><span className="font-bold">a. Benzotriazoles:</span> These are some of the most effective and widely used UV
-            absorbers, particularly in plastic and coatings applications. They offer excellent UV
-            protection and high thermal stability, making them suitable for outdoor applications.
-            <span className="font-bold">Omniquan UV 326</span> is a benzotriazole UV absorber that offers broad-spectrum UV
-            protection, ideal for plastic applications. <span className="font-bold">Omniqaun UV 1577</span> is used in automotive
-            coatings, providing excellent thermal stability and UV resistance. </li>
-          <li className="p-2"><span className="font-bold">b. Benzophenones:</span> Benzophenones work by absorbing UV radiation and dissipating
-            it as heat. They are commonly used in plastics, coatings, and adhesives to protect
-            against UV light-induced degradation. <span className="font-bold">Omniquan BP 12</span> belongs to the
-            benzophenone class of UV absorbers, known for their ability to absorb UVB radiation
-            in the wavelength range of 280-320 nm. This class of absorbers converts UV radiation
-            into harmless heat, preventing UV light from causing chemical degradation in the
-            materials it protects.</li>
-          <li className="p-2"><span className="font-bold">c. Triazines:</span> Known for their high performance in stabilizing polymers and coatings,
-            triazines are especially effective at absorbing UVB rays. They are used in automotive
-            and industrial coatings to enhance durability. <span className="font-bold">Omniquan UV 1577</span> is a highperformance triazine UV absorber that is widely used in automotive and industrial
-            coatings. It provides excellent stability at high temperatures and efficient UV
-            protection. <span className="font-bold">Omniquan UV 1600</span> is a triazine-based UV absorber that is specifically
-            designed for applications requiring long-term outdoor stability, such as automotive
-            clear coats and industrial finishes. It is known for its exceptional durability</li>
-        </ul>
+        <ol className="list-decimal space-y-4 pl-4">
+          <li className="p-2">
+            <span className="font-bold">Benzotriazoles:</span> These are some of
+            the most effective and widely used UV absorbers, particularly in
+            plastic and coatings applications. They offer excellent UV
+            protection and high thermal stability, making them suitable for
+            outdoor applications.
+            <span className="font-bold">Omniquan UV 326</span> is a
+            benzotriazole UV absorber that offers broad-spectrum UV protection,
+            ideal for plastic applications.{" "}
+            <span className="font-bold">Omniqaun UV 1577</span> is used in
+            automotive coatings, providing excellent thermal stability and UV
+            resistance.{" "}
+          </li>
+          <li className="p-2">
+            <span className="font-bold"> Benzophenones:</span> Benzophenones
+            work by absorbing UV radiation and dissipating it as heat. They are
+            commonly used in plastics, coatings, and adhesives to protect
+            against UV light-induced degradation.{" "}
+            <span className="font-bold">Omniquan BP 12</span> belongs to the
+            benzophenone class of UV absorbers, known for their ability to
+            absorb UVB radiation in the wavelength range of 280-320 nm. This
+            class of absorbers converts UV radiation into harmless heat,
+            preventing UV light from causing chemical degradation in the
+            materials it protects.
+          </li>
+          <li className="p-2">
+            <span className="font-bold">Triazines:</span> Known for their high
+            performance in stabilizing polymers and coatings, triazines are
+            especially effective at absorbing UVB rays. They are used in
+            automotive and industrial coatings to enhance durability.{" "}
+            <span className="font-bold">Omniquan UV 1577</span> is a
+            highperformance triazine UV absorber that is widely used in
+            automotive and industrial coatings. It provides excellent stability
+            at high temperatures and efficient UV protection.{" "}
+            <span className="font-bold">Omniquan UV 1600</span> is a
+            triazine-based UV absorber that is specifically designed for
+            applications requiring long-term outdoor stability, such as
+            automotive clear coats and industrial finishes. It is known for its
+            exceptional durability
+          </li>
+        </ol>
         <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
           Key benifits
         </h3>
-        <ol className="pl-4 list-decimal list-inside space-y-4">
-          <li className="py-2"> Protection from UV Degradation
-          </li>
-          <li className="py-2"> Enhancing Product Lifespan
-          </li>
-          <li className="py-2"> Preserving Color and Appearance
-          </li>
-          <li className="py-2"> Improving Stability
-          </li>
+        <ol className="pl-4 list-decimal space-y-4">
+          <li className="py-2"> Protection from UV Degradation</li>
+          <li className="py-2"> Enhancing Product Lifespan</li>
+          <li className="py-2"> Preserving Color and Appearance</li>
+          <li className="py-2"> Improving Stability</li>
         </ol>
         <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
           Key Industries
         </h3>
-        <ul className="pl-4 list-disc list-inside space-y-4">
+        <ul className=" list-decimal list-inside space-y-4">
           <li className="py-2">Automotive</li>
           <li className="py-2">Textiles</li>
           <li className="py-2">Plastics</li>
