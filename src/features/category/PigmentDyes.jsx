@@ -143,13 +143,12 @@ function PigmentDyes() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {data?.products?.map((product, index) => (
-            <div
-              key={product._id}
-              className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
-            >
-              <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-              <p className="text-gray-600">{product.cas_no}</p>
-            </div>
+            <a href={`/available-stocks/${product._id}`} key={product._id}>
+              <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center">
+                <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
+                <p className="text-gray-600">{product.cas_no}</p>
+              </div>
+            </a>
           ))}
         </div>
 

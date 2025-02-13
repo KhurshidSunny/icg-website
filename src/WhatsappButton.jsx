@@ -6,7 +6,7 @@ function WhatsAppButton() {
   const whatsappLink = `https://wa.me/${phoneNumber}?text=${message}`;
 
   return (
-    <div className="fixed bottom-4 right-4">
+    <div className="fixed z-50 bottom-4 right-4">
       <a href={whatsappLink} target="_blank" rel="noopener noreferrer">
         <button className="flex items-center gap-2 px-4 py-2 bg-green-500 text-white rounded-lg shadow-lg hover:bg-green-600 transition">
           <FaWhatsapp className="text-xl" /> Chat on WhatsApp

@@ -69,66 +69,79 @@ function AntiBlock() {
             Antiblocks
           </h3>
           <p className="pt-6 p-3">
-            Anti-blocking agents are additives used to reduce the adhesion or blocking of materials,
-            particularly in industries where materials have a tendency to stick together or adhere. These
-            agents possess specific properties that make them effective in preventing blocking or
-            clumping. These agents work by reducing the surface friction or stickiness between particles
-            or surfaces, making materials easier to handle, transport, and process.
+            Anti-blocking agents are additives used to reduce the adhesion or
+            blocking of materials, particularly in industries where materials
+            have a tendency to stick together or adhere. These agents possess
+            specific properties that make them effective in preventing blocking
+            or clumping. These agents work by reducing the surface friction or
+            stickiness between particles or surfaces, making materials easier to
+            handle, transport, and process.
             <br />
-            <span className="font-bold">Omniquan Block 22</span> is a high-performance antiblock that minimizes sticking in polymer
-            films and sheets which Used in packaging materials, films, and coatings to improve handling
-            and processing efficiency. <span className="font-bold">Omniquan Block 50 S</span> is An advanced anti block designed to
-            enhance the clarity of films while preventing adhesion . It is ideal for transparent packaging,
-            food wraps, and other applications where visibility is important. <span className="font-bold">Omniquan Block 111,</span> this
-            antiblock improves printability on surfaces, ensuring high-quality graphics and branding.
-            Suitable for flexible packaging, labels, and any printed film applications. <span className="font-bold">Omniquan Block770,</span>
-            optimizes performance in multilayer films by minimizing inter-layer adhesion
-            Commonly used in packaging, lamination, and industrial films. <span className="font-bold">Erucamide,</span> is a slip and
-            anti-block agent that reduces friction and enhances surface properties. Effective in various
-            plastic films, including food packaging and industrial applications. <span className="font-bold">Oleoamide</span> is an
-            effective antiblock that improves the flow and processing of polymers while reducing
-            surface adhesion is widely used in packaging, films, and coatings, particularly in
-            applications requiring enhanced performance and clarity
-
+            <span className="font-bold">Omniquan Block 22</span> is a
+            high-performance antiblock that minimizes sticking in polymer films
+            and sheets which Used in packaging materials, films, and coatings to
+            improve handling and processing efficiency.{" "}
+            <span className="font-bold">Omniquan Block 50 S</span> is An
+            advanced anti block designed to enhance the clarity of films while
+            preventing adhesion . It is ideal for transparent packaging, food
+            wraps, and other applications where visibility is important.{" "}
+            <span className="font-bold">Omniquan Block 111,</span> this
+            antiblock improves printability on surfaces, ensuring high-quality
+            graphics and branding. Suitable for flexible packaging, labels, and
+            any printed film applications.{" "}
+            <span className="font-bold">Omniquan Block770,</span>
+            optimizes performance in multilayer films by minimizing inter-layer
+            adhesion Commonly used in packaging, lamination, and industrial
+            films. <span className="font-bold">Erucamide,</span> is a slip and
+            anti-block agent that reduces friction and enhances surface
+            properties. Effective in various plastic films, including food
+            packaging and industrial applications.{" "}
+            <span className="font-bold">Oleoamide</span> is an effective
+            antiblock that improves the flow and processing of polymers while
+            reducing surface adhesion is widely used in packaging, films, and
+            coatings, particularly in applications requiring enhanced
+            performance and clarity
           </p>
-          <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">Key Benefits of Antiblocks</h3>
+          <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">
+            Key Benefits of Antiblocks
+          </h3>
           <ul className="list-disc list-inside space-y-4 p-4">
-            <li>Reduces surface friction to prevent layers from sticking together.</li>
+            <li>
+              Reduces surface friction to prevent layers from sticking together.
+            </li>
             <li>Enhances clarity for improved visibility in applications.</li>
-            <li>Improves printability, ensuring high-quality prints on packaging.</li>
-            <li>Optimizes packaging performance by minimizing adhesion between layers.</li>
+            <li>
+              Improves printability, ensuring high-quality prints on packaging.
+            </li>
+            <li>
+              Optimizes packaging performance by minimizing adhesion between
+              layers.
+            </li>
             <li>Maintains consistent product quality by reducing defects.</li>
-            <li>Offers versatility across various materials and applications.</li>
-            <li>Provides cost-effectiveness by lowering production costs and increasing yields.</li>
-            <li>Compatible with other additives for enhanced overall performance.</li>
+            <li>
+              Offers versatility across various materials and applications.
+            </li>
+            <li>
+              Provides cost-effectiveness by lowering production costs and
+              increasing yields.
+            </li>
+            <li>
+              Compatible with other additives for enhanced overall performance.
+            </li>
           </ul>
 
-          <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">Key Industries</h3>
+          <h3 className="text-xl font-semibold p-4 text-[#023B3B] ">
+            Key Industries
+          </h3>
           <ol className="list-decimal list-inside space-y-4 p-4">
-            <li>
-              Plastics Industry
-            </li>
-            <li>
-              Food Industry
-            </li>
-            <li>
-              Pharmaceutical Industry
-            </li>
-            <li>
-              Agriculture
-            </li>
-            <li>
-              Packaging Industry
-            </li>
-            <li>
-              Paper and Printing
-            </li>
-            <li>
-              Mining and Mineral Processing
-            </li>
-            <li>
-              Chemical Industry
-            </li>
+            <li>Plastics Industry</li>
+            <li>Food Industry</li>
+            <li>Pharmaceutical Industry</li>
+            <li>Agriculture</li>
+            <li>Packaging Industry</li>
+            <li>Paper and Printing</li>
+            <li>Mining and Mineral Processing</li>
+            <li>Chemical Industry</li>
           </ol>
         </div>
       </div>
@@ -150,13 +163,12 @@ function AntiBlock() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {data?.products?.map((product, index) => (
-            <div
-              key={product._id}
-              className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
-            >
-              <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-              <p className="text-gray-600">{product.cas_no}</p>
-            </div>
+            <a href={`/available-stocks/${product._id}`} key={product._id}>
+              <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center">
+                <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
+                <p className="text-gray-600">{product.cas_no}</p>
+              </div>
+            </a>
           ))}
         </div>
 

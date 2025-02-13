@@ -66,11 +66,13 @@ function MasterBatch() {
             Masterbatches
           </h3>
           <p className="pt-6">
-            Masterbatches are essential additives used in the plastics and polymer industries to impart
-            color, enhance properties, and optimize processing. ICG Specialty Chemicals offers a wide
-            range of masterbatches tailored for specific industrial applications, delivering unmatched
-            quality and consistency. Our masterbatch products are designed to enhance durability,
-            improve aesthetic appeal, and optimize performance, making them indispensable for
+            Masterbatches are essential additives used in the plastics and
+            polymer industries to impart color, enhance properties, and optimize
+            processing. ICG Specialty Chemicals offers a wide range of
+            masterbatches tailored for specific industrial applications,
+            delivering unmatched quality and consistency. Our masterbatch
+            products are designed to enhance durability, improve aesthetic
+            appeal, and optimize performance, making them indispensable for
             manufacturers across a variety of industries.
           </p>
         </div>
@@ -84,25 +86,21 @@ function MasterBatch() {
             1. Liquid/Paste Black Masterbatch
           </h3>
           <p>
-            Liquid/Paste Black Masterbatch is a concentrated colorant formulated for easy dispersion
-            into a variety of plastic resins. This product offers superior color consistency and is ideal for
-            applications that require deep, rich black tones with minimal usage levels. Its paste form
-            makes it convenient to mix directly into liquid or semi-liquid processing environments.
+            Liquid/Paste Black Masterbatch is a concentrated colorant formulated
+            for easy dispersion into a variety of plastic resins. This product
+            offers superior color consistency and is ideal for applications that
+            require deep, rich black tones with minimal usage levels. Its paste
+            form makes it convenient to mix directly into liquid or semi-liquid
+            processing environments.
           </p>
           <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
           <ul className="list-[circle] list-inside space-y-4 p-4">
-            <li>
-              Excellent dispersion and coverage.
-            </li>
-            <li>
-              High pigment concentration, allowing lower dosages.
-            </li>
+            <li>Excellent dispersion and coverage.</li>
+            <li>High pigment concentration, allowing lower dosages.</li>
             <li>
               Suitable for injection molding, extrusion, and film applications.
             </li>
-            <li>
-              Provides UV resistance, enhancing outdoor weatherability.
-            </li>
+            <li>Provides UV resistance, enhancing outdoor weatherability.</li>
           </ul>
         </div>
         <div>
@@ -110,25 +108,22 @@ function MasterBatch() {
             2. Black Masterbatch
           </h3>
           <p>
-            Black Masterbatch is a versatile, solid concentrate of carbon black pigments designed for
-            efficient and uniform coloring of plastic materials. It provides excellent opacity, UV stability,
-            and mechanical performance enhancement. Black masterbatch by ICG Specialty
-            Chemicals is specifically formulated to meet the stringent demands of sectors that require
-            robust coloration with added strength and protection.
+            Black Masterbatch is a versatile, solid concentrate of carbon black
+            pigments designed for efficient and uniform coloring of plastic
+            materials. It provides excellent opacity, UV stability, and
+            mechanical performance enhancement. Black masterbatch by ICG
+            Specialty Chemicals is specifically formulated to meet the stringent
+            demands of sectors that require robust coloration with added
+            strength and protection.
           </p>
           <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
           <ul className="list-[circle] list-inside space-y-4 p-4">
+            <li>High opacity and color strength, reducing usage rates.</li>
+            <li>Exceptional UV resistance, protecting against weathering.</li>
+            <li>Enhances mechanical properties like tensile strength.</li>
             <li>
-              High opacity and color strength, reducing usage rates.
-            </li>
-            <li>
-              Exceptional UV resistance, protecting against weathering.
-            </li>
-            <li>
-              Enhances mechanical properties like tensile strength.
-            </li>
-            <li>
-              Heat-resistant, making it suitable for high-temperature applications.
+              Heat-resistant, making it suitable for high-temperature
+              applications.
             </li>
           </ul>
         </div>
@@ -137,46 +132,35 @@ function MasterBatch() {
             3.Moisture Absorber (AB)
           </h3>
           <p>
-            Moisture Absorber (AB) masterbatch is engineered to effectively remove excess moisture
-            from recycled or virgin polymers during processing. It ensures improved product quality by
-            preventing moisture-related defects like voids, bubbles, and surface blemishes in plastic
-            parts. This masterbatch is essential for improving the processing efficiency of hygroscopic
-            materials, reducing downtime, and ensuring consistent output.
+            Moisture Absorber (AB) masterbatch is engineered to effectively
+            remove excess moisture from recycled or virgin polymers during
+            processing. It ensures improved product quality by preventing
+            moisture-related defects like voids, bubbles, and surface blemishes
+            in plastic parts. This masterbatch is essential for improving the
+            processing efficiency of hygroscopic materials, reducing downtime,
+            and ensuring consistent output.
           </p>
           <h3 className="text-xl font-semibold px-4 p-2">Key Benefits:</h3>
           <ul className="list-[circle] list-inside space-y-4 p-4">
+            <li>Absorbs excess moisture from resins, reducing defects.</li>
             <li>
-              Absorbs excess moisture from resins, reducing defects.
+              Improves the quality of finished products by preventing splay and
+              streaking.
             </li>
-            <li>
-              Improves the quality of finished products by preventing splay and streaking.
-            </li>
-            <li>
-              Enhances mechanical properties and surface finish.
-            </li>
-            <li>
-              Cost-effective solution for processing recycled materials.
-            </li>
+            <li>Enhances mechanical properties and surface finish.</li>
+            <li>Cost-effective solution for processing recycled materials.</li>
           </ul>
         </div>
         <div>
-          <h3 className="text-xl font-semibold text-[#023B3B] ">Key Industries of Nucleacting Agents:</h3>
+          <h3 className="text-xl font-semibold text-[#023B3B] ">
+            Key Industries of Nucleacting Agents:
+          </h3>
           <ul className="list-disc list-inside space-y-4 py-4">
-            <li>
-              Automotive:
-            </li>
-            <li>
-              Packaging:
-            </li>
-            <li>
-              Construction
-            </li>
-            <li>
-              Electronics:
-            </li>
-            <li>
-              Recycling
-            </li>
+            <li>Automotive:</li>
+            <li>Packaging:</li>
+            <li>Construction</li>
+            <li>Electronics:</li>
+            <li>Recycling</li>
           </ul>
         </div>
 
@@ -197,13 +181,12 @@ function MasterBatch() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data?.products?.map((product, index) => (
-              <div
-                key={product._id}
-                className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
-              >
-                <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-                <p className="text-gray-600">{product.cas_no}</p>
-              </div>
+              <a href={`/available-stocks/${product._id}`} key={product._id}>
+                <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center">
+                  <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
+                  <p className="text-gray-600">{product.cas_no}</p>
+                </div>
+              </a>
             ))}
           </div>
 
