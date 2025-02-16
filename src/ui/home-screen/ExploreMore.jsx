@@ -127,18 +127,20 @@ function ExploreMore() {
   const navigate = useNavigate();
 
   return (
-    <div className='text-center p-[2rem]'>
-      <h2 className='text-[2rem] mb-[1rem] text-[#2b2b2b]'>Explore Our Expertise</h2>
+    <div className='text-center p-[2rem] bg-background-light dark:bg-background-dark'>
+      <h2 className='text-[2rem] mb-[1rem] text-text-light dark:text-text-dark'>
+        Explore Our Expertise
+      </h2>
       <div className='flex justify-center mb-4 gap-4'>
         <button
-          className={`text-black font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-[#8bc53f] ${activeTab === 'industries' ? "text-[#8bc53f] border-b-2 border-black" : ""
+          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${activeTab === 'industries' ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light" : "text-text-light dark:text-text-dark"
             }`}
           onClick={() => setActiveTab("industries")}
         >
           Industries
         </button>
         <button
-          className={`text-black font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-[#8bc53f] ${activeTab === 'solutions' ? "text-[#8bc53f] border-b-2 border-black" : ""
+          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${activeTab === 'solutions' ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light" : "text-text-light dark:text-text-dark"
             }`}
           onClick={() => setActiveTab("solutions")}
         >

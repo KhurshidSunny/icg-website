@@ -151,7 +151,7 @@ function FindProductSection() {
         <div className="flex flex-col sm:flex-row justify-between w-full gap-[10px] mt-[20px]">
           <div className="flex-1 flex flex-col">
             <label className="text-[#333] font-bold mb-[5px]" htmlFor="industries">Industries</label>
-            <select className="text-[#333] font-bold mb-[5px]" id="industries">
+            <select className="text-[#333] font-bold mb-[5px] border p-2" id="industries">
               <option value="select industries">Select industries</option>
               <option value="automotive">Automotive</option>
               <option value="printing and packaging">Printing and Packaging</option>
@@ -164,9 +164,9 @@ function FindProductSection() {
               <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
             </select>
           </div>
-          <div className="flex-1 flex flex-col">
+          <div className="flex-1 flex flex-col ">
             <label className="text-[#333] font-bold mb-[5px]" htmlFor="solutions">Chemical Solutions</label>
-            <select className="text-[#333] font-bold mb-[5px]" id="solutions">
+            <select className="text-[#333] font-bold mb-[5px] border p-2" id="solutions">
               <option value="select category">Select category</option>
               <option value="antioxidants">Antioxidants</option>
               <option value="uv-absorbers">UV-absorbers</option>
