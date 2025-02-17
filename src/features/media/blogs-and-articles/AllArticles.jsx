@@ -64,7 +64,7 @@ function AllArticles() {
               </p>
               <a
                 className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
-                href={`/blog-articles/${item._id}`}
+                href={`/article/${item._id}`}
               >
                 Read me
               </a>

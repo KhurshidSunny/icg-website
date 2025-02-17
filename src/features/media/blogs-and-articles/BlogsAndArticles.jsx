@@ -125,7 +125,7 @@ export default function BlogsAndArticles() {
                     {blog.description}
                   </p> */}
                   <a
-                    href={`/blog-articles/${blog._id}`}
+                    href={`/blog/${blog._id}`}
                     className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
                   >
                     Read me
@@ -142,7 +142,7 @@ export default function BlogsAndArticles() {
 
           {data?.news?.mediaAndNews.length > 0 && (
             <div className="flex justify-center items-center mt-20 underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B] sm:text-[20px]">
-              <a href="/all-blog-articles?page=1&limit=10">See all blogs</a>
+              <a href="/all-blogs?page=1&limit=10">See all blogs</a>
             </div>
           )}
 
@@ -229,7 +229,7 @@ export default function BlogsAndArticles() {
                     {article.description}
                   </p>
                   <a
-                    href={`/blog-articles/${article._id}`}
+                    href={`/article/${article._id}`}
                     className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
                   >
                     Read me
