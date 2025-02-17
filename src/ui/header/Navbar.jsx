@@ -1,12 +1,25 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { BiMoon, BiSun } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
   const [nestedDropdown, setNestedDropdown] = useState(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // State for mobile menu
-  const [mobileNestedDropdown, setMobileNestedDropdown] = useState(null); // State for nested menus in mobile
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mobileNestedDropdown, setMobileNestedDropdown] = useState(null);
+  const [theme, setTheme] = useState('light'); // State for theme
   const navigate = useNavigate();
+
+  // Apply the theme to the body element
+  useEffect(() => {
+    document.documentElement.classList.remove('light', 'dark');
+    document.documentElement.classList.add(theme);
+  }, [theme]);
+
+  // Toggle between light and dark themes
+  const toggleTheme = () => {
+    setTheme(theme === 'light' ? 'dark' : 'light');
+  };
 
   const handleMouseEnter = (menu) => setDropdown(menu);
   const handleMouseLeave = () => {
@@ -30,7 +43,7 @@ const Navbar = () => {
         navigate("/media-news");
         break;
       case "Career":
-        navigate("/icg-career");
+        navigate("/career");
         break;
       case "Contact":
         navigate("/contact");
@@ -95,16 +108,16 @@ const Navbar = () => {
         {
           title: "Chemical Categories",
           nested: [
-            "Antioxidants (AN)",
+            "Antioxidants (NA)",
             "Hindered Amine Light Stabilizers (HALS)",
             "UV Absorbers",
-            "Flame Retardants (FR)",
+            "Flame Retardants",
             "Optical Brighteners (OB)",
             "Pigments and Dyes",
             "Polymers and Resins",
             "Nucleating Agents",
             "Masterbatch",
-            "Antiblocks",
+            "Anti Blocks",
             "Polymer Additives",
             "Plasticizers",
             "Compound",
@@ -146,24 +159,22 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-[1000] py-4">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8  flex justify-between items-center">
+    <nav className={`bg-background-light dark:bg-background-dark shadow-md sticky top-0 z-[1000] py-4 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
             alt="Logo"
             className="h-full w-16 object-cover cursor-pointer"
-            // className=" w-16 object-cover cursor-pointer"
           />
         </div>
-        {/* <img src="../logo.png" /> */}
 
         {/* Hamburger Menu Button (Mobile) */}
         <div className="md:hidden">
           <button
             onClick={toggleMobileMenu}
-            className="text-gray-700 focus:outline-none"
+            className="text-text-light dark:text-text-dark focus:outline-none"
           >
             {isMobileMenuOpen ? (
               <svg
@@ -208,7 +219,7 @@ const Navbar = () => {
               key={menu}
             >
               <button
-                className="flex items-center text-gray-700 font-bold hover:text-[#8AA823] focus:outline-none cursor-pointer"
+                className="flex items-center text-text-light dark:text-text-dark font-bold hover:text-primary focus:outline-none cursor-pointer"
                 onClick={() => handleMenuItemClick(menu)}
               >
                 {menu}{" "}
@@ -221,7 +232,13 @@ const Navbar = () => {
 
           {/* Icons */}
           <div className="flex space-x-4 items-center">
-            <img src="../navbar/moon.png" alt="theme-icon" />
+            <button onClick={toggleTheme} className="focus:outline-none">
+              {theme === 'light' ? (
+                <BiMoon className="text-text-light dark:text-text-dark" color="#8AA823" size={24} />
+              ) : (
+                <BiSun className="text-text-light dark:text-text-dark" color="#8AA823" size={24} />
+              )}
+            </button>
             <img src="../navbar/earth.png" alt="website icon" />
             <img src="../navbar/search.png" alt="search icon" />
           </div>
@@ -229,7 +246,7 @@ const Navbar = () => {
           {/* Button */}
           <Link
             to="/available-stocks"
-            className="ml-4 px-4 py-2 bg-[#8AA823] text-white font-bold rounded cursor-pointer"
+            className="ml-4 px-4 py-2 bg-primary text-white font-bold rounded cursor-pointer hover:bg-primary-dark"
           >
             Available Stocks
           </Link>
@@ -238,7 +255,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed inset-0 overflow-y-auto bg-white z-[1000] transform transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed inset-0 overflow-y-auto bg-background-light dark:bg-background-dark z-[1000] transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
@@ -247,7 +264,7 @@ const Navbar = () => {
           <div className="flex justify-end">
             <button
               onClick={toggleMobileMenu}
-              className="text-gray-700 focus:outline-none"
+              className="text-text-light dark:text-text-dark focus:outline-none"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -270,7 +287,7 @@ const Navbar = () => {
           {Object.keys(menuData).map((menu) => (
             <div key={menu}>
               <button
-                className="text-gray-700 font-bold text-lg w-full text-left"
+                className="text-text-light dark:text-text-dark font-bold text-lg w-full text-left"
                 onClick={() => handleMenuItemClick(menu)}
               >
                 {menu}
@@ -282,7 +299,7 @@ const Navbar = () => {
                       {item.link ? (
                         <Link
                           to={item.link}
-                          className="text-gray-600 hover:text-[#8AA823]"
+                          className="text-text-light dark:text-text-dark hover:text-primary"
                           onClick={() => setIsMobileMenuOpen(false)} // Close mobile menu on click
                         >
                           {item.title}
@@ -290,7 +307,7 @@ const Navbar = () => {
                       ) : (
                         <div>
                           <button
-                            className="text-gray-600 hover:text-[#8AA823] cursor-pointer w-full text-left"
+                            className="text-text-light dark:text-text-dark hover:text-primary cursor-pointer w-full text-left"
                             onClick={() => handleMobileNestedMenu(item.title)}
                           >
                             {item.title}{" "}
@@ -302,7 +319,7 @@ const Navbar = () => {
                                 {item.nested.map((nestedItem, nestedIndex) => (
                                   <div
                                     key={nestedIndex}
-                                    className="text-gray-600 hover:text-[#8AA823] cursor-pointer"
+                                    className="text-text-light dark:text-text-dark hover:text-primary cursor-pointer"
                                     onClick={() => handleNavigation(nestedItem)}
                                   >
                                     {nestedItem}
@@ -324,17 +341,17 @@ const Navbar = () => {
       {/* Full-Screen Dropdown (Desktop) */}
       {dropdown && (
         <div
-          className="absolute left-0 top-full w-full bg-white shadow-lg p-8 px-48"
+          className="absolute left-0 top-full w-full bg-background-light dark:bg-background-dark shadow-lg p-8 px-48"
           onMouseLeave={handleMouseLeave}
         >
           <div className="grid grid-cols-3 gap-6">
             {/* Paragraph Content */}
             {menuData[dropdown].paragraph && (
               <div>
-                <h3 className="font-bold text-gray-600">
+                <h3 className="font-bold text-text-light dark:text-text-dark">
                   {menuData[dropdown].paragraph.heading}
                 </h3>
-                <p className="text-sm text-gray-600">
+                <p className="text-sm text-text-light dark:text-text-dark">
                   {menuData[dropdown].paragraph.content}
                 </p>
               </div>
@@ -348,13 +365,13 @@ const Navbar = () => {
                     {item.link ? (
                       <Link
                         to={item.link}
-                        className="font-bold text-gray-700 hover:underline hover:text-[#8AA823] cursor-pointer"
+                        className="font-bold text-text-light dark:text-text-dark hover:underline hover:text-primary cursor-pointer"
                       >
                         {item.title}
                       </Link>
                     ) : (
                       <div
-                        className="font-bold text-gray-700 hover:underline hover:text-[#8AA823] cursor-pointer"
+                        className="font-bold text-text-light dark:text-text-dark hover:underline hover:text-primary cursor-pointer"
                         onMouseEnter={() =>
                           item.nested && handleNestedMouseEnter(item.title)
                         }
@@ -366,11 +383,11 @@ const Navbar = () => {
 
                     {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-white border-l border-gray-200 shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
+                      <div className="absolute left-full top-0 bg-background-light dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
-                            className="text-gray-600 hover:underline hover:text-[#8AA823] cursor-pointer"
+                            className="text-text-light dark:text-text-dark hover:underline hover:text-primary cursor-pointer"
                             onClick={() => handleNavigation(nestedItem)}
                           >
                             {nestedItem}
