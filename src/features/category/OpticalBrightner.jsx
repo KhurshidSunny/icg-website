@@ -66,35 +66,47 @@ function OpticalBrightner() {
             Optical Brighteners (OB)
           </h3>
           <p className="pt-6">
-            Optical brighteners, also known as optical brightening agents (OBAs) are specialized
-            chemical compounds designed to enhance the luminance and visual appeal of
-            materials. By absorbing ultraviolet light and re-emitting it as visible blue light, these
-            agents create a perception of increased whiteness and brightness, transforming the
+            Optical brighteners, also known as optical brightening agents (OBAs)
+            are specialized chemical compounds designed to enhance the luminance
+            and visual appeal of materials. By absorbing ultraviolet light and
+            re-emitting it as visible blue light, these agents create a
+            perception of increased whiteness and brightness, transforming the
             aesthetics of various products.
           </p>
         </div>
         <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
           Key benifits
         </h3>
-        <ul className="pl-4 list-disc list-inside space-y-4">
-          <li className="py-2"><span className="font-bold">Enhanced Aesthetic Appeal</span> Optical brighteners significantly improve the visual
-            quality of products, imparting a vibrant and pristine appearance.
-
+        <ul className="pl-4 list-decimal list-inside space-y-4">
+          <li className="py-2">
+            <span className="font-bold">Enhanced Aesthetic Appeal</span> Optical
+            brighteners significantly improve the visual quality of products,
+            imparting a vibrant and pristine appearance.
           </li>
-          <li className="py-2"><span className="font-bold">Value Addition</span> Products treated with OBAs often enjoy higher market valuation due
-            to their enhanced aesthetics.
+          <li className="py-2">
+            <span className="font-bold">Value Addition</span> Products treated
+            with OBAs often enjoy higher market valuation due to their enhanced
+            aesthetics.
           </li>
-          <li className="py-2"> <span className="font-bold">Versatility Across Industries</span> Their applicability across diverse sectors makes
-            optical brighteners invaluable to manufacturers.
+          <li className="py-2">
+            {" "}
+            <span className="font-bold">
+              Versatility Across Industries
+            </span>{" "}
+            Their applicability across diverse sectors makes optical brighteners
+            invaluable to manufacturers.
           </li>
-          <li className="py-2"> <span className="font-bold">Cost Efficiency</span> The integration of optical brighteners can enhance product quality
-            without necessitating major alterations in manufacturing processes.
+          <li className="py-2">
+            {" "}
+            <span className="font-bold">Cost Efficiency</span> The integration
+            of optical brighteners can enhance product quality without
+            necessitating major alterations in manufacturing processes.
           </li>
         </ul>
         <h3 className="text-xl font-semibold py-4 text-[#023B3B]">
           Applications
         </h3>
-        <ul className="pl-4 list-disc list-inside space-y-4">
+        <ul className="pl-4 list-decimal list-inside space-y-4">
           <li className="py-2">Textile Manufacturing</li>
           <li className="py-2">Paper and Packaging Industries</li>
           <li className="py-2">Household Cleaning and Detergent Products</li>
@@ -121,13 +133,12 @@ function OpticalBrightner() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {data?.products?.map((product, index) => (
-            <div
-              key={product._id}
-              className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
-            >
-              <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-              <p className="text-gray-600">{product.cas_no}</p>
-            </div>
+            <a href={`/available-stocks/${product._id}`} key={product._id}>
+              <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center">
+                <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
+                <p className="text-gray-600">{product.cas_no}</p>
+              </div>
+            </a>
           ))}
         </div>
 

@@ -66,9 +66,6 @@ function MediaAndNewsPage() {
                 Read me
               </a>
             </div>
-            <div className="absolute text-white font-[700] top-5 right-5 bg-[#45CE3896] py-2 px-6 rounded-full">
-              <h1>Announcement</h1>
-            </div>
           </div>
         ))}
       </div>

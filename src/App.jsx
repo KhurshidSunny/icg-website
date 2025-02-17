@@ -39,6 +39,7 @@ import ProductFinderHomePage from "./features/product-finder/ProductFinderHomePa
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllMediaEvents from "./features/media/media-and-news/MediaEvents";
 import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm";
+import WhatsAppButton from "./WhatsappButton";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -46,6 +47,7 @@ const queryClient = new QueryClient();
 function App() {
   return (
     <div>
+      <WhatsAppButton />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Navbar />
@@ -83,7 +85,7 @@ function App() {
 
             {/* <Route path="/gallery" element={<Gallery />} /> */}
             <Route
-              path="/products-and-solutions/antioxidants-(na)"
+              path="/products-and-solutions/antioxidants-(an)"
               element={<Antioxidant />}
             />
             <Route
@@ -95,7 +97,7 @@ function App() {
               element={<UVAbsorbers />}
             />
             <Route
-              path="/products-and-solutions/flame-retardants"
+              path="/products-and-solutions/flame-retardants-(fr)"
               element={<FlameRetardant />}
             />
             <Route
@@ -119,7 +121,7 @@ function App() {
               element={<MasterBatch />}
             />
             <Route
-              path="/products-and-solutions/anti-blocks"
+              path="/products-and-solutions/antiblocks"
               element={<AntiBlock />}
             />
             <Route

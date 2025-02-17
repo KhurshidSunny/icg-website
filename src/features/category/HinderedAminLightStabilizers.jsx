@@ -1,6 +1,6 @@
 import { FaArrowRightLong } from "react-icons/fa6";
 import { useQuery } from "@tanstack/react-query";
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { axiosInstance } from "../../axios";
 import { useSearchParams } from "react-router-dom";
 
@@ -78,37 +78,40 @@ function HinderedAminLightStabilizers() {
             Hindered Amine Light Stabilizers (HALS)
           </h3>
           <p className="">
-            Although not technically UV absorbers, HALS play a complementary role by
-            scavenging free radicals formed during UV exposure, thus preventing further
-            degradation of materials. <span className="font-bold">Omniquan LS 944</span> is a high molecular weight HALS that is
-            effective in polyolefin applications such as agricultural films, outdoor furniture, and
-            other plastic products. It provides long-lasting UV protection and reduces photooxidation. <span className="font-bold">Omniquan LS 770</span> is a well-known HALS product, it is highly effective in
-            preventing the degradation of plastics and coatings exposed to UV radiation. It is
-            commonly used in polyolefins, polyurethanes, and styrene.
-
+            Although not technically UV absorbers, HALS play a complementary
+            role by scavenging free radicals formed during UV exposure, thus
+            preventing further degradation of materials.{" "}
+            <span className="font-bold">Omniquan LS 944</span> is a high
+            molecular weight HALS that is effective in polyolefin applications
+            such as agricultural films, outdoor furniture, and other plastic
+            products. It provides long-lasting UV protection and reduces
+            photooxidation. <span className="font-bold">Omniquan LS 770</span>{" "}
+            is a well-known HALS product, it is highly effective in preventing
+            the degradation of plastics and coatings exposed to UV radiation. It
+            is commonly used in polyolefins, polyurethanes, and styrene.
           </p>
           <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
             Key benifits
           </h3>
-          <ol className="pl-4">
-            <li>1. Protection from UV Degradation</li>
-            <li>2. Enhancing Product Lifespan</li>
-            <li>3. Preserving Color and Appearance</li>
-            <li>4. Improving Stability</li>
+          <ol className="pl-4 list-decimal">
+            <li>Protection from UV Degradation</li>
+            <li>Enhancing Product Lifespan</li>
+            <li>Preserving Color and Appearance</li>
+            <li>Improving Stability</li>
           </ol>
           <h3 className="text-xl font-semibold p-4 text-[#023B3B]">
             Key Industries
           </h3>
-          <ul className="pl-4">
-            <li>• Agriculture</li>
-            <li>• Packaging</li>
-            <li>• Furniture</li>
-            <li>• Automotive</li>
-            <li>• Coatings</li>
-            <li>• Textiles</li>
-            <li>• Construction</li>
-            <li>• Sports & Recreation</li>
-          </ul>
+          <ol className="pl-4 list-decimal">
+            <li>Agriculture</li>
+            <li>Packaging</li>
+            <li>Furniture</li>
+            <li>Automotive</li>
+            <li>Coatings</li>
+            <li>Textiles</li>
+            <li>Construction</li>
+            <li>Sports & Recreation</li>
+          </ol>
         </div>
       </div>
 
@@ -129,13 +132,12 @@ function HinderedAminLightStabilizers() {
         </div>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           {data?.products?.map((product, index) => (
-            <div
-              key={product._id}
-              className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center"
-            >
-              <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
-              <p className="text-gray-600">{product.cas_no}</p>
-            </div>
+            <a href={`/available-stocks/${product._id}`} key={product._id}>
+              <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center">
+                <h4 className="font-semibold text-lg mb-2">{product.name}</h4>
+                <p className="text-gray-600">{product.cas_no}</p>
+              </div>
+            </a>
           ))}
         </div>
 
