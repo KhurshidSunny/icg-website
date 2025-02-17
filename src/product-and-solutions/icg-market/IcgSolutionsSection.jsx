@@ -17,7 +17,7 @@ function IcgSolutionsSection({
       <Card title={section2Heading2} paragraph={section2Paragraph2} />
 
       {/* Box 3 image */}
-      <div className=" bg-white  rounded-xl flex items-center">
+      <div className="bg-white dark:bg-gray-800 rounded-xl flex items-center">
         <img
           src={image3}
           alt="ICG Market"

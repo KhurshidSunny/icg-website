@@ -13,21 +13,21 @@ function IcgSection1({
         {/* Content 1 */}
         <div className={section1Heading1 ? "space-y-2" : ""}>
           {section1Heading1 && (
-            <h2 className="text-xl lg:text-2xl font-bold text-gray-800">
+            <h2 className="text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-200">
               {section1Heading1}
             </h2>
           )}
-          <p className="text-sm lg:text-base text-gray-600 text-justify">
+          <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 text-justify">
             {section1Paragraph1}
           </p>
         </div>
 
         {/* Content 2 */}
         <div>
-          <h2 className="text-xl lg:text-2xl font-bold text-gray-800 mb-2">
+          <h2 className="text-xl lg:text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">
             {section1Heading2}
           </h2>
-          <p className="text-sm lg:text-base text-gray-600 text-justify">
+          <p className="text-sm lg:text-base text-gray-600 dark:text-gray-400 text-justify">
             {section1Paragraph2}
           </p>
         </div>

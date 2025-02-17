@@ -358,7 +358,7 @@ const Navbar = () => {
       {/* Full-Screen Dropdown (Desktop) */}
       {dropdown && (
         <div
-          className="absolute left-0 top-full w-full bg-background-light dark:bg-background-dark shadow-lg p-8 px-48"
+          className="absolute left-0 top-full w-full bg-background-light bg-white dark:bg-background-dark shadow-lg p-8 px-48"
           onMouseLeave={handleMouseLeave}
         >
           <div className="grid grid-cols-3 gap-6">
@@ -376,7 +376,7 @@ const Navbar = () => {
 
             {/* Menu Items */}
             {menuData[dropdown].items && (
-              <div className="space-y-4">
+              <div className="space-y-4 bg-background-light bg-white">
                 {menuData[dropdown].items.map((item, index) => (
                   <div key={index} className="relative">
                     {item.link ? (
@@ -400,7 +400,7 @@ const Navbar = () => {
 
                     {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-background-light dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
+                      <div className="absolute left-full top-0 bg-background-light bg-white dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
@@ -424,3 +424,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+  
