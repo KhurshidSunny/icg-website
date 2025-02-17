@@ -48,7 +48,7 @@ const Navbar = () => {
         navigate("/media-news");
         break;
       case "Career":
-        navigate("/career");
+        navigate("/icg-career");
         break;
       case "Contact":
         navigate("/contact");
@@ -376,7 +376,7 @@ const Navbar = () => {
 
             {/* Menu Items */}
             {menuData[dropdown].items && (
-              <div className="space-y-4 bg-background-light bg-white">
+              <div className="space-y-4 bg-background-light">
                 {menuData[dropdown].items.map((item, index) => (
                   <div key={index} className="relative">
                     {item.link ? (
