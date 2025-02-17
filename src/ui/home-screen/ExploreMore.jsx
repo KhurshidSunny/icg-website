@@ -127,21 +127,27 @@ function ExploreMore() {
   const navigate = useNavigate();
 
   return (
-    <div className='text-center p-[2rem] bg-background-light dark:bg-background-dark'>
-      <h2 className='text-[2rem] mb-[1rem] text-text-light dark:text-text-dark'>
+    <div className="text-center p-[2rem] bg-background-light dark:bg-background-dark">
+      <h2 className="text-[2rem] mb-[1rem] text-text-light dark:text-text-dark">
         Explore Our Expertise
       </h2>
-      <div className='flex justify-center mb-4 gap-4'>
+      <div className="flex justify-center mb-4 gap-4">
         <button
-          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${activeTab === 'industries' ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light" : "text-text-light dark:text-text-dark"
-            }`}
+          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white dark:bg-gray-800 px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${
+            activeTab === "industries"
+              ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light"
+              : "text-text-light dark:text-text-dark"
+          }`}
           onClick={() => setActiveTab("industries")}
         >
           Industries
         </button>
         <button
-          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${activeTab === 'solutions' ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light" : "text-text-light dark:text-text-dark"
-            }`}
+          className={`font-noto text-[15px] font-bold uppercase tracking-wide transition-colors duration-300 bg-white dark:bg-gray-800 px-6 py-3 rounded hover:text-primary dark:hover:text-primary-light ${
+            activeTab === "solutions"
+              ? "text-primary dark:text-primary-light border-b-2 border-secondary dark:border-secondary-light"
+              : "text-text-light dark:text-text-dark"
+          }`}
           onClick={() => setActiveTab("solutions")}
         >
           Categories
@@ -149,27 +155,29 @@ function ExploreMore() {
       </div>
 
       {activeTab === "industries" && (
-        <div className='grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-5 p-5 justify-center mt-5 transition-all ease-in-out'>
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-5 p-5 justify-center mt-5 transition-all ease-in-out">
           {industries.map((industry, index) => (
             <div
-              className='relative w-full h-[300px] rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transition-shadow box-border hover:translate-y-[-10px] hover:shadow-[0_10px_20px_rgba(0,_0,_0,_0.2)]'
+              className="relative w-full h-[300px] rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transition-shadow box-border hover:translate-y-[-10px] hover:shadow-[0_10px_20px_rgba(0,_0,_0,_0.2)] bg-gray-100 dark:bg-gray-900"
               key={index}
               onClick={() => navigate(industry.link)}
             >
               <div
-                className='w-full h-full bg-cover bg-center flex justify-center items-center relative'
+                className="w-full h-full bg-cover bg-center flex justify-center items-center relative"
                 style={{ backgroundImage: `url(${industry.img})` }}
               >
-                <div className='absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,_0,_0,_0.59)] flex flex-col justify-center items-center text-center p-5'>
-                  <div className='w-[80px] h-[80px] border-2 border-white rounded-full flex justify-center items-center mb-4'>
+                <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,_0,_0,_0.59)] flex flex-col justify-center items-center text-center p-5">
+                  <div className="w-[80px] h-[80px] border-2 border-white dark:border-gray-300 rounded-full flex justify-center items-center mb-4">
                     <img
                       src={industry.icon}
                       alt={`${industry.title} icon`}
-                      className='w-[40px] h-[40px] object-contain'
+                      className="w-[40px] h-[40px] object-contain"
                       loading="lazy"
                     />
                   </div>
-                  <h3 className='text-white text-lg font-sans font-semibold leading-tight m-0 shadow-lg'>{industry.title}</h3>
+                  <h3 className="text-white dark:text-gray-200 text-lg font-sans font-semibold leading-tight m-0 shadow-lg">
+                    {industry.title}
+                  </h3>
                 </div>
               </div>
             </div>
@@ -178,19 +186,21 @@ function ExploreMore() {
       )}
 
       {activeTab === "solutions" && (
-        <div className='grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-5 p-5 justify-center mt-5 transition-all ease-in-out'>
+        <div className="grid grid-cols-[repeat(auto-fill,_minmax(300px,_1fr))] gap-5 p-5 justify-center mt-5 transition-all ease-in-out">
           {categories.map((category, index) => (
             <div
-              className='relative w-full h-[300px] rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transition-shadow box-border hover:translate-y-[-10px] hover:shadow-[0_10px_20px_rgba(0,_0,_0,_0.2)]'
+              className="relative w-full h-[300px] rounded-lg overflow-hidden cursor-pointer transition-transform duration-300 ease-in-out transition-shadow box-border hover:translate-y-[-10px] hover:shadow-[0_10px_20px_rgba(0,_0,_0,_0.2)] bg-gray-100 dark:bg-gray-900"
               key={index}
               onClick={() => navigate(category.link)}
             >
               <div
-                className='w-full h-full bg-cover bg-center flex justify-center items-center relative'
+                className="w-full h-full bg-cover bg-center flex justify-center items-center relative"
                 style={{ backgroundImage: `url(${category.img})` }}
               >
-                <div className='absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,_0,_0,_0.59)] flex flex-col justify-center items-center text-center p-5'>
-                  <h3 className='text-white text-lg font-sans font-semibold leading-tight m-0 shadow-lg'>{category.title}</h3>
+                <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-[rgba(0,_0,_0,_0.59)] flex flex-col justify-center items-center text-center p-5">
+                  <h3 className="text-white dark:text-gray-200 text-lg font-sans font-semibold leading-tight m-0 shadow-lg">
+                    {category.title}
+                  </h3>
                 </div>
               </div>
             </div>
