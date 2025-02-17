@@ -51,7 +51,7 @@ const queryClient = new QueryClient();
 
 function App() {
   return (
-    <div>
+    <div className="">
       <WhatsAppButton />
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>

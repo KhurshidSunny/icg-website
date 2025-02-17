@@ -87,148 +87,149 @@ const ProductList = () => {
   const sortedAndFilteredProducts = filterProducts(sortProducts(products));
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
-      {/* Filter Box */}
-      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
-        <h3 className="text-lg font-semibold">Filter</h3>
-
-        {/* A-Z Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
-          <button
-            onClick={() => {
-              setSortAZ(true);
-              setSortZA(false);
-            }}
-            className="w-full focus:outline-none"
-          >
-            A-Z
-          </button>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-
-        {/* Z-A Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
-          <button
-            onClick={() => {
-              setSortZA(true);
-              setSortAZ(false);
-            }}
-            className="w-full focus:outline-none"
-          >
-            Z-A
-          </button>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-
-        {/* Market */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
-          <select
-            value={market}
-            onChange={(e) => setMarket(e.target.value)}
-            className="w-full focus:outline-none"
-          >
-            <option value="">Select Market</option>
-            <option value="automotive">Automotive</option>
-            <option value="printing and packaging">Printing and Packaging</option>
-            <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
-            <option value="electronics">Electronics</option>
-            <option value="personal and home care">Personal and Home Care</option>
-            <option value="adhesives and sealants">Adhesives and Sealants</option>
-            <option value="paints and coating">Paints and Coating</option>
-            <option value="building and construction">Building and Construction</option>
-            <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
-          </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
-
-        {/* Category */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
-          <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
-            className="w-full focus:outline-none"
-          >
-            <option value="">Select Category</option>
-            <option value="antioxidants">Antioxidants</option>
-            <option value="uv-absorbers">UV-absorbers</option>
-            <option value="flame retardants">Flame retardants</option>
-            <option value="optical brightners">Optical Brightners</option>
-            <option value="pigments and dyes">Pigments and Dyes</option>
-            <option value="hals">HALS</option>
-            <option value="antiblocks">Antiblocks</option>
-            <option value="polymers and resins">Polymers and Resins</option>
-            <option value="plasticizers">Plasticizers</option>
-            <option value="nucleating agent">Nucleating Agent</option>
-            <option value="polymer processing additives">Polymer Processing Additives</option>
-            <option value="masterbatches">Masterbatches</option>
-          </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
-        </div>
+    <div className="max-w-6xl mx-auto p-4 dark:bg-gray-800 dark:text-white">
+    {/* Filter Box */}
+    <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
+      <h3 className="text-lg font-semibold">Filter</h3>
+  
+      {/* A-Z Sorting */}
+      <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-600">
+        <button
+          onClick={() => {
+            setSortAZ(true);
+            setSortZA(false);
+          }}
+          className="w-full focus:outline-none text-gray-900 dark:text-white"
+        >
+          A-Z
+        </button>
+        <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-500" />
       </div>
-
-      {/* Product List */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {sortedAndFilteredProducts.length > 0 ? (
-          sortedAndFilteredProducts.map((product) => (
-            <Link
-              key={product._id}
-              to={`/available-stocks/${product._id}`}
-              className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
-            >
-              <img
-                src={product.banner}
-                alt={product.name}
-                className="w-full h-48 object-cover rounded-t-lg"
-              />
-              <div className="py-4 text-center">
-                <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
-                <p className="text-sm text-gray-600">{product.chemical_name}</p>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <div className="text-center col-span-3">No products available.</div>
-        )}
+  
+      {/* Z-A Sorting */}
+      <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-600">
+        <button
+          onClick={() => {
+            setSortZA(true);
+            setSortAZ(false);
+          }}
+          className="w-full focus:outline-none text-gray-900 dark:text-white"
+        >
+          Z-A
+        </button>
+        <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-500" />
       </div>
-
-      {/* Pagination */}
-      {totalPages > 1 && (
-        <div className="flex flex-wrap items-center justify-center mt-8 mx-4 space-x-2 space-y-2">
-          <button
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-            disabled={page === 1 || isFetching}
+  
+      {/* Market */}
+      <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-600">
+        <select
+          value={market}
+          onChange={(e) => setMarket(e.target.value)}
+          className="w-full focus:outline-none bg-transparent text-gray-900 dark:text-white dark:bg-gray-700"
+        >
+          <option value="">Select Market</option>
+          <option value="automotive">Automotive</option>
+          <option value="printing and packaging">Printing and Packaging</option>
+          <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
+          <option value="electronics">Electronics</option>
+          <option value="personal and home care">Personal and Home Care</option>
+          <option value="adhesives and sealants">Adhesives and Sealants</option>
+          <option value="paints and coating">Paints and Coating</option>
+          <option value="building and construction">Building and Construction</option>
+          <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
+        </select>
+        <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-500" />
+      </div>
+  
+      {/* Category */}
+      <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-600">
+        <select
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          className="w-full focus:outline-none bg-transparent text-gray-900 dark:text-white dark:bg-gray-700"
+        >
+          <option value="">Select Category</option>
+          <option value="antioxidants">Antioxidants</option>
+          <option value="uv-absorbers">UV-absorbers</option>
+          <option value="flame retardants">Flame retardants</option>
+          <option value="optical brightners">Optical Brightners</option>
+          <option value="pigments and dyes">Pigments and Dyes</option>
+          <option value="hals">HALS</option>
+          <option value="antiblocks">Antiblocks</option>
+          <option value="polymers and resins">Polymers and Resins</option>
+          <option value="plasticizers">Plasticizers</option>
+          <option value="nucleating agent">Nucleating Agent</option>
+          <option value="polymer processing additives">Polymer Processing Additives</option>
+          <option value="masterbatches">Masterbatches</option>
+        </select>
+        <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-500" />
+      </div>
+    </div>
+  
+    {/* Product List */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      {sortedAndFilteredProducts.length > 0 ? (
+        sortedAndFilteredProducts.map((product) => (
+          <Link
+            key={product._id}
+            to={`/available-stocks/${product._id}`}
+            className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white"
           >
-            <FaArrowLeft className="text-gray-600" />
-          </button>
-
-          <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <button
-                key={index}
-                className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full border ${
-                  page === index + 1
-                    ? "text-white bg-[#8AA823]"
-                    : "text-gray-600 bg-gray-200 hover:bg-gray-300"
-                }`}
-                onClick={() => setPage(index + 1)}
-                disabled={isFetching}
-              >
-                {index + 1}
-              </button>
-            ))}
-          </div>
-
-          <button
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
-            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
-            disabled={page === totalPages || isFetching}
-          >
-            <FaArrowRight className="text-gray-600" />
-          </button>
-        </div>
+            <img
+              src={product.banner}
+              alt={product.name}
+              className="w-full h-48 object-cover rounded-t-lg"
+            />
+            <div className="py-4 text-center">
+              <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
+              <p className="text-sm text-gray-600 dark:text-gray-300">{product.chemical_name}</p>
+            </div>
+          </Link>
+        ))
+      ) : (
+        <div className="text-center col-span-3 text-white">No products available.</div>
       )}
     </div>
+  
+    {/* Pagination */}
+    {totalPages > 1 && (
+      <div className="flex flex-wrap items-center justify-center mt-8 mx-4 space-x-2 space-y-2">
+        <button
+          className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-600 dark:hover:bg-gray-500"
+          onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+          disabled={page === 1 || isFetching}
+        >
+          <FaArrowLeft className="text-gray-600 dark:text-white" />
+        </button>
+  
+        <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2">
+          {Array.from({ length: totalPages }, (_, index) => (
+            <button
+              key={index}
+              className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full border ${
+                page === index + 1
+                  ? "text-white bg-[#8AA823]"
+                  : "text-gray-600 bg-gray-200 hover:bg-gray-300 dark:text-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600"
+              }`}
+              onClick={() => setPage(index + 1)}
+              disabled={isFetching}
+            >
+              {index + 1}
+            </button>
+          ))}
+        </div>
+  
+        <button
+          className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-600 dark:hover:bg-gray-500"
+          onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+          disabled={page === totalPages || isFetching}
+        >
+          <FaArrowRight className="text-gray-600 dark:text-white" />
+        </button>
+      </div>
+    )}
+  </div>
+  
   );
 };
 
