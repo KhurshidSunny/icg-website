@@ -256,7 +256,9 @@ const Navbar = () => {
                 />
               )}
             </button>
+            <Link to="/contact">
             <img src="../navbar/earth.png" alt="website icon" />
+            </Link>
             <img src="../navbar/search.png" alt="search icon" />
           </div>
 
