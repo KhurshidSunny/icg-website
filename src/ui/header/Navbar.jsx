@@ -7,18 +7,23 @@ const Navbar = () => {
   const [nestedDropdown, setNestedDropdown] = useState(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [mobileNestedDropdown, setMobileNestedDropdown] = useState(null);
-  const [theme, setTheme] = useState('light'); // State for theme
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("theme") || "light"
+  );
   const navigate = useNavigate();
 
-  // Apply the theme to the body element
   useEffect(() => {
-    document.documentElement.classList.remove('light', 'dark');
+    // Apply the theme to the body element
+    document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
+
+    // Store the theme in localStorage
+    localStorage.setItem("theme", theme);
   }, [theme]);
 
   // Toggle between light and dark themes
   const toggleTheme = () => {
-    setTheme(theme === 'light' ? 'dark' : 'light');
+    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
   const handleMouseEnter = (menu) => setDropdown(menu);
@@ -159,7 +164,11 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`bg-background-light dark:bg-background-dark shadow-md sticky top-0 z-[1000] py-4 ${theme === 'light' ? 'bg-white' : 'bg-gray-800'}`}>
+    <nav
+      className={`bg-background-light dark:bg-background-dark shadow-md sticky top-0 z-[1000] py-4 ${
+        theme === "light" ? "bg-white" : "bg-gray-800"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>
@@ -233,10 +242,18 @@ const Navbar = () => {
           {/* Icons */}
           <div className="flex space-x-4 items-center">
             <button onClick={toggleTheme} className="focus:outline-none">
-              {theme === 'light' ? (
-                <BiMoon className="text-text-light dark:text-text-dark" color="#8AA823" size={24} />
+              {theme === "light" ? (
+                <BiMoon
+                  className="text-text-light dark:text-text-dark"
+                  color="#8AA823"
+                  size={24}
+                />
               ) : (
-                <BiSun className="text-text-light dark:text-text-dark" color="#8AA823" size={24} />
+                <BiSun
+                  className="text-text-light dark:text-text-dark"
+                  color="#8AA823"
+                  size={24}
+                />
               )}
             </button>
             <img src="../navbar/earth.png" alt="website icon" />
