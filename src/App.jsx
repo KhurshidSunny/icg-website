@@ -83,10 +83,12 @@ function App() {
             <Route path="/all-media-events" element={<AllMediaEvents />} />
             <Route path="/media-events/:mediaId" element={<MediaEvent />} />
             <Route path="/blog-articles" element={<BlogsAndArticles />} />
-            <Route path="/blog-articles/:articleId" element={<Article />} />
+            <Route path="/article/:articleId" element={<Article />} />
             <Route path="/all-articles" element={<AllArticles />} />
-            <Route path="/all-blog-articles" element={<AllBlogs />} />
-            <Route path="/blog-articles/:blogId" element={<Blog />} />
+
+            <Route path="/blog/:blogId" element={<Blog />} />
+            <Route path="/all-blogs" element={<AllBlogs />} />
+            {/* <Route path="/blog-articles/:blogId" element={<Blog />} /> */}
             {/* <Route path="/blog-articles" element={<MediaText />} /> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/icg-career" element={<ICGCareer />} />
