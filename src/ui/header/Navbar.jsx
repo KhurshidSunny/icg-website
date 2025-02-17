@@ -48,7 +48,7 @@ const Navbar = () => {
         navigate("/media-news");
         break;
       case "Career":
-        navigate("/career");
+        navigate("/icg-career");
         break;
       case "Contact":
         navigate("/contact");
