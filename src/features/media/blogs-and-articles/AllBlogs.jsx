@@ -35,6 +35,7 @@ function AllBlogs() {
   console.log("All blogs");
 
   return (
+    <div className="dark:bg-background-dark">
     <div className="container mx-auto px-6 lg:px-16 py-10  dark:bg-gray-800 ">
       <div className="flex justify-center">
         <h1 className="uppercase text-[#8AA823] text-xl font-bold sm:text-[18px] md:text-xl lg:text-xl 2xl:text-xl dark:text-white">
@@ -109,6 +110,7 @@ function AllBlogs() {
           </button>
         </div>
       )}
+    </div>
     </div>
   );
 }
