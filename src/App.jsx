@@ -40,6 +40,11 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import AllMediaEvents from "./features/media/media-and-news/MediaEvents";
 import RequestFileForm from "./features/our-company/available-stocks/RequestFileForm";
 import WhatsAppButton from "./WhatsappButton";
+import MediaAndNews from "./features/media/media-and-news/MediaAndNews";
+import AllMediaAndNews from "./features/media/media-and-news/AllMediaAndNews";
+import AllBlogs from "./features/media/blogs-and-articles/AllBlogs";
+import Article from "./features/media/blogs-and-articles/Article";
+import AllArticles from "./features/media/blogs-and-articles/AllArticles";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -72,12 +77,17 @@ function App() {
             <Route path="/our-history" element={<OurHistory />} />
             <Route path="/available-stocks" element={<AvailableStock />} />
             <Route path="/media-news" element={<MediaPage />} />
+            <Route path="/media-news/:mediaId" element={<MediaAndNews />} />
+            <Route path="/all-media-and-news" element={<AllMediaAndNews />} />
             <Route path="/media-events" element={<MediaEvents />} />
             <Route path="/all-media-events" element={<AllMediaEvents />} />
             <Route path="/media-events/:mediaId" element={<MediaEvent />} />
             <Route path="/blog-articles" element={<BlogsAndArticles />} />
+            <Route path="/blog-articles/:articleId" element={<Article />} />
+            <Route path="/all-articles" element={<AllArticles />} />
+            <Route path="/all-blog-articles" element={<AllBlogs />} />
             <Route path="/blog-articles/:blogId" element={<Blog />} />
-            <Route path="/blog-articles" element={<MediaText />} />
+            {/* <Route path="/blog-articles" element={<MediaText />} /> */}
             <Route path="/contact" element={<Contact />} />
             <Route path="/icg-career" element={<ICGCareer />} />
             <Route path="/job/:jobId" element={<Career />} />

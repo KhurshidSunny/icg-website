@@ -64,13 +64,10 @@ function AllArticles() {
               </p>
               <a
                 className="underline decoration-[#023B3B] decoration-2 cursor-pointer text-[#023B3B]"
-                href={`/articles/${item._id}`}
+                href={`/blog-articles/${item._id}`}
               >
                 Read me
               </a>
-            </div>
-            <div className="absolute text-white font-[700] top-5 right-5 bg-[#45CE3896] py-2 px-6 rounded-full">
-              <h1>Announcement</h1>
             </div>
           </div>
         ))}
