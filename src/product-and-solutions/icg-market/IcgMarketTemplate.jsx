@@ -5,6 +5,7 @@ import IcgSection1 from "./IcgSection1";
 import IcgFullImageSection from "./IcgFullImageSection";
 import IcgSolutionsSection from "./IcgSolutionsSection";
 import IcgFinalSection from "./IcgFinalSection";
+
 const IcgMarketTemplate = ({ icgMarketData }) => {
   const { pageName } = useParams();
   const pageData = icgMarketData.find(
@@ -12,11 +13,10 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
   );
 
   if (!pageData) {
-    return <div className="p-4">Page not found.</div>;
+    return <div className="p-4 text-gray-800 dark:text-gray-200">Page not found.</div>;
   }
 
   const {
-    
     titleImage,
     image1,
     image2,
@@ -36,7 +36,7 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
   } = pageData;
 
   return (
-    <div className="container mx-auto px-6 lg:px-16 py-10">
+    <div className="container mx-auto px-6 lg:px-16 py-10 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
       <IcgHeaderSection titleImage={titleImage} title={title} />
       <IcgSection1
         section1Heading1={section1Heading1}

@@ -87,45 +87,45 @@ const ProductList = () => {
   const sortedAndFilteredProducts = filterProducts(sortProducts(products));
 
   return (
-    <div className="max-w-6xl mx-auto p-4">
+    <div className="max-w-6xl mx-auto p-4 bg-background-light dark:bg-background-dark">
       {/* Filter Box */}
       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
-        <h3 className="text-lg font-semibold">Filter</h3>
+        <h3 className="text-lg font-semibold text-text-light dark:text-text-dark">Filter</h3>
 
         {/* A-Z Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
             onClick={() => {
               setSortAZ(true);
               setSortZA(false);
             }}
-            className="w-full focus:outline-none"
+            className="w-full focus:outline-none dark:text-text-dark"
           >
             A-Z
           </button>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
 
         {/* Z-A Sorting */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
             onClick={() => {
               setSortZA(true);
               setSortAZ(false);
             }}
-            className="w-full focus:outline-none"
+            className="w-full focus:outline-none dark:text-text-dark"
           >
             Z-A
           </button>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
 
         {/* Market */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
           <select
             value={market}
             onChange={(e) => setMarket(e.target.value)}
-            className="w-full focus:outline-none"
+            className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
           >
             <option value="">Select Market</option>
             <option value="automotive">Automotive</option>
@@ -138,15 +138,15 @@ const ProductList = () => {
             <option value="building and construction">Building and Construction</option>
             <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
           </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
 
         {/* Category */}
-        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px]">
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full focus:outline-none"
+            className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
           >
             <option value="">Select Category</option>
             <option value="antioxidants">Antioxidants</option>
@@ -162,7 +162,7 @@ const ProductList = () => {
             <option value="polymer processing additives">Polymer Processing Additives</option>
             <option value="masterbatches">Masterbatches</option>
           </select>
-          <PiCaretUpDownFill className="cursor-pointer text-gray-300" />
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
       </div>
 
@@ -173,7 +173,7 @@ const ProductList = () => {
             <Link
               key={product._id}
               to={`/available-stocks/${product._id}`}
-              className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg"
+              className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:bg-gray-800 dark:border-gray-700"
             >
               <img
                 src={product.banner}
@@ -181,13 +181,13 @@ const ProductList = () => {
                 className="w-full h-48 object-cover rounded-t-lg"
               />
               <div className="py-4 text-center">
-                <h3 className="text-lg font-semibold mt-4">{product.name}</h3>
-                <p className="text-sm text-gray-600">{product.chemical_name}</p>
+                <h3 className="text-lg font-semibold mt-4 text-text-light dark:text-text-dark">{product.name}</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">{product.chemical_name}</p>
               </div>
             </Link>
           ))
         ) : (
-          <div className="text-center col-span-3">No products available.</div>
+          <div className="text-center col-span-3 text-text-light dark:text-text-dark">No products available.</div>
         )}
       </div>
 
@@ -195,11 +195,11 @@ const ProductList = () => {
       {totalPages > 1 && (
         <div className="flex flex-wrap items-center justify-center mt-8 mx-4 space-x-2 space-y-2">
           <button
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
             disabled={page === 1 || isFetching}
           >
-            <FaArrowLeft className="text-gray-600" />
+            <FaArrowLeft className="text-gray-600 dark:text-gray-400" />
           </button>
 
           <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2">
@@ -209,7 +209,7 @@ const ProductList = () => {
                 className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full border ${
                   page === index + 1
                     ? "text-white bg-[#8AA823]"
-                    : "text-gray-600 bg-gray-200 hover:bg-gray-300"
+                    : "text-gray-600 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
                 }`}
                 onClick={() => setPage(index + 1)}
                 disabled={isFetching}
@@ -220,11 +220,11 @@ const ProductList = () => {
           </div>
 
           <button
-            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50"
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
             onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
             disabled={page === totalPages || isFetching}
           >
-            <FaArrowRight className="text-gray-600" />
+            <FaArrowRight className="text-gray-600 dark:text-gray-400" />
           </button>
         </div>
       )}

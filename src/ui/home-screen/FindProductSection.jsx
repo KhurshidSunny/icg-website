@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
 import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
-// import "./FindProduct.css";
 import { BiSearchAlt2 } from "react-icons/bi";
+import { useForm } from "react-hook-form";
 
 const API_URL = "/products";
 
@@ -15,7 +15,12 @@ function FindProductSection() {
   const [selectedIndustry, setSelectedIndustry] = useState("select industries");
   const [selectedChemicalSolution, setSelectedChemicalSolution] =
     useState("select category");
+  const [showModal, setShowModal] = useState(false); // State to show the modal
+  const [modalType, setModalType] = useState(""); // Type to identify which modal to show (Safety/Technical)
   const navigate = useNavigate();
+
+  // React Hook Form for email input
+  const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
   // Fetch all products on component load
   useEffect(() => {
@@ -84,6 +89,24 @@ function FindProductSection() {
     }
 
     setFilteredProducts(matchedProducts);
+  };
+
+  // Function to handle modal form submission
+  const onSubmit = (data) => {
+    console.log("Email submitted:", data.email);
+    // You can implement the actual logic to send the email request here
+    setShowModal(false); // Close the modal after submission
+    reset(); // Reset the form
+  };
+
+  const handleLinkClick = (type) => {
+    setModalType(type); // Set the modal type to either 'Safety' or 'Technical'
+    setShowModal(true); // Show the modal
+  };
+
+  // Function to close the modal
+  const closeModal = () => {
+    setShowModal(false);
   };
 
   console.log(products);
@@ -230,11 +253,17 @@ function FindProductSection() {
         </div>
 
         <div className="flex flex-wrap justify-center gap-[10px] mt-[20px]">
-          <div className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer">
-            Safety Data Sheets
-          </div>
-          <div className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer">
+          <div
+            className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer"
+            onClick={() => handleLinkClick("technical")}
+          >
             Technical Data Sheets
+          </div>
+          <div
+            className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer"
+            onClick={() => handleLinkClick("safety")}
+          >
+            Safety Data Sheets
           </div>
           <div className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer">
             Product Brochures
@@ -250,6 +279,38 @@ function FindProductSection() {
           </div>
         </div>
       </div>
+
+      {/* Modal for email submission */}
+      {showModal && (
+        <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center z-50">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-lg w-96 relative">
+            <button
+              onClick={closeModal}
+              className="absolute top-2 right-2 text-gray-500 dark:text-white"
+            >
+              &times;
+            </button>
+            <div className="text-center text-xl font-semibold text-black dark:text-white mb-4">
+              {modalType === "technical" ? "Request Technical Data Sheet" : "Request Safety Data Sheet"}
+            </div>
+            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+              <input
+                type="email"
+                {...register("email", { required: "Email is required", pattern: /^[^@]+@[^@]+\.[^@]+$/i })}
+                placeholder="Enter your email"
+                className="px-4 py-2 mb-4 border rounded-lg bg-transparent text-black dark:text-white"
+              />
+              {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+              <button
+                type="submit"
+                className="bg-[#a6ce39] text-white py-2 px-4 rounded-lg hover:bg-[#8aa823] transition-all"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
