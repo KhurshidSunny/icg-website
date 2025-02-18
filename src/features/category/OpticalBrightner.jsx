@@ -46,7 +46,7 @@ function OpticalBrightner() {
           style={{ backgroundImage: `url('/assets/opti.png')` }}
         >
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#010101] opacity-20 rounded-xl"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#010101] opacity-20"></div>
 
           {/* Centered Content */}
           <div className="absolute inset-0 flex justify-center items-center">

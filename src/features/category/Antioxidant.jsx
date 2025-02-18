@@ -49,7 +49,7 @@ function Antioxidant() {
             backgroundPosition: "center",
           }}
         >
-          <div className="absolute inset-0 bg-black bg-opacity-40 rounded-xl"></div>
+          <div className="absolute inset-0 bg-black bg-opacity-40"></div>
           <h1 className="relative z-10 text-white text-lg lg:text-3xl font-bold md:text-[25px]">
             Antioxidants (AN)
           </h1>
