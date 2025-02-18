@@ -97,7 +97,7 @@ function App() {
 
             {/* <Route path="/gallery" element={<Gallery />} /> */}
             <Route
-              path="/products-and-solutions/antioxidants-(an)"
+              path="/products-and-solutions/antioxidants-(na)"
               element={<Antioxidant />}
             />
             <Route
@@ -109,7 +109,7 @@ function App() {
               element={<UVAbsorbers />}
             />
             <Route
-              path="/products-and-solutions/flame-retardants-(fr)"
+              path="/products-and-solutions/flame-retardants"
               element={<FlameRetardant />}
             />
             <Route
@@ -133,7 +133,7 @@ function App() {
               element={<MasterBatch />}
             />
             <Route
-              path="/products-and-solutions/antiblocks"
+              path="/products-and-solutions/anti-blocks"
               element={<AntiBlock />}
             />
             <Route
