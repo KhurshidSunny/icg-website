@@ -69,14 +69,16 @@ const ProductList = () => {
     // Filter by selected market (industry_name)
     if (market) {
       filtered = filtered.filter(
-        (product) => product.industry_name?.toLowerCase() === market.toLowerCase()
+        (product) =>
+          product.industry_name?.toLowerCase() === market.toLowerCase()
       );
     }
 
     // Filter by selected category (chemical_name)
     if (category) {
       filtered = filtered.filter(
-        (product) => product.chemical_name?.toLowerCase() === category.toLowerCase()
+        (product) =>
+          product.chemical_name?.toLowerCase() === category.toLowerCase()
       );
     }
 
@@ -90,7 +92,9 @@ const ProductList = () => {
     <div className="max-w-6xl mx-auto p-4 bg-background-light dark:bg-background-dark">
       {/* Filter Box */}
       <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
-        <h3 className="text-lg font-semibold text-text-light dark:text-text-dark">Filter</h3>
+        <h3 className="text-lg font-semibold text-text-light dark:text-text-dark">
+          Filter
+        </h3>
 
         {/* A-Z Sorting */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
@@ -129,14 +133,26 @@ const ProductList = () => {
           >
             <option value="">Select Market</option>
             <option value="automotive">Automotive</option>
-            <option value="printing and packaging">Printing and Packaging</option>
-            <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
+            <option value="printing and packaging">
+              Printing and Packaging
+            </option>
+            <option value="agriculture, feed, and food">
+              Agriculture, Feed, and Food
+            </option>
             <option value="electronics">Electronics</option>
-            <option value="personal and home care">Personal and Home Care</option>
-            <option value="adhesives and sealants">Adhesives and Sealants</option>
+            <option value="personal and home care">
+              Personal and Home Care
+            </option>
+            <option value="adhesives and sealants">
+              Adhesives and Sealants
+            </option>
             <option value="paints and coating">Paints and Coating</option>
-            <option value="building and construction">Building and Construction</option>
-            <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
+            <option value="building and construction">
+              Building and Construction
+            </option>
+            <option value="medical and pharmaceutical">
+              Medical and Pharmaceutical
+            </option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
@@ -159,7 +175,9 @@ const ProductList = () => {
             <option value="polymers and resins">Polymers and Resins</option>
             <option value="plasticizers">Plasticizers</option>
             <option value="nucleating agent">Nucleating Agent</option>
-            <option value="polymer processing additives">Polymer Processing Additives</option>
+            <option value="polymer processing additives">
+              Polymer Processing Additives
+            </option>
             <option value="masterbatches">Masterbatches</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
@@ -175,19 +193,25 @@ const ProductList = () => {
               to={`/available-stocks/${product._id}`}
               className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:bg-gray-800 dark:border-gray-700"
             >
-              <img
+              {/* <img
                 src={product.banner}
                 alt={product.name}
                 className="w-full h-48 object-cover rounded-t-lg"
-              />
+              /> */}
               <div className="py-4 text-center">
-                <h3 className="text-lg font-semibold mt-4 text-text-light dark:text-text-dark">{product.name}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{product.chemical_name}</p>
+                <h3 className="text-lg font-semibold mt-4 text-text-light dark:text-text-dark">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {product.cas_no}
+                </p>
               </div>
             </Link>
           ))
         ) : (
-          <div className="text-center col-span-3 text-text-light dark:text-text-dark">No products available.</div>
+          <div className="text-center col-span-3 text-text-light dark:text-text-dark">
+            No products available.
+          </div>
         )}
       </div>
 
