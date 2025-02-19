@@ -11,12 +11,12 @@ const API_URL = "/products";
 function FindProductSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]); // All fetched products
-  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products based on search
+  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products based on search and filters
   const [selectedIndustry, setSelectedIndustry] = useState("select industries");
   const [selectedChemicalSolution, setSelectedChemicalSolution] =
     useState("select category");
   const [showModal, setShowModal] = useState(false); // State to show the modal
-  const [modalType, setModalType] = useState(""); // Type to identify which modal to show (Safety/Technical)
+  const [modalType, setModalType] = useState(""); // Type to identify which modal to show (Safety/Technical/Brochure)
   const navigate = useNavigate();
 
   // React Hook Form for email input
@@ -67,21 +67,24 @@ function FindProductSection() {
   const filterProducts = (term, industry, chemicalSolution) => {
     let matchedProducts = products;
 
-    // Filter by search term
+    // Filter by search term (only if search term is not empty)
     if (term) {
       matchedProducts = matchedProducts.filter((p) =>
         p.name?.toLowerCase().includes(term)
       );
+    } else {
+      // If search term is empty, show no products
+      matchedProducts = [];
     }
 
-    // Filter by selected industry
+    // Filter by selected industry (if not "select industries")
     if (industry !== "select industries") {
       matchedProducts = matchedProducts.filter(
-        (p) => p.industry_name?.toLowerCase() === industry
+        (p) => p.category_name?.toLowerCase() === industry
       );
     }
 
-    // Filter by selected chemical solution
+    // Filter by selected chemical solution (if not "select category")
     if (chemicalSolution !== "select category") {
       matchedProducts = matchedProducts.filter(
         (p) => p.chemical_name?.toLowerCase() === chemicalSolution
@@ -100,7 +103,7 @@ function FindProductSection() {
   };
 
   const handleLinkClick = (type) => {
-    setModalType(type); // Set the modal type to either 'Safety' or 'Technical'
+    setModalType(type); // Set the modal type to either 'Safety', 'Technical', or 'Brochure'
     setShowModal(true); // Show the modal
   };
 
@@ -141,8 +144,6 @@ function FindProductSection() {
         {filteredProducts.length > 0 && (
           <div className="search-result-container bg-slate-200 dark:bg-gray-700 p-4 rounded-lg mt-4 w-full sm:w-3/5 mx-auto">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-              {" "}
-              {/* Grid for 2 per row */}
               {filteredProducts.map((product) => (
                 <Link
                   key={product._id}
@@ -193,6 +194,8 @@ function FindProductSection() {
             <select
               className="text-[#333] dark:text-white font-bold mb-[5px] border p-2 bg-white dark:bg-gray-700"
               id="industries"
+              value={selectedIndustry}
+              onChange={handleIndustryChange}
             >
               <option value="select industries">Select industries</option>
               <option value="automotive">Automotive</option>
@@ -228,6 +231,8 @@ function FindProductSection() {
             <select
               className="text-[#333] dark:text-white font-bold mb-[5px] border p-2 bg-white dark:bg-gray-700"
               id="solutions"
+              value={selectedChemicalSolution}
+              onChange={handleChemicalSolutionChange}
             >
               <option value="select category">Select category</option>
               <option value="antioxidants">Antioxidants</option>
@@ -265,7 +270,10 @@ function FindProductSection() {
           >
             Safety Data Sheets
           </div>
-          <div className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer">
+          <div
+            className="text-[#023b3b] dark:text-white text-[16px] font-bold cursor-pointer"
+            onClick={() => handleLinkClick("brochure")}
+          >
             Product Brochures
           </div>
         </div>
@@ -291,23 +299,42 @@ function FindProductSection() {
               &times;
             </button>
             <div className="text-center text-xl font-semibold text-black dark:text-white mb-4">
-              {modalType === "technical" ? "Request Technical Data Sheet" : "Request Safety Data Sheet"}
+              {modalType === "technical"
+                ? "Request Technical Data Sheet"
+                : modalType === "safety"
+                ? "Request Safety Data Sheet"
+                : "Download Product Brochure"}
             </div>
-            <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
-              <input
-                type="email"
-                {...register("email", { required: "Email is required", pattern: /^[^@]+@[^@]+\.[^@]+$/i })}
-                placeholder="Enter your email"
-                className="px-4 py-2 mb-4 border rounded-lg bg-transparent text-black dark:text-white"
-              />
-              {errors.email && <span className="text-red-500">{errors.email.message}</span>}
-              <button
-                type="submit"
-                className="bg-[#a6ce39] text-white py-2 px-4 rounded-lg hover:bg-[#8aa823] transition-all"
-              >
-                Submit
-              </button>
-            </form>
+            {modalType === "brochure" ? (
+              <div className="flex flex-col items-center">
+                <button
+                  className="bg-[#a6ce39] text-white py-2 px-4 rounded-lg hover:bg-[#8aa823] transition-all"
+                  onClick={() => {
+                    // Implement download logic here
+                    console.log("Downloading brochure...");
+                    closeModal();
+                  }}
+                >
+                  Download Brochure
+                </button>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col">
+                <input
+                  type="email"
+                  {...register("email", { required: "Email is required", pattern: /^[^@]+@[^@]+\.[^@]+$/i })}
+                  placeholder="Enter your email"
+                  className="px-4 py-2 mb-4 border rounded-lg bg-transparent text-black dark:text-white"
+                />
+                {errors.email && <span className="text-red-500">{errors.email.message}</span>}
+                <button
+                  type="submit"
+                  className="bg-[#a6ce39] text-white py-2 px-4 rounded-lg hover:bg-[#8aa823] transition-all"
+                >
+                  Submit
+                </button>
+              </form>
+            )}
           </div>
         </div>
       )}
