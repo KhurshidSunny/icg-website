@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { BiMoon, BiSun } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-hot-toast"; // Import react-hot-toast
+import { axiosInstance } from "../../axios"; // Adjust the path as needed
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
@@ -10,32 +12,91 @@ const Navbar = () => {
   const [theme, setTheme] = useState(
     () => localStorage.getItem("theme") || "light"
   );
+  const [searchTerm, setSearchTerm] = useState("");
+  const [products, setProducts] = useState([]); // All fetched products
+  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products
+  const [showSearchInput, setShowSearchInput] = useState(false); // Toggle search input
   const navigate = useNavigate();
 
+  // Apply theme on component load
   useEffect(() => {
-    // Apply the theme to the body element
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
-
-    // Store the theme in localStorage
     localStorage.setItem("theme", theme);
   }, [theme]);
+
+  // Fetch all products on component load
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await axiosInstance.get("/products", {
+          params: { page: 1, limit: 50 }, // Adjust as needed
+        });
+        if (response.status === 200) {
+          setProducts(response.data?.data?.products || []);
+        } else {
+          console.error(`Unexpected status code: ${response.status}`);
+        }
+      } catch (err) {
+        console.error("Error fetching products:", err.message);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Handle search input change
+  const handleSearchChange = (event) => {
+    const term = event.target.value.trim().toLowerCase();
+    setSearchTerm(term);
+
+    // Filter products based on search term
+    if (term) {
+      const matchedProducts = products.filter((p) =>
+        p.name?.toLowerCase().includes(term)
+      );
+      setFilteredProducts(matchedProducts);
+
+      // Show notification if no products are found
+      if (matchedProducts.length === 0) {
+        toast.error("No product found matching your search.");
+      }
+    } else {
+      setFilteredProducts([]);
+    }
+  };
+
+  // Toggle search input visibility
+  const toggleSearchInput = () => {
+    setShowSearchInput(!showSearchInput);
+    setSearchTerm(""); // Clear search term when toggling
+    setFilteredProducts([]); // Clear filtered products
+  };
+
+  // Handle navigation to product details
+  const handleProductClick = (productId) => {
+    navigate(`/available-stocks/${productId}`);
+    setShowSearchInput(false); // Hide search input after navigation
+  };
 
   // Toggle between light and dark themes
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
+  // Handle mouse enter for dropdown
   const handleMouseEnter = (menu) => setDropdown(menu);
   const handleMouseLeave = () => {
     setDropdown(null);
     setNestedDropdown(null);
   };
 
+  // Handle nested dropdown mouse enter
   const handleNestedMouseEnter = (nestedTitle) => {
     setNestedDropdown(nestedTitle);
   };
 
+  // Handle menu item click
   const handleMenuItemClick = (menu) => {
     switch (menu) {
       case "Our Company":
@@ -59,6 +120,7 @@ const Navbar = () => {
     setIsMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
+  // Handle navigation for nested items
   const handleNavigation = (path) => {
     navigate(
       `/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`
@@ -66,11 +128,13 @@ const Navbar = () => {
     setIsMobileMenuOpen(false); // Close mobile menu after navigation
   };
 
+  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     setMobileNestedDropdown(null); // Reset nested dropdown when toggling mobile menu
   };
 
+  // Handle mobile nested menu click
   const handleMobileNestedMenu = (title) => {
     setMobileNestedDropdown(mobileNestedDropdown === title ? null : title);
   };
@@ -225,6 +289,7 @@ const Navbar = () => {
             <div
               className="relative"
               onMouseEnter={() => handleMouseEnter(menu)}
+              onMouseLeave={handleMouseLeave}
               key={menu}
             >
               <button
@@ -257,9 +322,49 @@ const Navbar = () => {
               )}
             </button>
             <Link to="/contact">
-            <img src="../navbar/earth.png" alt="website icon" />
+              <img src="../navbar/earth.png" alt="website icon" />
             </Link>
-            <img src="../navbar/search.png" alt="search icon" />
+            <button onClick={toggleSearchInput} className="focus:outline-none">
+              <img src="../navbar/search.png" alt="search icon" />
+            </button>
+          </div>
+
+          {/* Search Input (Conditional Rendering) */}
+          <div
+            className={`absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out ${
+              showSearchInput ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+            }`}
+          >
+            <div className="p-4">
+              <input
+                type="text"
+                placeholder="Search for products, grades, or codes"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="w-full px-4 py-2 border rounded-lg bg-transparent text-black dark:text-white focus:outline-none"
+              />
+              {/* Display Matched Products */}
+              {filteredProducts.length > 0 && (
+                <div className="mt-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    {filteredProducts.map((product) => (
+                      <div
+                        key={product._id}
+                        className="p-4 bg-gray-100 dark:bg-gray-600 rounded-lg cursor-pointer hover:shadow-lg transition-shadow"
+                        onClick={() => handleProductClick(product._id)}
+                      >
+                        <h3 className="text-lg font-semibold text-black dark:text-white">
+                          {product.name}
+                        </h3>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">
+                          {product.chemical_name}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           {/* Button */}
@@ -274,8 +379,9 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden fixed inset-0 overflow-y-auto bg-background-light dark:bg-background-dark z-[1000] transform transition-transform duration-300 ease-in-out ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
-          }`}
+        className={`md:hidden fixed inset-0 overflow-y-auto bg-background-light dark:bg-background-dark z-[1000] transform transition-transform duration-300 ease-in-out ${
+          isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
+        }`}
       >
         <div className="p-6 space-y-6">
           {/* Close Button */}
@@ -425,4 +531,3 @@ const Navbar = () => {
 };
 
 export default Navbar;
-  

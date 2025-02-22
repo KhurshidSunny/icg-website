@@ -2,7 +2,6 @@
 function IcgFullImageSection({ fullImage }) {
   return (
     <div className="relative mb-16">
-      {/* Image */}
       <img
         src={fullImage}
         alt="About ICG"
