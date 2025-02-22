@@ -15,7 +15,7 @@ const industries = [
     link: "/products-and-solutions/printing-and-packaging",
   },
   {
-    title: "Agriculture, Feed, and Food",
+    title: "Agriculture Feed and Food",
     img: "./assets/agriculture.png",
     icon: "/assets/SVG (9).png",
     link: "/products-and-solutions/agriculture-feed-and-food",
