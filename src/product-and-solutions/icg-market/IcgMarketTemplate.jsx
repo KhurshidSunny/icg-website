@@ -4,7 +4,7 @@ import IcgHeaderSection from "./IcgHeaderSection";
 import IcgSection1 from "./IcgSection1";
 import IcgFullImageSection from "./IcgFullImageSection";
 import IcgSolutionsSection from "./IcgSolutionsSection";
-import IcgAdditionalSection from "./IcgAdditionalSection";
+import IcgAdditionalSection from "./IcgAdditionalSection"
 import IcgFinalSection from "./IcgFinalSection";
 
 const IcgMarketTemplate = ({ icgMarketData }) => {
