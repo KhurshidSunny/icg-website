@@ -66,7 +66,7 @@ function HeroSection() {
           </h1>
   {/* Paragraph */}
 <p className="text-base mb-7 max-w-[600px] text-center">
-  AT ICG SPECIALTY CHEMICALS FZCO We Aim To Improve The Quality Of
+  At ICG Speciality Chemicals FZCO We Aim To Improve The Quality Of
   Your Products By Providing Environmental Friendly Chemicals
 </p>
 

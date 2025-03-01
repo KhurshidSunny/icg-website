@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { BiMoon, BiSun } from "react-icons/bi";
 import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-hot-toast"; // Import react-hot-toast
-import { axiosInstance } from "../../axios"; // Adjust the path as needed
+import { toast } from "react-hot-toast";
+import { axiosInstance } from "../../axios";
 
 const Navbar = () => {
   const [dropdown, setDropdown] = useState(null);
@@ -13,10 +13,11 @@ const Navbar = () => {
     () => localStorage.getItem("theme") || "light"
   );
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]); // All fetched products
-  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products
-  const [showSearchInput, setShowSearchInput] = useState(false); // Toggle search input
+  const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
+  const [showSearchInput, setShowSearchInput] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null); // Ref to track dropdown element
 
   // Apply theme on component load
   useEffect(() => {
@@ -30,7 +31,7 @@ const Navbar = () => {
     const fetchProducts = async () => {
       try {
         const response = await axiosInstance.get("/products", {
-          params: { page: 1, limit: 50 }, // Adjust as needed
+          params: { page: 1, limit: 50 },
         });
         if (response.status === 200) {
           setProducts(response.data?.data?.products || []);
@@ -45,19 +46,36 @@ const Navbar = () => {
     fetchProducts();
   }, []);
 
+  // Detect mouse movement below dropdown
+  useEffect(() => {
+    const handleMouseMove = (event) => {
+      if (dropdown && dropdownRef.current) {
+        const dropdownRect = dropdownRef.current.getBoundingClientRect();
+        const isBelowDropdown = event.clientY > dropdownRect.bottom;
+
+        if (isBelowDropdown) {
+          setDropdown(null);
+          setNestedDropdown(null);
+        }
+      }
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, [dropdown]);
+
   // Handle search input change
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
 
-    // Filter products based on search term
     if (term) {
       const matchedProducts = products.filter((p) =>
         p.name?.toLowerCase().includes(term)
       );
       setFilteredProducts(matchedProducts);
-
-      // Show notification if no products are found
       if (matchedProducts.length === 0) {
         toast.error("No product found matching your search.");
       }
@@ -69,14 +87,14 @@ const Navbar = () => {
   // Toggle search input visibility
   const toggleSearchInput = () => {
     setShowSearchInput(!showSearchInput);
-    setSearchTerm(""); // Clear search term when toggling
-    setFilteredProducts([]); // Clear filtered products
+    setSearchTerm("");
+    setFilteredProducts([]);
   };
 
   // Handle navigation to product details
   const handleProductClick = (productId) => {
     navigate(`/available-stocks/${productId}`);
-    setShowSearchInput(false); // Hide search input after navigation
+    setShowSearchInput(false);
   };
 
   // Toggle between light and dark themes
@@ -85,10 +103,8 @@ const Navbar = () => {
   };
 
   // Handle mouse enter for dropdown
-  const handleMouseEnter = (menu) => setDropdown(menu);
-  const handleMouseLeave = () => {
-    setDropdown(null);
-    setNestedDropdown(null);
+  const handleMouseEnter = (menu) => {
+    setDropdown(menu);
   };
 
   // Handle nested dropdown mouse enter
@@ -96,7 +112,7 @@ const Navbar = () => {
     setNestedDropdown(nestedTitle);
   };
 
-  // Handle menu item click
+  // Handle menu item click (closes dropdown)
   const handleMenuItemClick = (menu) => {
     switch (menu) {
       case "Our Company":
@@ -117,21 +133,25 @@ const Navbar = () => {
       default:
         break;
     }
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+    setDropdown(null); // Close dropdown on click
+    setNestedDropdown(null);
+    setIsMobileMenuOpen(false);
   };
 
-  // Handle navigation for nested items
+  // Handle navigation for nested items (closes dropdown)
   const handleNavigation = (path) => {
     navigate(
       `/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`
     );
-    setIsMobileMenuOpen(false); // Close mobile menu after navigation
+    setDropdown(null); // Close dropdown on click
+    setNestedDropdown(null);
+    setIsMobileMenuOpen(false);
   };
 
   // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
-    setMobileNestedDropdown(null); // Reset nested dropdown when toggling mobile menu
+    setMobileNestedDropdown(null);
   };
 
   // Handle mobile nested menu click
@@ -289,7 +309,6 @@ const Navbar = () => {
             <div
               className="relative"
               onMouseEnter={() => handleMouseEnter(menu)}
-              onMouseLeave={handleMouseLeave}
               key={menu}
             >
               <button
@@ -332,7 +351,9 @@ const Navbar = () => {
           {/* Search Input (Conditional Rendering) */}
           <div
             className={`absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out ${
-              showSearchInput ? "opacity-100 translate-y-0" : "opacity-0 -translate-y-4 pointer-events-none"
+              showSearchInput
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-4 pointer-events-none"
             }`}
           >
             <div className="p-4">
@@ -343,7 +364,6 @@ const Navbar = () => {
                 onChange={handleSearchChange}
                 className="w-full px-4 py-2 border rounded-lg bg-transparent text-black dark:text-white focus:outline-none"
               />
-              {/* Display Matched Products */}
               {filteredProducts.length > 0 && (
                 <div className="mt-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md">
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -424,7 +444,7 @@ const Navbar = () => {
                         <Link
                           to={item.link}
                           className="text-text-light dark:text-text-dark hover:text-primary"
-                          onClick={() => setIsMobileMenuOpen(false)} // Close mobile menu on click
+                          onClick={() => setIsMobileMenuOpen(false)}
                         >
                           {item.title}
                         </Link>
@@ -465,8 +485,8 @@ const Navbar = () => {
       {/* Full-Screen Dropdown (Desktop) */}
       {dropdown && (
         <div
+          ref={dropdownRef} // Attach ref to dropdown
           className="absolute left-0 top-full w-full bg-background-light bg-white dark:bg-background-dark shadow-lg p-8 px-48"
-          onMouseLeave={handleMouseLeave}
         >
           <div className="grid grid-cols-3 gap-6">
             {/* Paragraph Content */}
@@ -490,6 +510,10 @@ const Navbar = () => {
                       <Link
                         to={item.link}
                         className="font-bold text-text-light dark:text-text-dark hover:underline hover:text-primary cursor-pointer"
+                        onClick={() => {
+                          setDropdown(null);
+                          setNestedDropdown(null);
+                        }}
                       >
                         {item.title}
                       </Link>
