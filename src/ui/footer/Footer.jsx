@@ -1,6 +1,5 @@
 import { FooterColumn } from "./FooterColumn";
 import { Link } from "react-router-dom";
-import { SocialIcon } from "react-social-icons";
 
 function Footer() {
   const columnData = [
@@ -15,28 +14,28 @@ function Footer() {
     {
       title: "Most Sold",
       items: [
-        { text: "UV Absorbers", href: "/Absorber" },
-        { text: "Light Stabilizers (HALS)", href: "/HALS" },
-        { text: "Optical Brighteners", href: "/OpticalBrightners" },
-        { text: "Our Products", href: "/products" },
+        { text: "UV Absorbers", href: "/products-and-solutions/uv-absorbers" },
+        { text: "Light Stabilizers (HALS)", href: "/products-and-solutions/hindered-amine-light-stabilizers-(hals)" },
+        { text: "Optical Brighteners", href: "/products-and-solutions/opticalbrighteners(ob)" },
+        { text: "Our Products", href: "/product-finder" },
       ],
     },
     {
       title: "Media & Events",
       items: [
-        { text: "News", href: "/news" },
-        { text: "Events", href: "/events" },
-        { text: "Social", href: "/social" },
+        { text: "News", href: "/media-news" },
+        { text: "Events", href: "/media-events" },
+        { text: "Social", href: "/blog-articles" },
       ],
     },
     {
       title: "Contact us",
       items: [
-        { text: "Jebel Ali, Dubai UAE", href: "/offices" },
-        { text: "00971 4887 6111", href: "tel:00971488761111" },
+        { text: "Jebel Ali, Dubai UAE", href: "/contact" },
+        { text: "00971 4887 6111", href: "/contact" },
         {
           text: "info@icgchemicals.com",
-          href: "mailto:info@icgchemicals.com",
+          href: "/contact",
           external: true,
         },
       ],
@@ -51,56 +50,81 @@ function Footer() {
           <Link to="/">
             <img
               className="w-24 object-contain"
-              src="../assets/logo.png"
+              src="../logo-white.png"
               alt="ICG Chemicals Logo"
             />
           </Link>
           <div className="text-white">Follow Us:</div>
           <div className="flex space-x-4">
-            {/* {socialIcons.map((icon, index) => (
-              <SocialIcon
-                key={index}
-                src={icon.src}
-                alt={icon.alt}
-                href={icon.href}
-                className="rounded-full"
+            {/* Facebook */}
+            <a
+              href="https://www.facebook.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/facebook.png"
+                className="w-[32px] h-[32px]"
+                alt="Facebook"
               />
-            ))} */}
-            <SocialIcon
-              url="https://facebook.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
-            <SocialIcon
-              url="https://x.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
-            <SocialIcon
-              url="https://instagram.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
-            <SocialIcon
-              url="https://linkedin.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
-            <SocialIcon
-              url="https://pinterest.com"
-              style={{
-                width: "32px", // Smaller size
-                height: "32px", // Smaller size
-              }}
-            />
+            </a>
+
+            {/* Twitter */}
+            <a
+              href="https://www.twitter.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/Twitter.png"
+                className="w-[32px] h-[32px]"
+                alt="Twitter"
+              />
+            </a>
+
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/insta.png"
+                className="w-[32px] h-[32px]"
+                alt="Instagram"
+              />
+            </a>
+
+            {/* LinkedIn */}
+            <a
+              href="https://www.linkedin.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/linkedin.png"
+                className="w-[32px] h-[32px]"
+                alt="LinkedIn"
+              />
+            </a>
+
+            {/* Pinterest */}
+            <a
+              href="https://www.pinterest.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer"
+            >
+              <img
+                src="../social icons/pinterest.png"
+                className="w-[32px] h-[32px]"
+                alt="Pinterest"
+              />
+            </a>
           </div>
         </div>
 
@@ -118,7 +142,7 @@ function Footer() {
       </div>
 
       {/* Footer Bottom */}
-      <div className="mt-12 border-t  pt-8">
+      <div className="mt-12 border-t pt-8">
         <div className="flex flex-col lg:flex-row items-center justify-between">
           <div className="text-white text-sm">
             ©2024 Powered By{" "}
