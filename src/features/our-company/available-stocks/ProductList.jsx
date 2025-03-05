@@ -88,6 +88,44 @@ const ProductList = () => {
   // Apply sorting and filtering
   const sortedAndFilteredProducts = filterProducts(sortProducts(products));
 
+  // Pagination logic to show 5 pages + ellipsis + last page
+  const getPaginationRange = () => {
+    const maxPagesToShow = 5;
+    const ellipsis = "...";
+
+    if (totalPages <= maxPagesToShow + 1) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const pages = [];
+    const startPage = Math.max(1, page - 2);
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    if (page <= 3) {
+      for (let i = 1; i <= maxPagesToShow; i++) {
+        pages.push(i);
+      }
+      pages.push(ellipsis);
+      pages.push(totalPages);
+    } else if (page > totalPages - 3) {
+      pages.push(1);
+      pages.push(ellipsis);
+      for (let i = totalPages - maxPagesToShow + 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      pages.push(ellipsis);
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      pages.push(ellipsis);
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
+
   return (
     <div className="max-w-6xl mx-auto p-4 bg-background-light dark:bg-background-dark">
       {/* Filter Box */}
@@ -217,7 +255,7 @@ const ProductList = () => {
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="flex flex-wrap items-center justify-center mt-8 mx-4 space-x-2 space-y-2">
+        <div className="flex items-center justify-center mt-8 mx-4 space-x-2">
           <button
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
             onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
@@ -226,19 +264,21 @@ const ProductList = () => {
             <FaArrowLeft className="text-gray-600 dark:text-gray-400" />
           </button>
 
-          <div className="flex flex-wrap items-center justify-center space-x-2 space-y-2">
-            {Array.from({ length: totalPages }, (_, index) => (
+          <div className="flex items-center space-x-2">
+            {getPaginationRange().map((item, index) => (
               <button
                 key={index}
                 className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full border ${
-                  page === index + 1
+                  item === page
                     ? "text-white bg-[#8AA823]"
+                    : item === "..."
+                    ? "text-gray-600 bg-transparent border-none cursor-default"
                     : "text-gray-600 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
                 }`}
-                onClick={() => setPage(index + 1)}
-                disabled={isFetching}
+                onClick={() => typeof item === "number" && setPage(item)}
+                disabled={isFetching || item === "..."}
               >
-                {index + 1}
+                {item}
               </button>
             ))}
           </div>
