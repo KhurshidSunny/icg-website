@@ -17,16 +17,14 @@ const Navbar = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showSearchInput, setShowSearchInput] = useState(false);
   const navigate = useNavigate();
-  const dropdownRef = useRef(null); // Ref to track dropdown element
+  const dropdownRef = useRef(null);
 
-  // Apply theme on component load
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
     document.documentElement.classList.add(theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // Fetch all products on component load
   useEffect(() => {
     const fetchProducts = async () => {
       try {
@@ -42,35 +40,27 @@ const Navbar = () => {
         console.error("Error fetching products:", err.message);
       }
     };
-
     fetchProducts();
   }, []);
 
-  // Detect mouse movement below dropdown
   useEffect(() => {
     const handleMouseMove = (event) => {
       if (dropdown && dropdownRef.current) {
         const dropdownRect = dropdownRef.current.getBoundingClientRect();
         const isBelowDropdown = event.clientY > dropdownRect.bottom;
-
         if (isBelowDropdown) {
           setDropdown(null);
           setNestedDropdown(null);
         }
       }
     };
-
     document.addEventListener("mousemove", handleMouseMove);
-    return () => {
-      document.removeEventListener("mousemove", handleMouseMove);
-    };
+    return () => document.removeEventListener("mousemove", handleMouseMove);
   }, [dropdown]);
 
-  // Handle search input change
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
-
     if (term) {
       const matchedProducts = products.filter((p) =>
         p.name?.toLowerCase().includes(term)
@@ -84,77 +74,59 @@ const Navbar = () => {
     }
   };
 
-  // Toggle search input visibility
   const toggleSearchInput = () => {
     setShowSearchInput(!showSearchInput);
     setSearchTerm("");
     setFilteredProducts([]);
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    }
   };
 
-  // Handle navigation to product details
   const handleProductClick = (productId) => {
     navigate(`/available-stocks/${productId}`);
     setShowSearchInput(false);
+    setIsMobileMenuOpen(false);
   };
 
-  // Toggle between light and dark themes
   const toggleTheme = () => {
     setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
   };
 
-  // Handle mouse enter for dropdown
-  const handleMouseEnter = (menu) => {
-    setDropdown(menu);
+  const handleGlobeClick = () => {
+    navigate("/contact");
+    setIsMobileMenuOpen(false);
   };
 
-  // Handle nested dropdown mouse enter
-  const handleNestedMouseEnter = (nestedTitle) => {
-    setNestedDropdown(nestedTitle);
-  };
+  const handleMouseEnter = (menu) => setDropdown(menu);
+  const handleNestedMouseEnter = (nestedTitle) => setNestedDropdown(nestedTitle);
 
-  // Handle menu item click (closes dropdown)
   const handleMenuItemClick = (menu) => {
     switch (menu) {
-      case "Our Company":
-        navigate("/our-company");
-        break;
-      case "Products & Solutions":
-        navigate("/products-and-solutions");
-        break;
-      case "Media":
-        navigate("/media-news");
-        break;
-      case "Career":
-        navigate("/icg-career");
-        break;
-      case "Contact":
-        navigate("/contact");
-        break;
-      default:
-        break;
+      case "Our Company": navigate("/our-company"); break;
+      case "Products & Solutions": navigate("/products-and-solutions"); break;
+      case "Media": navigate("/media-news"); break;
+      case "Career": navigate("/icg-career"); break;
+      case "Contact": navigate("/contact"); break;
+      default: break;
     }
-    setDropdown(null); // Close dropdown on click
+    setDropdown(null);
     setNestedDropdown(null);
     setIsMobileMenuOpen(false);
   };
 
-  // Handle navigation for nested items (closes dropdown)
   const handleNavigation = (path) => {
-    navigate(
-      `/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`
-    );
-    setDropdown(null); // Close dropdown on click
+    navigate(`/products-and-solutions/${path.toLowerCase().split(" ").join("-")}`);
+    setDropdown(null);
     setNestedDropdown(null);
     setIsMobileMenuOpen(false);
   };
 
-  // Toggle mobile menu
   const toggleMobileMenu = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
     setMobileNestedDropdown(null);
   };
 
-  // Handle mobile nested menu click
   const handleMobileNestedMenu = (title) => {
     setMobileNestedDropdown(mobileNestedDropdown === title ? null : title);
   };
@@ -163,8 +135,7 @@ const Navbar = () => {
     "Our Company": {
       paragraph: {
         heading: "Who we are",
-        content:
-          "ICG Specialty Chemicals FZCO is a leading provider of specialty chemicals, recognized for our commitment to quality and innovation.",
+        content: "ICG Specialty Chemicals FZCO is a leading provider of specialty chemicals...",
       },
       items: [
         { title: "About ICG Chemicals", link: "/about-us" },
@@ -175,8 +146,7 @@ const Navbar = () => {
     "Products & Solutions": {
       paragraph: {
         heading: "Our Solutions",
-        content:
-          "Our extensive product range includes Antioxidants, HALS, UV absorbers, Optical brighteners, and more.",
+        content: "Our extensive product range includes Antioxidants, HALS, UV absorbers...",
       },
       items: [
         {
@@ -217,8 +187,7 @@ const Navbar = () => {
     Media: {
       paragraph: {
         heading: "Newsroom",
-        content:
-          "What's going on in ICG. Stay connected with our news and events.",
+        content: "What's going on in ICG. Stay connected with our news and events.",
       },
       items: [
         { title: "Media and News", link: "/media-news" },
@@ -229,8 +198,7 @@ const Navbar = () => {
     Career: {
       paragraph: {
         heading: "Career",
-        content:
-          "At ICG, we offer exciting career opportunities in a dynamic and innovative environment.",
+        content: "At ICG, we offer exciting career opportunities...",
       },
       items: [
         { title: "Life at ICG", link: "/life-at-icg" },
@@ -240,8 +208,7 @@ const Navbar = () => {
     Contact: {
       paragraph: {
         heading: "Contact",
-        content:
-          "Have questions or need assistance? Reach out to us through our contact page.",
+        content: "Have questions or need assistance? Reach out to us...",
       },
       items: [{ title: "Contact", link: "/contact" }],
     },
@@ -254,7 +221,6 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-        {/* Logo */}
         <div className="flex items-center" onClick={() => navigate("/")}>
           <img
             src="../logo.png"
@@ -263,7 +229,6 @@ const Navbar = () => {
           />
         </div>
 
-        {/* Hamburger Menu Button (Mobile) */}
         <div className="md:hidden">
           <button
             onClick={toggleMobileMenu}
@@ -303,7 +268,6 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Desktop Navbar Items */}
         <div className="hidden md:flex space-x-6 items-center">
           {Object.keys(menuData).map((menu) => (
             <div
@@ -323,24 +287,15 @@ const Navbar = () => {
             </div>
           ))}
 
-          {/* Icons */}
           <div className="flex space-x-4 items-center">
             <button onClick={toggleTheme} className="focus:outline-none">
               {theme === "light" ? (
-                <BiMoon
-                  className="text-text-light dark:text-text-dark"
-                  color="#8AA823"
-                  size={24}
-                />
+                <BiMoon color="#8AA823" size={24} />
               ) : (
-                <BiSun
-                  className="text-text-light dark:text-text-dark"
-                  color="#8AA823"
-                  size={24}
-                />
+                <BiSun color="#8AA823" size={24} />
               )}
             </button>
-            <Link to="/contact">
+            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
               <img src="../navbar/earth.png" alt="website icon" />
             </Link>
             <button onClick={toggleSearchInput} className="focus:outline-none">
@@ -348,46 +303,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Search Input (Conditional Rendering) */}
-          <div
-            className={`absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-lg transition-all duration-300 ease-in-out ${
-              showSearchInput
-                ? "opacity-100 translate-y-0"
-                : "opacity-0 -translate-y-4 pointer-events-none"
-            }`}
-          >
-            <div className="p-4">
-              <input
-                type="text"
-                placeholder="Search for products, grades, or codes"
-                value={searchTerm}
-                onChange={handleSearchChange}
-                className="w-full px-4 py-2 border rounded-lg bg-transparent text-black dark:text-white focus:outline-none"
-              />
-              {filteredProducts.length > 0 && (
-                <div className="mt-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {filteredProducts.map((product) => (
-                      <div
-                        key={product._id}
-                        className="p-4 bg-gray-100 dark:bg-gray-600 rounded-lg cursor-pointer hover:shadow-lg transition-shadow"
-                        onClick={() => handleProductClick(product._id)}
-                      >
-                        <h3 className="text-lg font-semibold text-black dark:text-white">
-                          {product.name}
-                        </h3>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">
-                          {product.chemical_name}
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* Button */}
           <Link
             to="/available-stocks"
             className="ml-4 px-4 py-2 bg-primary text-white font-bold rounded cursor-pointer hover:bg-primary-dark"
@@ -397,15 +312,85 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Search Input with Close Button for Desktop and Mobile */}
+      {showSearchInput && (
+        <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 shadow-lg z-[1001] p-4">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="flex items-center">
+              <input
+                type="text"
+                placeholder="Search for products, grades, or codes"
+                value={searchTerm}
+                onChange={handleSearchChange}
+                className="w-full px-4 py-2 border rounded-lg bg-transparent text-black dark:text-white focus:outline-none"
+                autoFocus
+              />
+              <button
+                onClick={toggleSearchInput}
+                className="ml-2 text-text-light dark:text-text-dark focus:outline-none"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M6 18L18 6M6 6l12 12"
+                  />
+                </svg>
+              </button>
+            </div>
+            {filteredProducts.length > 0 && (
+              <div className="mt-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md max-h-96 overflow-y-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                  {filteredProducts.map((product) => (
+                    <div
+                      key={product._id}
+                      className="p-4 bg-gray-100 dark:bg-gray-600 rounded-lg cursor-pointer hover:shadow-lg transition-shadow"
+                      onClick={() => handleProductClick(product._id)}
+                    >
+                      <h3 className="text-lg font-semibold text-black dark:text-white">
+                        {product.name}
+                      </h3>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
+                        {product.chemical_name}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
+
       <div
-        className={`md:hidden fixed inset-0 overflow-y-auto bg-background-light dark:bg-background-dark z-[1000] transform transition-transform duration-300 ease-in-out ${
+        className={`md:hidden fixed inset-0 overflow-y-auto bg-white dark:bg-gray-800 z-[1000] transform transition-transform duration-300 ease-in-out ${
           isMobileMenuOpen ? "translate-x-0" : "translate-x-full"
         }`}
       >
         <div className="p-6 space-y-6">
-          {/* Close Button */}
-          <div className="flex justify-end">
+          <div className="flex justify-between items-center">
+            <div className="flex space-x-4">
+              <button onClick={toggleTheme} className="focus:outline-none">
+                {theme === "light" ? (
+                  <BiMoon color="#8AA823" size={24} />
+                ) : (
+                  <BiSun color="#8AA823" size={24} />
+                )}
+              </button>
+              <button onClick={handleGlobeClick} className="focus:outline-none">
+                <img src="../navbar/earth.png" alt="website icon" />
+              </button>
+              <button onClick={toggleSearchInput} className="focus:outline-none">
+                <img src="../navbar/search.png" alt="search icon" />
+              </button>
+            </div>
             <button
               onClick={toggleMobileMenu}
               className="text-text-light dark:text-text-dark focus:outline-none"
@@ -427,7 +412,6 @@ const Navbar = () => {
             </button>
           </div>
 
-          {/* Menu Items */}
           {Object.keys(menuData).map((menu) => (
             <div key={menu}>
               <button
@@ -482,14 +466,12 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Full-Screen Dropdown (Desktop) */}
       {dropdown && (
         <div
-          ref={dropdownRef} // Attach ref to dropdown
+          ref={dropdownRef}
           className="absolute left-0 top-full w-full bg-background-light bg-white dark:bg-background-dark shadow-lg p-8 px-48"
         >
           <div className="grid grid-cols-3 gap-6">
-            {/* Paragraph Content */}
             {menuData[dropdown].paragraph && (
               <div>
                 <h3 className="font-bold text-text-light dark:text-text-dark">
@@ -501,7 +483,6 @@ const Navbar = () => {
               </div>
             )}
 
-            {/* Menu Items */}
             {menuData[dropdown].items && (
               <div className="space-y-4 bg-background-light">
                 {menuData[dropdown].items.map((item, index) => (
@@ -529,7 +510,6 @@ const Navbar = () => {
                       </div>
                     )}
 
-                    {/* Nested Items */}
                     {nestedDropdown === item.title && item.nested && (
                       <div className="absolute left-full top-0 bg-background-light bg-white dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
                         {item.nested.map((nestedItem, nestedIndex) => (
