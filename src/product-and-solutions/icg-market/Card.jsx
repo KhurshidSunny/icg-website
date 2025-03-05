@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 function Card({ title, paragraph }) {
   return (
     <div className="bg-white dark:bg-gray-800 rounded-xl flex flex-col p-4">
