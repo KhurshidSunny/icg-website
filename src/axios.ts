@@ -2,5 +2,5 @@
 import axios from "axios";
 
 export const axiosInstance = axios.create({
-  baseURL: "http://208.109.240.175:3000/api/external",
+  baseURL: "https://208.109.240.175:3000/api/external",
 });
