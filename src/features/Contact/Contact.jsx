@@ -1,4 +1,3 @@
-import React from "react";
 import { CiMail } from "react-icons/ci";
 import { FiPhone } from "react-icons/fi";
 

@@ -9,7 +9,7 @@ import { PiCaretUpDownFill } from "react-icons/pi";
 // Function to fetch products from the API
 const fetchProducts = async ({ queryKey }) => {
   const [, { page, limit }] = queryKey;
-  const url = `https://208.109.240.175:3000/api/external/products?page=${page}&limit=${limit}`;
+  const url = `http://208.109.240.175:3000/api/external/products?page=${page}&limit=${limit}`;
   const response = await fetch(url);
 
   if (!response.ok) {
@@ -17,6 +17,7 @@ const fetchProducts = async ({ queryKey }) => {
   }
 
   const data = await response.json();
+  console.log(data)
   return data;
 };
 
