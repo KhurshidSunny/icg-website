@@ -1,167 +1,299 @@
+/* eslint-disable react/prop-types */
+
+import { useState, useEffect } from "react";
+import { useQuery } from "@tanstack/react-query";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { PiCaretUpDownFill } from "react-icons/pi";
 
-function ProductCards() {
-  const products = [
-    {
-      id: "CAS-31570-04-4",
-      name: "Omniquan AN 168 ",
-      img: "./product1.png",
-      usage: "Versatile Antioxidant for Enhanced Polymer Stability",
-      description:
-        "Our advanced antioxidant is specially designed to boost thermal stability and overall performance in polymer-based products. Engineered for versatility, this solution excels across a wide range of industries—automotive, electronics, paints and coatings, and medical and pharmaceutical. With its superior ability to resist oxidative degradation, this antioxidant ensures polymers maintain their integrity and functionality under demanding conditions, extending product life and enhancing reliability.",
-      casNumber: "31570-04-4",
-      chemicalName: "Xylyl dibutylbenzofu",
-      molecularFormula: "C24H70O2",
-      molecularWeight: 350.5,
-      productForm: "White Powder",
-    },
-    {
-      id: "CAS-12345-67-8",
-      name: "Omniquan AN 136 ",
-      img: "./product2.png",
-      usage: "Innovative Stabilizer for Polymer Durability",
-      description:
-        "This cutting-edge stabilizer is crafted to enhance durability and performance in polymers under extreme conditions. With applications in automotive, aerospace, and industrial sectors, it delivers outstanding protection against environmental and thermal degradation.",
-      casNumber: "12345-67-8",
-      chemicalName: "Phenolic Dibenzofuran",
-      molecularFormula: "C20H12O2",
-      molecularWeight: 300.4,
-      productForm: "Crystalline Solid",
-    },
-    {
-      id: "CAS-98765-43-2",
-      name: "Omniquan AN 245",
-      img: "./product3.png",
-      usage: "Advanced UV Absorber for Long-Lasting Performance",
-      description:
-        "A highly effective UV absorber designed to shield polymers and coatings from harmful ultraviolet radiation. Ensures long-lasting protection and stability for outdoor applications such as construction materials and automotive coatings.",
-      casNumber: "98765-43-2",
-      chemicalName: "Benzotriazole Derivative",
-      molecularFormula: "C13H10N3",
-      molecularWeight: 211.24,
-      productForm: "Yellowish Granules",
-    },
-    {
-      id: "CAS-56789-01-2",
-      name: "Omniquan AN 565 ",
-      img: "./product4.png",
-      usage: "High-Performance Flame Retardant for Enhanced Safety",
-      description:
-        "Our premium flame retardant provides superior thermal resistance and fire safety in a range of polymer systems. Suitable for electronics, automotive, and building materials, it combines efficiency with environmental compliance.",
-      casNumber: "56789-01-2",
-      chemicalName: "Phosphoramide",
-      molecularFormula: "C3H9O4P",
-      molecularWeight: 141.08,
-      productForm: "Fine Powder",
-    },
-    {
-      id: "CAS-13579-68-4",
-      name: "Omniquan AN 168 ",
-      img: "./product5.png",
-      usage: "Efficient Catalyst for Chemical Synthesis",
-      description:
-        "Designed for high precision in chemical synthesis, this catalyst accelerates reaction rates and enhances yields. Widely used in pharmaceutical and agrochemical industries for efficient production processes.",
-      casNumber: "13579-68-4",
-      chemicalName: "Transition Metal Complex",
-      molecularFormula: "C10H20Cl2Ni",
-      molecularWeight: 246.88,
-      productForm: "Green Crystals",
-    },
-    {
-      id: "CAS-24680-35-7",
-      name: "Omniquan AN 168 ",
-      img: "./product6.png",
-      usage: "Eco-Friendly Plasticizer for Flexible Polymers",
-      description:
-        "This environmentally friendly plasticizer enhances the flexibility and durability of polymer products, making it ideal for consumer goods, packaging, and medical devices.",
-      casNumber: "24680-35-7",
-      chemicalName: "Diethylhexyl Adipate",
-      molecularFormula: "C22H42O4",
-      molecularWeight: 370.57,
-      productForm: "Viscous Liquid",
-    },
-    {
-      id: "CAS -11223-44-5",
-      name: "Omniquan AN 168 ",
-      img: "./product7.png",
-      usage: "Premium Antioxidant for High-Temperature Applications",
-      description:
-        "An exceptional antioxidant that ensures polymer stability under high-temperature conditions. Suitable for applications in industrial machinery and automotive components, it provides unparalleled thermal resistance.",
-      casNumber: "11223-44-5",
-      chemicalName: "Phenolic Resin Compound",
-      molecularFormula: "C15H24O2",
-      molecularWeight: 236.35,
-      productForm: "Brownish Pellets",
-    },
-    {
-      id: "CAS-66789-22-3",
-      name: "Omniquan AN 168 ",
-      img: "./product8.png",
-      usage: "Specialized Stabilizer for Enhanced Chemical Resistance",
-      description:
-        "A unique stabilizer engineered to provide exceptional chemical resistance and longevity to polymer materials. It is widely applied in industrial coatings and advanced composites.",
-      casNumber: "66789-22-3",
-      chemicalName: "Epoxy Stabilizer",
-      molecularFormula: "C21H25O5",
-      molecularWeight: 356.43,
-      productForm: "Transparent Gel",
-    },
-  ];
+// Function to fetch products from the API
+const fetchProducts = async ({ queryKey }) => {
+  const [, { page, limit }] = queryKey;
+  const url = `https://208.109.240.175:3000/api/external/products?page=${page}&limit=${limit}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`Failed to fetch products: ${response.statusText}`);
+  }
+
+  const data = await response.json();
+  return data;
+};
+
+const ProductList = () => {
+  const [page, setPage] = useState(1);
+  const [sortAZ, setSortAZ] = useState(false);
+  const [sortZA, setSortZA] = useState(false);
+  const [market, setMarket] = useState("");
+  const [category, setCategory] = useState("");
+
+  const limit = 6; // Set limit to 6 products per page
+
+  // Fetch products with query params
+  const { data, error, isLoading, isFetching, refetch } = useQuery({
+    queryKey: ["products", { page, limit }],
+    queryFn: fetchProducts,
+    keepPreviousData: true,
+    refetchOnWindowFocus: false,
+  });
+
+  const { products = [], totalPages = 1 } = data?.data || {};
+
+  useEffect(() => {
+    refetch(); // Refetch data if market or category changes
+  }, [market, category, refetch]);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  // Sorting function
+  const sortProducts = (products) => {
+    if (sortAZ) {
+      return [...products].sort((a, b) => a.name.localeCompare(b.name));
+    }
+    if (sortZA) {
+      return [...products].sort((a, b) => b.name.localeCompare(a.name));
+    }
+    return products;
+  };
+
+  // Filter products based on selected market and category
+  const filterProducts = (products) => {
+    let filtered = products;
+
+    // Filter by selected market (industry_name)
+    if (market) {
+      filtered = filtered.filter(
+        (product) =>
+          product.industry_name?.toLowerCase() === market.toLowerCase()
+      );
+    }
+
+    // Filter by selected category (chemical_name)
+    if (category) {
+      filtered = filtered.filter(
+        (product) =>
+          product.chemical_name?.toLowerCase() === category.toLowerCase()
+      );
+    }
+
+    return filtered;
+  };
+
+  // Apply sorting and filtering
+  const sortedAndFilteredProducts = filterProducts(sortProducts(products));
+
+  // Pagination logic to show 5 pages + ellipsis + last page
+  const getPaginationRange = () => {
+    const maxPagesToShow = 5;
+    const ellipsis = "...";
+
+    if (totalPages <= maxPagesToShow + 1) {
+      return Array.from({ length: totalPages }, (_, i) => i + 1);
+    }
+
+    const pages = [];
+    const startPage = Math.max(1, page - 2);
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+
+    if (page <= 3) {
+      for (let i = 1; i <= maxPagesToShow; i++) {
+        pages.push(i);
+      }
+      pages.push(ellipsis);
+      pages.push(totalPages);
+    } else if (page > totalPages - 3) {
+      pages.push(1);
+      pages.push(ellipsis);
+      for (let i = totalPages - maxPagesToShow + 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      pages.push(1);
+      pages.push(ellipsis);
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      pages.push(ellipsis);
+      pages.push(totalPages);
+    }
+
+    return pages;
+  };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-        {products.map((product, index) => (
-          <Link
-            key={index}
-            to={`/available-stocks/${product.id}`}
-            className="bg-white rounded-lg shadow-md hover:shadow-lg cursor-pointer transition-shadow duration-300"
+    <div className="max-w-6xl mx-auto p-4 bg-background-light dark:bg-background-dark">
+      {/* Filter Box */}
+      <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-4 py-4 mb-8 w-full">
+        <h3 className="text-lg font-semibold text-text-light dark:text-text-dark">
+          Filter
+        </h3>
+
+        {/* A-Z Sorting */}
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
+          <button
+            onClick={() => {
+              setSortAZ(true);
+              setSortZA(false);
+            }}
+            className="w-full focus:outline-none dark:text-text-dark"
           >
-            <div className="relative h-48 overflow-hidden rounded-t-lg hover:shadow-2xl hover:scale-105 transition-transform duration-300">
-              <img
-                src={product.img}
+            A-Z
+          </button>
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
+        </div>
+
+        {/* Z-A Sorting */}
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
+          <button
+            onClick={() => {
+              setSortZA(true);
+              setSortAZ(false);
+            }}
+            className="w-full focus:outline-none dark:text-text-dark"
+          >
+            Z-A
+          </button>
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
+        </div>
+
+        {/* Market */}
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
+          <select
+            value={market}
+            onChange={(e) => setMarket(e.target.value)}
+            className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
+          >
+            <option value="">Select Market</option>
+            <option value="automotive">Automotive</option>
+            <option value="printing and packaging">
+              Printing and Packaging
+            </option>
+            <option value="agriculture, feed, and food">
+              Agriculture, Feed, and Food
+            </option>
+            <option value="electronics">Electronics</option>
+            <option value="personal and home care">
+              Personal and Home Care
+            </option>
+            <option value="adhesives and sealants">
+              Adhesives and Sealants
+            </option>
+            <option value="paints and coating">Paints and Coating</option>
+            <option value="building and construction">
+              Building and Construction
+            </option>
+            <option value="medical and pharmaceutical">
+              Medical and Pharmaceutical
+            </option>
+          </select>
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
+        </div>
+
+        {/* Category */}
+        <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
+          <select
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
+          >
+            <option value="">Select Category</option>
+            <option value="antioxidants">Antioxidants</option>
+            <option value="uv-absorbers">UV-absorbers</option>
+            <option value="flame retardants">Flame retardants</option>
+            <option value="optical brightners">Optical Brightners</option>
+            <option value="pigments and dyes">Pigments and Dyes</option>
+            <option value="hals">HALS</option>
+            <option value="antiblocks">Antiblocks</option>
+            <option value="polymers and resins">Polymers and Resins</option>
+            <option value="plasticizers">Plasticizers</option>
+            <option value="nucleating agent">Nucleating Agent</option>
+            <option value="polymer processing additives">
+              Polymer Processing Additives
+            </option>
+            <option value="masterbatches">Masterbatches</option>
+          </select>
+          <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
+        </div>
+      </div>
+
+      {/* Product List */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {sortedAndFilteredProducts.length > 0 ? (
+          sortedAndFilteredProducts.map((product) => (
+            <Link
+              key={product._id}
+              to={`/available-stocks/${product._id}`}
+              className="border rounded-lg shadow-md bg-white transform transition-transform duration-300 hover:scale-105 hover:shadow-lg dark:bg-gray-800 dark:border-gray-700"
+            >
+              {/* <img
+                src={product.banner}
                 alt={product.name}
-                className="w-full h-full object-cover"
-              />
-            </div>
-            <div className="p-4 text-center">
-              <h3 className="text-lg font-semibold text-gray-800">
-                {product.name}
-              </h3>
-              <p className="text-sm text-gray-600 mt-1">{product.id}</p>
-            </div>
-          </Link>
-        ))}
+                className="w-full h-48 object-cover rounded-t-lg"
+              /> */}
+              <div className="py-4 text-center">
+                <h3 className="text-lg font-semibold mt-4 text-text-light dark:text-text-dark">
+                  {product.name}
+                </h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {product.cas_no}
+                </p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <div className="text-center col-span-3 text-text-light dark:text-text-dark">
+            No products available.
+          </div>
+        )}
       </div>
 
       {/* Pagination */}
-      <div className="flex items-center justify-center mt-8 space-x-4">
-        {/* Left Arrow */}
-        <button className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-          <FaArrowLeft className="text-gray-600" />
-        </button>
+      {totalPages > 1 && (
+        <div className="flex items-center justify-center mt-8 mx-4 space-x-2">
+          <button
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
+            onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+            disabled={page === 1 || isFetching}
+          >
+            <FaArrowLeft className="text-gray-600 dark:text-gray-400" />
+          </button>
 
-        {/* Page Numbers */}
-        <div className="flex items-center space-x-2">
-          <button className="px-4 py-2 text-sm font-semibold text-white bg-[#8AA823] rounded-full">
-            1
-          </button>
-          <button className="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-200 rounded-full hover:bg-gray-300">
-            2
-          </button>
-          <button className="px-4 py-2 text-sm font-semibold text-gray-600 bg-gray-200 rounded-full hover:bg-gray-300">
-            3
+          <div className="flex items-center space-x-2">
+            {getPaginationRange().map((item, index) => (
+              <button
+                key={index}
+                className={`w-8 h-8 flex items-center justify-center text-sm font-semibold rounded-full border ${
+                  item === page
+                    ? "text-white bg-[#8AA823]"
+                    : item === "..."
+                    ? "text-gray-600 bg-transparent border-none cursor-default"
+                    : "text-gray-600 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:text-gray-400 dark:hover:bg-gray-600"
+                }`}
+                onClick={() => typeof item === "number" && setPage(item)}
+                disabled={isFetching || item === "..."}
+              >
+                {item}
+              </button>
+            ))}
+          </div>
+
+          <button
+            className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
+            onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+            disabled={page === totalPages || isFetching}
+          >
+            <FaArrowRight className="text-gray-600 dark:text-gray-400" />
           </button>
         </div>
-
-        {/* Right Arrow */}
-        <button className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-          <FaArrowRight className="text-gray-600" />
-        </button>
-      </div>
+      )}
     </div>
   );
-}
+};
 
-export default ProductCards;
+export default ProductList;
