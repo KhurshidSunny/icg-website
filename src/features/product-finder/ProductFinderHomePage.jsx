@@ -1,4 +1,3 @@
-import { BiRightArrowAlt } from "react-icons/bi";
 import ProductList from "../our-company/available-stocks/ProductList";
 
 function ProductFinderHomePage() {

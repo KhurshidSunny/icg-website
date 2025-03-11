@@ -16,6 +16,8 @@ const Navbar = () => {
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [showSearchInput, setShowSearchInput] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
 
@@ -26,21 +28,42 @@ const Navbar = () => {
   }, [theme]);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchAllProducts = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        const response = await axiosInstance.get("/products", {
-          params: { page: 1, limit: 50 },
-        });
-        if (response.status === 200) {
-          setProducts(response.data?.data?.products || []);
-        } else {
-          console.error(`Unexpected status code: ${response.status}`);
-        }
+        let allProducts = [];
+        let currentPage = 1;
+        let totalPages = 1;
+
+        do {
+          const response = await axiosInstance.get("/products", {
+            params: {
+              page: currentPage,
+              limit: 50, // Adjust based on your API's maximum limit per page
+            },
+          });
+
+          if (response.status === 200) {
+            const data = response.data?.data;
+            allProducts = [...allProducts, ...(data?.products || [])];
+            totalPages = data?.totalPages || 1;
+            currentPage++;
+          } else {
+            throw new Error(`Unexpected status code: ${response.status}`);
+          }
+        } while (currentPage <= totalPages);
+
+        setProducts(allProducts);
       } catch (err) {
         console.error("Error fetching products:", err.message);
+        setError("Failed to load products. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
-    fetchProducts();
+
+    fetchAllProducts();
   }, []);
 
   useEffect(() => {
@@ -61,14 +84,27 @@ const Navbar = () => {
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
-    if (term) {
-      const matchedProducts = products.filter((p) =>
-        p.name?.toLowerCase().includes(term)
-      );
+
+    if (term.length > 0) {
+      const matchedProducts = products.filter((product) => {
+        const nameMatch = product.name?.toLowerCase().includes(term);
+        const casMatch = product.cas_no?.toLowerCase().includes(term);
+        return nameMatch || casMatch;
+      });
       setFilteredProducts(matchedProducts);
-      if (matchedProducts.length === 0) {
-        toast.error("No product found matching your search.");
-      }
+    } else {
+      setFilteredProducts([]);
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (searchTerm.length > 0) {
+      const matchedProducts = products.filter((product) => {
+        const nameMatch = product.name?.toLowerCase().includes(searchTerm.toLowerCase());
+        const casMatch = product.cas_no?.toLowerCase().includes(searchTerm.toLowerCase());
+        return nameMatch || casMatch;
+      });
+      setFilteredProducts(matchedProducts);
     } else {
       setFilteredProducts([]);
     }
@@ -87,6 +123,8 @@ const Navbar = () => {
     navigate(`/available-stocks/${productId}`);
     setShowSearchInput(false);
     setIsMobileMenuOpen(false);
+    setSearchTerm("");
+    setFilteredProducts([]);
   };
 
   const toggleTheme = () => {
@@ -298,7 +336,7 @@ const Navbar = () => {
             <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
               <img src="../navbar/earth.png" alt="website icon" />
             </Link>
-            <button onClick={toggleSearchInput} className="focus:outline-none">
+            <button onClick={() => { toggleSearchInput(); handleSearchClick(); }} className="focus:outline-none">
               <img src="../navbar/search.png" alt="search icon" />
             </button>
           </div>
@@ -324,6 +362,7 @@ const Navbar = () => {
                 onChange={handleSearchChange}
                 className="w-full px-4 py-2 border rounded-lg bg-transparent text-black dark:text-white focus:outline-none"
                 autoFocus
+                disabled={isLoading}
               />
               <button
                 onClick={toggleSearchInput}
@@ -345,7 +384,18 @@ const Navbar = () => {
                 </svg>
               </button>
             </div>
-            {filteredProducts.length > 0 && (
+
+            {isLoading && (
+              <div className="mt-4 text-center text-gray-500 dark:text-gray-300">
+                Loading products...
+              </div>
+            )}
+
+            {error && !isLoading && (
+              <div className="mt-4 text-center text-red-400">{error}</div>
+            )}
+
+            {filteredProducts.length > 0 && !isLoading && !error && (
               <div className="mt-4 bg-white dark:bg-gray-700 p-4 rounded-lg shadow-md max-h-96 overflow-y-auto">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                   {filteredProducts.map((product) => (
@@ -358,11 +408,20 @@ const Navbar = () => {
                         {product.name}
                       </h3>
                       <p className="text-sm text-gray-600 dark:text-gray-300">
+                        CAS: {product.cas_no}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-300">
                         {product.chemical_name}
                       </p>
                     </div>
                   ))}
                 </div>
+              </div>
+            )}
+
+            {searchTerm && filteredProducts.length === 0 && !isLoading && !error && (
+              <div className="mt-4 text-center text-gray-500 dark:text-gray-300">
+                No products found matching "{searchTerm}".
               </div>
             )}
           </div>
@@ -387,7 +446,7 @@ const Navbar = () => {
               <button onClick={handleGlobeClick} className="focus:outline-none">
                 <img src="../navbar/earth.png" alt="website icon" />
               </button>
-              <button onClick={toggleSearchInput} className="focus:outline-none">
+              <button onClick={() => { toggleSearchInput(); handleSearchClick(); }} className="focus:outline-none">
                 <img src="../navbar/search.png" alt="search icon" />
               </button>
             </div>

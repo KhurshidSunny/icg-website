@@ -1,118 +1,123 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
-import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom"; // Import Link for navigation
-import { axiosInstance } from "../../axios"; // Using axios instance for consistent API calls
+import { useState, useMemo } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import { axiosInstance } from "../../axios";
 import { BiSearchAlt2 } from "react-icons/bi";
 import { useForm } from "react-hook-form";
+import { useQuery } from "@tanstack/react-query";
 
 const API_URL = "/products";
 
+const fetchAllProducts = async () => {
+  let allProducts = [];
+  let currentPage = 1;
+  let totalPages = 1;
+
+  do {
+    const response = await axiosInstance.get(API_URL, {
+      params: { page: currentPage, limit: 50 },
+    });
+
+    if (response.status === 200) {
+      const data = response.data?.data;
+      allProducts = [...allProducts, ...(data?.products || [])];
+      totalPages = data?.totalPages || 1;
+      currentPage++;
+    } else {
+      throw new Error(`Unexpected status code: ${response.status}`);
+    }
+  } while (currentPage <= totalPages);
+
+  return allProducts;
+};
+
 function FindProductSection() {
   const [searchTerm, setSearchTerm] = useState("");
-  const [products, setProducts] = useState([]); // All fetched products
-  const [filteredProducts, setFilteredProducts] = useState([]); // Matched products based on search and filters
   const [selectedIndustry, setSelectedIndustry] = useState("select industries");
-  const [selectedChemicalSolution, setSelectedChemicalSolution] =
-    useState("select category");
-  const [showModal, setShowModal] = useState(false); // State to show the modal
-  const [modalType, setModalType] = useState(""); // Type to identify which modal to show (Safety/Technical/Brochure)
+  const [selectedChemicalSolution, setSelectedChemicalSolution] = useState("select category");
+  const [showModal, setShowModal] = useState(false);
+  const [modalType, setModalType] = useState("");
   const navigate = useNavigate();
 
-  // React Hook Form for email input
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
-  // Fetch all products on component load
-  useEffect(() => {
-    const fetchProducts = async () => {
-      try {
-        const response = await axiosInstance.get(API_URL, {
-          params: { page: 1, limit: 50 }, // Required parameters
-        });
-        if (response.status === 200) {
-          setProducts(response.data?.data?.products || []); // Save all fetched products
-        } else {
-          console.error(`Unexpected status code: ${response.status}`);
-        }
-      } catch (err) {
-        console.error("Error fetching products:", err.message);
-      }
-    };
+  // Fetch products using React Query
+  const { data: products = [], isLoading, error } = useQuery({
+    queryKey: ["products"],
+    queryFn: fetchAllProducts,
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    cacheTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
+  });
+  fetchAllProducts().then(data => console.log(data))
 
-    fetchProducts();
-  }, []);
+  // Pure function to filter products
+  const filterProducts = (term, industry, chemicalSolution, productList) => {
+    let matchedProducts = [...productList];
+
+    // If search term is empty, show nothing
+    if (!term) {
+      return [];
+    }
+
+    // Filter by search term if provided
+    matchedProducts = matchedProducts.filter((p) =>
+      p.name?.toLowerCase().includes(term) ||
+      p.cas_no?.toLowerCase().includes(term)
+    );
+
+    // Apply filters only if they're not the default "select" options
+    if (industry !== "select industries" || chemicalSolution !== "select category") {
+      matchedProducts = matchedProducts.filter((p) => {
+        const industryMatch = industry === "select industries" || 
+          p.industry_name?.toLowerCase() === industry;
+        const categoryMatch = chemicalSolution === "select category" || 
+          p.category_name?.toLowerCase() === chemicalSolution;
+        return industryMatch && categoryMatch;
+      });
+    }
+
+    return matchedProducts;
+  };
+
+  // Memoize filtered products
+  const filteredProducts = useMemo(() => {
+    return filterProducts(searchTerm, selectedIndustry, selectedChemicalSolution, products);
+  }, [searchTerm, selectedIndustry, selectedChemicalSolution, products]);
 
   // Handle search input change
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
-    filterProducts(term, selectedIndustry, selectedChemicalSolution);
   };
 
   // Handle industry selection change
   const handleIndustryChange = (event) => {
-    const industry = event.target.value.toLowerCase(); // Convert to lowercase
+    const industry = event.target.value.toLowerCase();
     setSelectedIndustry(industry);
-    filterProducts(searchTerm, industry, selectedChemicalSolution);
   };
 
   // Handle chemical solution selection change
   const handleChemicalSolutionChange = (event) => {
-    const chemicalSolution = event.target.value.toLowerCase(); // Convert to lowercase
+    const chemicalSolution = event.target.value.toLowerCase();
     setSelectedChemicalSolution(chemicalSolution);
-    filterProducts(searchTerm, selectedIndustry, chemicalSolution);
-  };
-
-  // Filter products based on search term, industry, and chemical solution
-  const filterProducts = (term, industry, chemicalSolution) => {
-    let matchedProducts = products;
-
-    // Filter by search term (only if search term is not empty)
-    if (term) {
-      matchedProducts = matchedProducts.filter((p) =>
-        p.name?.toLowerCase().includes(term)
-      );
-    } else {
-      // If search term is empty, show no products
-      matchedProducts = [];
-    }
-
-    // Filter by selected industry (if not "select industries")
-    if (industry !== "select industries") {
-      matchedProducts = matchedProducts.filter(
-        (p) => p.category_name?.toLowerCase() === industry
-      );
-    }
-
-    // Filter by selected chemical solution (if not "select category")
-    if (chemicalSolution !== "select category") {
-      matchedProducts = matchedProducts.filter(
-        (p) => p.chemical_name?.toLowerCase() === chemicalSolution
-      );
-    }
-
-    setFilteredProducts(matchedProducts);
   };
 
   // Function to handle modal form submission
   const onSubmit = (data) => {
     console.log("Email submitted:", data.email);
-    // You can implement the actual logic to send the email request here
-    setShowModal(false); // Close the modal after submission
-    reset(); // Reset the form
+    setShowModal(false);
+    reset();
   };
 
   const handleLinkClick = (type) => {
-    setModalType(type); // Set the modal type to either 'Safety', 'Technical', or 'Brochure'
-    setShowModal(true); // Show the modal
+    setModalType(type);
+    setShowModal(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setShowModal(false);
   };
-
-  console.log(products);
 
   return (
     <div
@@ -136,22 +141,37 @@ function FindProductSection() {
               placeholder="Search for products, grades or codes"
               value={searchTerm}
               onChange={handleSearchChange}
+              disabled={isLoading}
             />
           </div>
         </div>
 
-        {/* Display filtered products */}
-        {filteredProducts.length > 0 && (
+        {/* Loading and Error States */}
+        {isLoading && (
+          <div className="text-center mt-4 text-gray-500 dark:text-gray-300">
+            Loading products...
+          </div>
+        )}
+        {error && !isLoading && (
+          <div className="text-center mt-4 text-red-400">
+            {error.message || "Failed to load products. Please try again later."}
+          </div>
+        )}
+
+        {/* Display filtered products with count */}
+        {filteredProducts.length > 0 && !isLoading && !error && (
           <div className="search-result-container bg-slate-200 dark:bg-gray-700 p-4 rounded-lg mt-4 w-full sm:w-3/5 mx-auto">
+            <div className="text-center text-sm text-gray-600 dark:text-gray-300 mb-2">
+              {filteredProducts.length} product{filteredProducts.length !== 1 ? "s" : ""} found
+            </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               {filteredProducts.map((product) => (
                 <Link
                   key={product._id}
-                  to={`/available-stocks/${product._id}`} // Link to ProductDetails page with product ID
+                  to={`/available-stocks/${product._id}`}
                   className="flex flex-col w-full border rounded-lg shadow-md transform transition-transform duration-300 hover:scale-105 hover:shadow-lg p-4 bg-white dark:bg-gray-800"
-                  style={{ aspectRatio: "1 / 1" }} // Making each card square
+                  style={{ aspectRatio: "1 / 1" }}
                 >
-                  {/* Image Container */}
                   <div className="bg-white dark:bg-gray-700 rounded-t-lg overflow-hidden flex-grow">
                     <img
                       src={product.banner}
@@ -159,8 +179,6 @@ function FindProductSection() {
                       className="w-full h-32 object-cover"
                     />
                   </div>
-
-                  {/* Product Info */}
                   <div className="py-4 text-center">
                     <h3 className="text-lg font-semibold mt-2 text-black dark:text-white">
                       {product.name}
@@ -176,9 +194,9 @@ function FindProductSection() {
         )}
 
         {/* Show message if no product matches */}
-        {searchTerm && filteredProducts.length === 0 && (
+        {searchTerm && filteredProducts.length === 0 && !isLoading && !error && (
           <div className="text-center mt-4 text-gray-500 dark:text-gray-300">
-            No product found matching "{searchTerm}".
+            No products found matching your criteria.
           </div>
         )}
 
@@ -196,32 +214,21 @@ function FindProductSection() {
               id="industries"
               value={selectedIndustry}
               onChange={handleIndustryChange}
+              disabled={isLoading}
             >
               <option value="select industries">Select industries</option>
               <option value="automotive">Automotive</option>
-              <option value="printing and packaging">
-                Printing and Packaging
-              </option>
-              <option value="agriculture, feed, and food">
-                Agriculture, Feed, and Food
-              </option>
+              <option value="printing and packaging">Printing and Packaging</option>
+              <option value="agriculture, feed, and food">Agriculture, Feed, and Food</option>
               <option value="electronics">Electronics</option>
-              <option value="personal and home care">
-                Personal and Home Care
-              </option>
-              <option value="adhesives and sealants">
-                Adhesives and Sealants
-              </option>
+              <option value="personal and home care">Personal and Home Care</option>
+              <option value="adhesives and sealants">Adhesives and Sealants</option>
               <option value="paints and coating">Paints and Coating</option>
-              <option value="building and construction">
-                Building and Construction
-              </option>
-              <option value="medical and pharmaceutical">
-                Medical and Pharmaceutical
-              </option>
+              <option value="building and construction">Building and Construction</option>
+              <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
             </select>
           </div>
-          <div className="flex-1 flex flex-col ">
+          <div className="flex-1 flex flex-col">
             <label
               className="text-[#333] dark:text-white font-bold mb-[5px]"
               htmlFor="solutions"
@@ -233,6 +240,7 @@ function FindProductSection() {
               id="solutions"
               value={selectedChemicalSolution}
               onChange={handleChemicalSolutionChange}
+              disabled={isLoading}
             >
               <option value="select category">Select category</option>
               <option value="antioxidants">Antioxidants</option>
@@ -245,9 +253,7 @@ function FindProductSection() {
               <option value="polymers and resins">Polymers and Resins</option>
               <option value="plasticizers">Plasticizers</option>
               <option value="nucleating agent">Nucleating Agent</option>
-              <option value="polymer processing additives">
-                Polymer Processing Additives
-              </option>
+              <option value="polymer processing additives">Polymer Processing Additives</option>
               <option value="masterbatches">Masterbatches</option>
             </select>
           </div>
@@ -296,7 +302,7 @@ function FindProductSection() {
               onClick={closeModal}
               className="absolute top-2 right-2 text-gray-500 dark:text-white"
             >
-              &times;
+              ×
             </button>
             <div className="text-center text-xl font-semibold text-black dark:text-white mb-4">
               {modalType === "technical"
@@ -310,7 +316,6 @@ function FindProductSection() {
                 <button
                   className="bg-[#a6ce39] text-white py-2 px-4 rounded-lg hover:bg-[#8aa823] transition-all"
                   onClick={() => {
-                    // Implement download logic here
                     console.log("Downloading brochure...");
                     closeModal();
                   }}

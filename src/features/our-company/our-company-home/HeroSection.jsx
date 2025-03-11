@@ -8,24 +8,47 @@ function HeroSection() {
   const [searchTerm, setSearchTerm] = useState("");
   const [products, setProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
-    const fetchProducts = async () => {
+    const fetchAllProducts = async () => {
+      setIsLoading(true);
+      setError(null);
       try {
-        const response = await axiosInstance.get("/products", {
-          params: { page: 1, limit: 50 },
-        });
-        if (response.status === 200) {
-          setProducts(response.data?.data?.products || []);
-        } else {
-          console.error(`Unexpected status code: ${response.status}`);
-        }
+        // Since limit: 0 might not work, we'll fetch all pages iteratively
+        let allProducts = [];
+        let currentPage = 1;
+        let totalPages = 1;
+
+        do {
+          const response = await axiosInstance.get("/products", {
+            params: {
+              page: currentPage,
+              limit: 50, // Adjust based on your API's maximum limit per page
+            },
+          });
+
+          if (response.status === 200) {
+            const data = response.data?.data;
+            allProducts = [...allProducts, ...(data?.products || [])];
+            totalPages = data?.totalPages || 1;
+            currentPage++;
+          } else {
+            throw new Error(`Unexpected status code: ${response.status}`);
+          }
+        } while (currentPage <= totalPages);
+
+        setProducts(allProducts);
       } catch (err) {
         console.error("Error fetching products:", err.message);
+        setError("Failed to load products. Please try again later.");
+      } finally {
+        setIsLoading(false);
       }
     };
 
-    fetchProducts();
+    fetchAllProducts();
   }, []);
 
   const toggleSearch = () => {
@@ -36,10 +59,12 @@ function HeroSection() {
     const term = event.target.value.trim().toLowerCase();
     setSearchTerm(term);
 
-    if (term) {
-      const matchedProducts = products.filter((p) =>
-        p.name.toLowerCase().includes(term)
-      );
+    if (term.length > 0) {
+      const matchedProducts = products.filter((product) => {
+        const nameMatch = product.name?.toLowerCase().includes(term);
+        const casMatch = product.cas_no?.toLowerCase().includes(term);
+        return nameMatch || casMatch;
+      });
       setFilteredProducts(matchedProducts);
     } else {
       setFilteredProducts([]);
@@ -60,13 +85,11 @@ function HeroSection() {
           <h1 className="text-4xl mb-5 font-bold leading-[41px] text-center">
             SERVING CHEMICALS
           </h1>
-          {/* Paragraph */}
           <p className="text-base mb-7 max-w-[600px] text-center">
             At ICG Speciality Chemicals FZCO We Aim To Improve The Quality Of
             Your Products By Providing Environmental Friendly Chemicals
           </p>
 
-          {/* Search bar container */}
           <div className="flex items-center justify-center w-full mx-auto flex-col relative max-w-[600px]">
             <div className="mb-4 flex items-center w-full relative bg-white dark:bg-gray-800 rounded-full shadow-md">
               <input
@@ -75,6 +98,7 @@ function HeroSection() {
                 placeholder="Search for CAS no. or Product name"
                 value={searchTerm}
                 onChange={handleSearchChange}
+                disabled={isLoading}
               />
               <button className="absolute right-1 flex items-center px-4 py-2 bg-[#8aa823] text-white rounded-full cursor-pointer">
                 <span className="text-sm font-semibold mr-2">Search</span>
@@ -89,8 +113,15 @@ function HeroSection() {
               {isSearchOpen ? "Hide Search" : "Show Search"}
             </button>
 
-            {/* Display filtered products */}
-            {filteredProducts.length > 0 && (
+            {isLoading && (
+              <div className="text-white mt-4">Loading products...</div>
+            )}
+
+            {error && !isLoading && (
+              <div className="text-red-400 mt-4">{error}</div>
+            )}
+
+            {filteredProducts.length > 0 && !isLoading && !error && (
               <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 p-4 rounded-lg mt-1 shadow-lg z-[1000] max-h-64 overflow-y-auto border border-gray-300 dark:border-gray-600">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
                   {filteredProducts.map((product) => (
@@ -104,6 +135,9 @@ function HeroSection() {
                           {product.name}
                         </h3>
                         <p className="text-xs text-gray-600 dark:text-gray-300">
+                          CAS: {product.cas_no}
+                        </p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300">
                           {product.chemical_name}
                         </p>
                       </div>
@@ -112,14 +146,13 @@ function HeroSection() {
                 </div>
               </div>
             )}
-          </div>
 
-          {/* Show message if no product matches */}
-          {searchTerm && filteredProducts.length === 0 && (
-            <div className="text-center mt-4 text-gray-500 dark:text-gray-300">
-              No product found matching "{searchTerm}".
-            </div>
-          )}
+            {searchTerm && filteredProducts.length === 0 && !isLoading && !error && (
+              <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 p-4 rounded-lg mt-1 shadow-lg z-[1000] text-center text-gray-500 dark:text-gray-300">
+                No products found matching "{searchTerm}".
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
