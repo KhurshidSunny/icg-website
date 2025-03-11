@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
@@ -15,15 +15,17 @@ const fetchProducts = async ({ queryKey }) => {
 };
 
 const ProductList = () => {
+  // Pagination state
   const [page, setPage] = useState(1);
-  const [sortAZ, setSortAZ] = useState(false);
-  const [sortZA, setSortZA] = useState(false);
-  const [market, setMarket] = useState("");
-  const [category, setCategory] = useState("");
-  const [filteredProducts, setFilteredProducts] = useState([]);
-  const [showProducts, setShowProducts] = useState([]);
-
   const limit = 6; // Set limit to 6 products per page
+  
+  // Filter and sort state
+  const [filters, setFilters] = useState({
+    sortAZ: false,
+    sortZA: false,
+    market: "",
+    category: ""
+  });
 
   // Fetch products with query params
   const { data, error, isLoading } = useQuery({
@@ -34,56 +36,68 @@ const ProductList = () => {
   });
 
   const { products = [], total = 0 } = data?.data || {};
-
-  // Apply filters and sorting to products
-  useEffect(() => {
-    if (products.length > 0) {
-      let result = [...products];
-      
-      // Apply market filter
-      if (market) {
-        result = result.filter(
-          (product) => product.industry_name?.toLowerCase() === market.toLowerCase()
-        );
-      }
-      
-      // Apply category filter
-      if (category) {
-        result = result.filter(
-          (product) => product.category_name?.toLowerCase() === category.toLowerCase()
-        );
-      }
-      
-      // Apply sorting
-      if (sortAZ) {
-        result = [...result].sort((a, b) => a.name.localeCompare(b.name));
-      } else if (sortZA) {
-        result = [...result].sort((a, b) => b.name.localeCompare(a.name));
-      }
-      
-      setFilteredProducts(result);
-      
-      // Get current page products
-      const startIndex = 0; // Always 0 since products are already paginated from the server
-      const endIndex = limit;
-      setShowProducts(result.slice(startIndex, endIndex));
-    } else {
-      setFilteredProducts([]);
-      setShowProducts([]);
-    }
-  }, [products, market, category, sortAZ, sortZA]);
+  console.log(products)
 
   // Reset to page 1 when filters change
   useEffect(() => {
     setPage(1);
-  }, [market, category, sortAZ, sortZA]);
+  }, [filters]);
 
-  // Calculate total pages based on total items or filtered items
+  // Handle filter changes
+  const handleFilterChange = (name, value) => {
+    setFilters(prev => {
+      // Special handling for sortAZ and sortZA since they're mutually exclusive
+      if (name === "sortAZ" && value === true) {
+        return { ...prev, sortAZ: true, sortZA: false, [name]: value };
+      } else if (name === "sortZA" && value === true) {
+        return { ...prev, sortAZ: false, sortZA: true, [name]: value };
+      } else {
+        return { ...prev, [name]: value };
+      }
+    });
+  };
+
+  // Apply filters and sorting using useMemo instead of useEffect
+  const filteredProducts = useMemo(() => {
+    if (!products.length) return [];
+    
+    let result = [...products];
+    
+    // Apply market filter
+    if (filters.market) {
+      result = result.filter(
+        (product) => product.industry_name?.toLowerCase() === filters.market.toLowerCase()
+      );
+    }
+    
+    // Apply category filter
+    if (filters.category) {
+      result = result.filter(
+        (product) => product.category_name?.toLowerCase() === filters.category.toLowerCase()
+      );
+    }
+    
+    // Apply sorting
+    if (filters.sortAZ) {
+      result = [...result].sort((a, b) => a.name.localeCompare(b.name));
+    } else if (filters.sortZA) {
+      result = [...result].sort((a, b) => b.name.localeCompare(a.name));
+    }
+    
+    return result;
+  }, [products, filters]);
+
+  // Get current page products for display
+  const showProducts = useMemo(() => {
+    return filteredProducts.slice(0, limit);
+  }, [filteredProducts, limit]);
+
+  // Calculate total for pagination
   const totalFilteredItems = filteredProducts.length;
-  const totalPages = Math.ceil((market || category ? totalFilteredItems : total) / limit);
+  const totalPages = Math.max(1, Math.ceil((filters.market || filters.category ? totalFilteredItems : total) / limit));
 
   // Generate pagination items
-  const getPaginationItems = () => {
+  const paginationItems = useMemo(() => {
     const items = [];
     
     if (totalPages <= 5) {
@@ -101,9 +115,9 @@ const ProductList = () => {
       
       // Adjust to show 5 pages when possible
       if (page <= 3) {
-        endPage = 5;
+        endPage = Math.min(5, totalPages - 1);
       } else if (page >= totalPages - 2) {
-        startPage = totalPages - 4;
+        startPage = Math.max(totalPages - 4, 2);
       }
       
       // Add ellipsis if needed on left side
@@ -128,7 +142,7 @@ const ProductList = () => {
     }
     
     return items;
-  };
+  }, [page, totalPages]);
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -154,12 +168,9 @@ const ProductList = () => {
         {/* A-Z Sorting */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
-            onClick={() => {
-              setSortAZ(true);
-              setSortZA(false);
-            }}
+            onClick={() => handleFilterChange("sortAZ", true)}
             className={`w-full focus:outline-none dark:text-text-dark ${
-              sortAZ ? "font-bold" : ""
+              filters.sortAZ ? "font-bold" : ""
             }`}
           >
             A-Z
@@ -170,12 +181,9 @@ const ProductList = () => {
         {/* Z-A Sorting */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
-            onClick={() => {
-              setSortZA(true);
-              setSortAZ(false);
-            }}
+            onClick={() => handleFilterChange("sortZA", true)}
             className={`w-full focus:outline-none dark:text-text-dark ${
-              sortZA ? "font-bold" : ""
+              filters.sortZA ? "font-bold" : ""
             }`}
           >
             Z-A
@@ -186,8 +194,8 @@ const ProductList = () => {
         {/* Market */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
           <select
-            value={market}
-            onChange={(e) => setMarket(e.target.value)}
+            value={filters.market}
+            onChange={(e) => handleFilterChange("market", e.target.value)}
             className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
           >
             <option value="">Select Market</option>
@@ -220,8 +228,8 @@ const ProductList = () => {
         {/* Category */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full min-w-[150px] dark:border-gray-700">
           <select
-            value={category}
-            onChange={(e) => setCategory(e.target.value)}
+            value={filters.category}
+            onChange={(e) => handleFilterChange("category", e.target.value)}
             className="w-full focus:outline-none dark:bg-gray-800 dark:text-text-dark"
           >
             <option value="">Select Category</option>
@@ -271,7 +279,7 @@ const ProductList = () => {
       </div>
 
       {/* Pagination - Only show if there are products */}
-      {(market || category ? totalFilteredItems : total) > 0 && (
+      {(filters.market || filters.category ? totalFilteredItems : total) > 0 && (
         <div className="flex items-center justify-center mt-8 mx-4 space-x-2">
           <button
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
@@ -282,7 +290,7 @@ const ProductList = () => {
           </button>
 
           <div className="flex items-center space-x-2">
-            {getPaginationItems().map((item, index) =>
+            {paginationItems.map((item, index) =>
               item === "..." ? (
                 <span
                   key={`ellipsis-${index}`}

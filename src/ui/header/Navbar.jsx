@@ -20,6 +20,7 @@ const Navbar = () => {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
+  const nestedDropdownRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.classList.remove("light", "dark");
@@ -71,7 +72,20 @@ const Navbar = () => {
       if (dropdown && dropdownRef.current) {
         const dropdownRect = dropdownRef.current.getBoundingClientRect();
         const isBelowDropdown = event.clientY > dropdownRect.bottom;
-        if (isBelowDropdown) {
+        
+        // Check if mouse is inside nested dropdown
+        let isInsideNestedDropdown = false;
+        if (nestedDropdown && nestedDropdownRef.current) {
+          const nestedRect = nestedDropdownRef.current.getBoundingClientRect();
+          isInsideNestedDropdown = 
+            event.clientX >= nestedRect.left && 
+            event.clientX <= nestedRect.right && 
+            event.clientY >= nestedRect.top && 
+            event.clientY <= nestedRect.bottom;
+        }
+        
+        // Only close dropdown if mouse is below main dropdown AND not inside nested dropdown
+        if (isBelowDropdown && !isInsideNestedDropdown) {
           setDropdown(null);
           setNestedDropdown(null);
         }
@@ -79,7 +93,7 @@ const Navbar = () => {
     };
     document.addEventListener("mousemove", handleMouseMove);
     return () => document.removeEventListener("mousemove", handleMouseMove);
-  }, [dropdown]);
+  }, [dropdown, nestedDropdown]);
 
   const handleSearchChange = (event) => {
     const term = event.target.value.trim().toLowerCase();
@@ -570,7 +584,10 @@ const Navbar = () => {
                     )}
 
                     {nestedDropdown === item.title && item.nested && (
-                      <div className="absolute left-full top-0 bg-background-light bg-white dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64">
+                      <div 
+                        ref={nestedDropdownRef}
+                        className="absolute left-full top-0 bg-background-light bg-white dark:bg-background-dark border-l border-neutral-light dark:border-neutral-dark shadow-lg p-4 space-y-2 w-48 overflow-y-auto overflow-x-hidden max-h-64"
+                      >
                         {item.nested.map((nestedItem, nestedIndex) => (
                           <div
                             key={nestedIndex}
