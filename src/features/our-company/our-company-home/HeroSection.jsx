@@ -113,14 +113,7 @@ function HeroSection() {
               {isSearchOpen ? "Hide Search" : "Show Search"}
             </button>
 
-            {isLoading && (
-              <div className="text-white mt-4">Loading products...</div>
-            )}
-
-            {error && !isLoading && (
-              <div className="text-red-400 mt-4">{error}</div>
-            )}
-
+         
             {filteredProducts.length > 0 && !isLoading && !error && (
               <div className="absolute top-full left-0 w-full bg-white dark:bg-gray-800 p-4 rounded-lg mt-1 shadow-lg z-[1000] max-h-64 overflow-y-auto border border-gray-300 dark:border-gray-600">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
