@@ -4,7 +4,7 @@ import IcgHeaderSection from "./IcgHeaderSection";
 import IcgSection1 from "./IcgSection1";
 import IcgFullImageSection from "./IcgFullImageSection";
 import IcgSolutionsSection from "./IcgSolutionsSection";
-import IcgAdditionalSection from "./IcgAdditionalSection"
+import IcgAdditionalSection from "./IcgAdditionalSection";
 import IcgFinalSection from "./IcgFinalSection";
 
 const IcgMarketTemplate = ({ icgMarketData }) => {
@@ -59,7 +59,7 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
   } = pageData;
 
   return (
-    <div className="container mx-auto px-6 lg:px-16 py-10 bg-background-light dark:bg-background-dark text-text-light dark:text-text-dark">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200">
       <IcgHeaderSection titleImage={titleImage} title={title} />
       <IcgSection1
         section1Heading1={section1Heading1}
@@ -84,9 +84,9 @@ const IcgMarketTemplate = ({ icgMarketData }) => {
         section2Paragraph6={section2Paragraph6}
         section2Heading7={section2Heading7}
         section2Paragraph7={section2Paragraph7}
-        image3={image3}
       />
       <IcgAdditionalSection
+        image3={image3}
         section1Heading3={section1Heading3}
         section1Paragraph3={section1Paragraph3}
         section1Heading4={section1Heading4}

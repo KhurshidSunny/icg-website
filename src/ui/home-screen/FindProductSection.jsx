@@ -147,16 +147,7 @@ function FindProductSection() {
         </div>
 
         {/* Loading and Error States */}
-        {isLoading && (
-          <div className="text-center mt-4 text-gray-500 dark:text-gray-300">
-            Loading products...
-          </div>
-        )}
-        {error && !isLoading && (
-          <div className="text-center mt-4 text-red-400">
-            {error.message || "Failed to load products. Please try again later."}
-          </div>
-        )}
+     
 
         {/* Display filtered products with count */}
         {filteredProducts.length > 0 && !isLoading && !error && (
