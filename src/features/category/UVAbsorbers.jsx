@@ -9,18 +9,18 @@ function UVAbsorbers() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
-  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 8);
 
   useEffect(() => {
     if (page < 1 || isNaN(page)) setPage(1);
-    if (limit < 1 || isNaN(limit)) setLimit(10);
+    if (limit < 1 || isNaN(limit)) setLimit(8);
   }, [page, limit]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["uvabsorbers", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=uvabsorbers`,
+        `/products/?page=${page}&limit=${limit}&categoryName=UV-Absorbers`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -58,12 +58,14 @@ function UVAbsorbers() {
 
         <div>
           {/* Description */}
-          <h2 className="text-2xl font-bold mb-4 text-[#023B3B] dark:text-white">UV-Absorbers</h2>
+          <h2 className="text-2xl font-bold mb-4 text-[#023B3B] dark:text-white">
+            UV-Absorbers
+          </h2>
           <p className="font-normal text-[#000000] mb-6 dark:text-gray-300">
             UV absorbers are specialized compounds designed to absorb harmful
-            ultraviolet (UV) radiation from sunlight or artificial light sources.
-            They help protect materials, products, and surfaces from the
-            detrimental effects of UV rays, which can cause degradation,
+            ultraviolet (UV) radiation from sunlight or artificial light
+            sources. They help protect materials, products, and surfaces from
+            the detrimental effects of UV rays, which can cause degradation,
             discoloration, and loss of mechanical properties. UV absorbers are
             widely used in industries such as plastics, coatings, textiles, and
             personal care to ensure the longevity and stability of products.
@@ -75,22 +77,22 @@ function UVAbsorbers() {
           </h3>
           <ol className="list-decimal space-y-4 pl-4  dark:text-gray-300">
             <li className="p-2">
-              <span className="font-bold">Benzotriazoles:</span> These are some of
-              the most effective and widely used UV absorbers, particularly in
-              plastic and coatings applications. They offer excellent UV
+              <span className="font-bold">Benzotriazoles:</span> These are some
+              of the most effective and widely used UV absorbers, particularly
+              in plastic and coatings applications. They offer excellent UV
               protection and high thermal stability, making them suitable for
               outdoor applications.
               <span className="font-bold">Omniquan UV 326</span> is a
-              benzotriazole UV absorber that offers broad-spectrum UV protection,
-              ideal for plastic applications.{" "}
+              benzotriazole UV absorber that offers broad-spectrum UV
+              protection, ideal for plastic applications.{" "}
               <span className="font-bold">Omniqaun UV 1577</span> is used in
               automotive coatings, providing excellent thermal stability and UV
               resistance.{" "}
             </li>
             <li className="p-2">
               <span className="font-bold"> Benzophenones:</span> Benzophenones
-              work by absorbing UV radiation and dissipating it as heat. They are
-              commonly used in plastics, coatings, and adhesives to protect
+              work by absorbing UV radiation and dissipating it as heat. They
+              are commonly used in plastics, coatings, and adhesives to protect
               against UV light-induced degradation.{" "}
               <span className="font-bold">Omniquan BP 12</span> belongs to the
               benzophenone class of UV absorbers, known for their ability to
@@ -106,13 +108,13 @@ function UVAbsorbers() {
               automotive and industrial coatings to enhance durability.{" "}
               <span className="font-bold">Omniquan UV 1577</span> is a
               highperformance triazine UV absorber that is widely used in
-              automotive and industrial coatings. It provides excellent stability
-              at high temperatures and efficient UV protection.{" "}
+              automotive and industrial coatings. It provides excellent
+              stability at high temperatures and efficient UV protection.{" "}
               <span className="font-bold">Omniquan UV 1600</span> is a
               triazine-based UV absorber that is specifically designed for
               applications requiring long-term outdoor stability, such as
-              automotive clear coats and industrial finishes. It is known for its
-              exceptional durability
+              automotive clear coats and industrial finishes. It is known for
+              its exceptional durability
             </li>
           </ol>
           <h3 className="text-xl font-semibold p-4 text-[#023B3B] dark:text-white">
@@ -141,23 +143,23 @@ function UVAbsorbers() {
           <div className="px-20 pb-10">
             <div className="flex justify-between pt-10 pb-10">
               <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-              <button
+              <a
+                href={`all-products/UV-Absorbers`}
                 className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-                onClick={() => {
-                  setLimit(limit + 100);
-                  setSearchParams({ page: page, limit: limit + 100 });
-                  // queryClient.invalidateQueries(["uvabsorbers"]);
-                }}
               >
                 View All <FaArrowRightLong className="text-[#8AA823]" />
-              </button>
+              </a>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {data?.products?.map((product, index) => (
                 <a href={`/available-stocks/${product._id}`} key={product._id}>
                   <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                    <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                    <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                    <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                      {product.name}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {product.cas_no}
+                    </p>
                   </div>
                 </a>
               ))}
@@ -165,12 +167,14 @@ function UVAbsorbers() {
 
             {data?.products?.length === 0 && (
               <div className="flex justify-center items-center mt-10">
-                <p className="text-2xl font-semibold dark:text-gray-300">No Products Found</p>
+                <p className="text-2xl font-semibold dark:text-gray-300">
+                  No Products Found
+                </p>
               </div>
             )}
 
             {/* Pagination Controls */}
-            {data && data.totalPages > 1 && (
+            {/* {data && data.totalPages > 1 && (
               <div className="flex justify-center items-center mt-10 gap-4">
                 <button
                   onClick={() => handlePageChange(page - 1)}
@@ -190,7 +194,7 @@ function UVAbsorbers() {
                   Next
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

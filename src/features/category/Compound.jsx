@@ -8,18 +8,18 @@ function Compound() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
-  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 8);
 
   useEffect(() => {
     if (page < 1 || isNaN(page)) setPage(1);
-    if (limit < 1 || isNaN(limit)) setLimit(10);
+    if (limit < 1 || isNaN(limit)) setLimit(8);
   }, [page, limit]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["compound", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=compound`,
+        `/products/?page=${page}&limit=${limit}&categoryName=Compounds`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -57,15 +57,18 @@ function Compound() {
         {/* Below Content */}
         <div className="pt-8 leading-loose">
           <div className="pt-8 pb-6">
-            <h3 className="text-3xl font-bold pb-4 text-[#023B3B] dark:text-white">Compounds</h3>
+            <h3 className="text-3xl font-bold pb-4 text-[#023B3B] dark:text-white">
+              Compounds
+            </h3>
             <p className="pt-6 dark:text-gray-300">
-              Compounds are versatile materials used across industries to enhance
-              product performance, improve processability, and meet specific
-              functional requirements. At ICG Specialty Chemicals, we offer a
-              comprehensive range of compounds that deliver exceptional quality,
-              consistency, and functionality. Our compounds are tailored to meet
-              the stringent demands of key industries such as automotive,
-              construction, electronics, and chemicals manufacturing.
+              Compounds are versatile materials used across industries to
+              enhance product performance, improve processability, and meet
+              specific functional requirements. At ICG Specialty Chemicals, we
+              offer a comprehensive range of compounds that deliver exceptional
+              quality, consistency, and functionality. Our compounds are
+              tailored to meet the stringent demands of key industries such as
+              automotive, construction, electronics, and chemicals
+              manufacturing.
             </p>
           </div>
           <div>
@@ -86,13 +89,15 @@ function Compound() {
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-bold pb-4 text-[#023B3B] dark:text-white">2. Glycerin</h3>
+            <h3 className="text-xl font-bold pb-4 text-[#023B3B] dark:text-white">
+              2. Glycerin
+            </h3>
             <p className=" dark:text-gray-300">
-              Glycerin is a versatile, colorless, odorless liquid used extensively
-              in personal care, pharmaceuticals, and food industries due to its
-              moisturizing and emollient properties. As a humectant, glycerin
-              helps retain moisture in formulations, enhancing product texture and
-              stability.
+              Glycerin is a versatile, colorless, odorless liquid used
+              extensively in personal care, pharmaceuticals, and food industries
+              due to its moisturizing and emollient properties. As a humectant,
+              glycerin helps retain moisture in formulations, enhancing product
+              texture and stability.
             </p>
           </div>
           <div>
@@ -135,10 +140,10 @@ function Compound() {
             </h3>
             <p className=" dark:text-gray-300">
               Methylene Chloride is a powerful solvent with a wide range of
-              applications, including paint stripping, pharmaceutical production,
-              and chemical processing. Known for its low boiling point, it allows
-              for efficient evaporation and easy removal in solvent-based
-              processes.
+              applications, including paint stripping, pharmaceutical
+              production, and chemical processing. Known for its low boiling
+              point, it allows for efficient evaporation and easy removal in
+              solvent-based processes.
             </p>
           </div>
           <div>
@@ -149,7 +154,8 @@ function Compound() {
               XLPE is a durable, thermoset plastic known for its superior
               insulation and chemical resistance properties. Cross-linking
               increases its strength, making it ideal for demanding applications
-              where thermal, electrical, and mechanical properties are essential.
+              where thermal, electrical, and mechanical properties are
+              essential.
             </p>
           </div>
           <div>
@@ -157,11 +163,11 @@ function Compound() {
               8. HFFR (Halogen-Free Flame Retardant Compounds)
             </h3>
             <p className=" dark:text-gray-300">
-              HFFR Compounds are specially formulated to provide flame retardancy
-              without the use of halogenated chemicals, making them
-              environmentally friendly while ensuring high safety standards. These
-              compounds are ideal for applications requiring strict fire safety
-              regulations.
+              HFFR Compounds are specially formulated to provide flame
+              retardancy without the use of halogenated chemicals, making them
+              environmentally friendly while ensuring high safety standards.
+              These compounds are ideal for applications requiring strict fire
+              safety regulations.
             </p>
           </div>
           <div>
@@ -189,14 +195,14 @@ function Compound() {
               </li>
               <li>
                 <span className="font-bold">Pharmaceuticals:</span>
-                Ethanol and Methylene Chloride are crucial in drug manufacturing,
-                serving as solvents and extraction agents for various
-                applications.
+                Ethanol and Methylene Chloride are crucial in drug
+                manufacturing, serving as solvents and extraction agents for
+                various applications.
               </li>
               <li>
                 <span className="font-bold">Consumer Goods:</span>
-                Glycerin and Ethanol find extensive use in personal care products,
-                cosmetics, and household items.
+                Glycerin and Ethanol find extensive use in personal care
+                products, cosmetics, and household items.
               </li>
             </ul>
           </div>
@@ -205,23 +211,23 @@ function Compound() {
           <div className="px-20 pb-10">
             <div className="flex justify-between pt-10 pb-10">
               <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-              <button
+              <a
+                href={`all-products/Compounds`}
                 className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-                onClick={() => {
-                  setLimit(limit + 100);
-                  setSearchParams({ page: page, limit: limit + 100 });
-                  // queryClient.invalidateQueries(["uvabsorbers"]);
-                }}
               >
                 View All <FaArrowRightLong className="text-[#8AA823]" />
-              </button>
+              </a>
             </div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               {data?.products?.map((product, index) => (
                 <a href={`/available-stocks/${product._id}`} key={product._id}>
                   <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                    <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                    <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                    <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                      {product.name}
+                    </h4>
+                    <p className="text-gray-600 dark:text-gray-300">
+                      {product.cas_no}
+                    </p>
                   </div>
                 </a>
               ))}
@@ -229,12 +235,14 @@ function Compound() {
 
             {data?.products?.length === 0 && (
               <div className="flex justify-center items-center mt-10">
-                <p className="text-2xl font-semibold dark:text-white">No Products Found</p>
+                <p className="text-2xl font-semibold dark:text-white">
+                  No Products Found
+                </p>
               </div>
             )}
 
             {/* Pagination Controls */}
-            {data && data.totalPages > 1 && (
+            {/* {data && data.totalPages > 1 && (
               <div className="flex justify-center items-center mt-10 gap-4">
                 <button
                   onClick={() => handlePageChange(page - 1)}
@@ -254,7 +262,7 @@ function Compound() {
                   Next
                 </button>
               </div>
-            )}
+            )} */}
           </div>
         </div>
       </div>

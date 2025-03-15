@@ -21,7 +21,7 @@ function PolymerAdditives() {
     queryKey: ["polymeradditives", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=polymeradditives`,
+        `/products/?page=${page}&limit=${limit}&categoryName=Polymer Additives`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -52,7 +52,10 @@ function PolymerAdditives() {
 
           {/* Centered Content */}
           <div className="absolute inset-0 flex justify-center items-center">
-            <h3 className="text-4xl text-white"> POLYMER PROCESSING ADDITIVES</h3>
+            <h3 className="text-4xl text-white">
+              {" "}
+              POLYMER PROCESSING ADDITIVES
+            </h3>
           </div>
         </div>
 
@@ -65,8 +68,8 @@ function PolymerAdditives() {
             <p className="pt-6 dark:text-gray-300">
               In the competitive landscape of polymer manufacturing, achieving
               optimal performance during processing is crucial for creating
-              high-quality end products. Omniquan Processing Aids (PPAs) stand out
-              as essential additives designed to enhance the processing
+              high-quality end products. Omniquan Processing Aids (PPAs) stand
+              out as essential additives designed to enhance the processing
               characteristics of polymers, ensuring efficiency and consistency
               throughout production.
               <br />
@@ -76,13 +79,13 @@ function PolymerAdditives() {
               are specialized additives formulated to improve the flow
               characteristics, reduce melt viscosity, and facilitate easier
               processing of various polymer materials. These aids modify the
-              rheological properties of polymers, enabling smoother processing and
-              enhancing the overall performance of polymer products.
+              rheological properties of polymers, enabling smoother processing
+              and enhancing the overall performance of polymer products.
               <br />
               <span className="font-bold">Omniquan PPA 5920,</span> this
-              processing aid is designed for enhanced flow and reduced viscosity,
-              making it ideal for applications requiring improved processing
-              efficiency.
+              processing aid is designed for enhanced flow and reduced
+              viscosity, making it ideal for applications requiring improved
+              processing efficiency.
               <span className="font-bold">Omniquan PPA 5922</span> is aimed at
               optimizing the extrusion and injection molding processes, PPA 5922
               significantly reduces cycle times while enhancing product quality.{" "}
@@ -98,9 +101,9 @@ function PolymerAdditives() {
               <span className="font-bold">Omniquan Zero Moisture</span> is
               engineered to minimize moisture absorption during processing,
               ensuring consistent quality and performance in the final products.
-              This innovative processing aid enhances the durability and longevity
-              of the polymers, making it particularly valuable in applications
-              where moisture resistance is critical.
+              This innovative processing aid enhances the durability and
+              longevity of the polymers, making it particularly valuable in
+              applications where moisture resistance is critical.
             </p>
           </div>
           <div className="pt-8 pb-6">
@@ -113,13 +116,14 @@ function PolymerAdditives() {
             </p>{" "}
             <br />
             <p className=" dark:text-gray-300">
-              <span className="font-bold">Extrusion:</span> Enhancing polymer flow
-              to prevent die drool and improve surface finish.
+              <span className="font-bold">Extrusion:</span> Enhancing polymer
+              flow to prevent die drool and improve surface finish.
             </p>{" "}
             <br />
             <p className=" dark:text-gray-300">
-              <span className="font-bold">Injection Molding:</span> Reducing cycle
-              times and enhancing mold filling for consistent part quality.
+              <span className="font-bold">Injection Molding:</span> Reducing
+              cycle times and enhancing mold filling for consistent part
+              quality.
             </p>{" "}
             <br />
             <p className=" dark:text-gray-300">
@@ -150,12 +154,14 @@ function PolymerAdditives() {
                 superior finish.
               </li>
               <li>
-                <span className="font-bold">Increased Output:</span> Faster cycle
-                times and reduced downtime enhance production rates and overall
-                efficiency
+                <span className="font-bold">Increased Output:</span> Faster
+                cycle times and reduced downtime enhance production rates and
+                overall efficiency
               </li>
               <li>
-                <span className="font-bold">Better Material Compatibility:</span>{" "}
+                <span className="font-bold">
+                  Better Material Compatibility:
+                </span>{" "}
                 Improved compatibility of polymer blends enhances the mechanical
                 properties of the final products.
               </li>
@@ -178,23 +184,23 @@ function PolymerAdditives() {
         <div className="px-20 pb-10">
           <div className="flex justify-between pt-10 pb-10">
             <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-            <button
+            <a
+              href={`all-products/Polymer Additives`}
               className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-              onClick={() => {
-                setLimit(limit + 100);
-                setSearchParams({ page: page, limit: limit + 100 });
-                // queryClient.invalidateQueries(["uvabsorbers"]);
-              }}
             >
               View All <FaArrowRightLong className="text-[#8AA823]" />
-            </button>
+            </a>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data?.products?.map((product, index) => (
               <a href={`/available-stocks/${product._id}`} key={product._id}>
                 <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                  <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                  <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                    {product.name}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {product.cas_no}
+                  </p>
                 </div>
               </a>
             ))}
@@ -202,12 +208,14 @@ function PolymerAdditives() {
 
           {data?.products?.length === 0 && (
             <div className="flex justify-center items-center mt-10">
-              <p className="text-2xl font-semibold dark:text-white">No Products Found</p>
+              <p className="text-2xl font-semibold dark:text-white">
+                No Products Found
+              </p>
             </div>
           )}
 
           {/* Pagination Controls */}
-          {data && data.totalPages > 1 && (
+          {/* {data && data.totalPages > 1 && (
             <div className="flex justify-center items-center mt-10 gap-4">
               <button
                 onClick={() => handlePageChange(page - 1)}
@@ -227,7 +235,7 @@ function PolymerAdditives() {
                 Next
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

@@ -45,6 +45,7 @@ import AllMediaAndNews from "./features/media/media-and-news/AllMediaAndNews";
 import AllBlogs from "./features/media/blogs-and-articles/AllBlogs";
 import Article from "./features/media/blogs-and-articles/Article";
 import AllArticles from "./features/media/blogs-and-articles/AllArticles";
+import AllProductsByCategory from "./features/category/AllProductsByCategory";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -95,7 +96,10 @@ function App() {
             <Route path="/job/:jobId" element={<Career />} />
             <Route path="/life-at-icg" element={<Gallery />} />
 
-            {/* <Route path="/gallery" element={<Gallery />} /> */}
+            <Route
+              path="/products-and-solutions/all-products/:category"
+              element={<AllProductsByCategory />}
+            />
             <Route
               path="/products-and-solutions/antioxidants-(na)"
               element={<Antioxidant />}

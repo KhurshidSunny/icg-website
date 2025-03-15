@@ -9,18 +9,18 @@ function Plasticizers() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
-  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 8);
 
   useEffect(() => {
     if (page < 1 || isNaN(page)) setPage(1);
-    if (limit < 1 || isNaN(limit)) setLimit(10);
+    if (limit < 1 || isNaN(limit)) setLimit(8);
   }, [page, limit]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["plasticizers", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=plasticizers`,
+        `/products/?page=${page}&limit=${limit}&categoryName=Plasticizers`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -42,8 +42,6 @@ function Plasticizers() {
   return (
     <div className="min-h-screen dark:bg-background-dark">
       <div className="container mx-auto px-6 lg:px-16 py-10">
-
-
         <div
           className="relative m-auto h-[419px] bg-cover bg-center"
           style={{
@@ -83,11 +81,11 @@ function Plasticizers() {
                 <ul className="list-[circle] list-inside space-y-4 font-normal">
                   <li>
                     Plasticizers are vital in the manufacturing of flexible PVC,
-                    transforming it from a rigid polymer into a malleable material
-                    used in products such as cables, hoses, and vinyl flooring. By
-                    embedding plasticizers, PVC can achieve enhanced elongation,
-                    flexibility, and resilience. One of the most widely used
-                    general-purpose plasticizers,{" "}
+                    transforming it from a rigid polymer into a malleable
+                    material used in products such as cables, hoses, and vinyl
+                    flooring. By embedding plasticizers, PVC can achieve
+                    enhanced elongation, flexibility, and resilience. One of the
+                    most widely used general-purpose plasticizers,{" "}
                     <span className="font-bold">DOP</span> offers{" "}
                     <span className="font-bold">excellent flexibility</span> and{" "}
                     <span className="font-bold">low volatility</span>, making it
@@ -104,10 +102,10 @@ function Plasticizers() {
                     plasticizers are integrated into elastomeric compounds to
                     enhance their{" "}
                     <span className="font-bold">processability</span> and{" "}
-                    <span className="font-bold">elasticity.</span> These compounds
-                    are widely used in automotive components like tires, seals,
-                    and gaskets, where superior flexibility under dynamic stress
-                    is required.
+                    <span className="font-bold">elasticity.</span> These
+                    compounds are widely used in automotive components like
+                    tires, seals, and gaskets, where superior flexibility under
+                    dynamic stress is required.
                   </li>
                 </ul>
               </li>
@@ -132,18 +130,22 @@ function Plasticizers() {
                   <li>
                     In the production of films used for{" "}
                     <span className="font-bold">packaging</span> and{" "}
-                    <span className="font-bold">agricultural applications,</span>
-                    plasticizers impart flexibility, tear resistance, and enhanced
-                    transparency. They enable materials to endure deformation
-                    without breaking, ideal for shrink wraps, greenhouse films,
-                    and food packaging. <span className="font-bold">DPHP</span> is
-                    recognized for providing{" "}
+                    <span className="font-bold">
+                      agricultural applications,
+                    </span>
+                    plasticizers impart flexibility, tear resistance, and
+                    enhanced transparency. They enable materials to endure
+                    deformation without breaking, ideal for shrink wraps,
+                    greenhouse films, and food packaging.{" "}
+                    <span className="font-bold">DPHP</span> is recognized for
+                    providing{" "}
                     <span className="font-bold">excellent weatherability</span>{" "}
                     and <span>UV resistance</span> in outdoor applications. Its
                     low volatility and{" "}
-                    <span className="font-bold">long-term flexibility</span> make
-                    it ideal for roofing membranes, coated fabrics, and automotive
-                    components exposed to sunlight and environmental elements.
+                    <span className="font-bold">long-term flexibility</span>{" "}
+                    make it ideal for roofing membranes, coated fabrics, and
+                    automotive components exposed to sunlight and environmental
+                    elements.
                   </li>
                 </ul>
               </li>
@@ -154,10 +156,11 @@ function Plasticizers() {
                     In medical applications, plasticizers are used in products
                     such as <span className="font-bold">IV tubing,</span>
                     <span className="font-bold">blood bags,</span> and{" "}
-                    <span className="font-bold">catheters,</span> where flexible,
-                    biocompatible materials are critical. The use of specialized,
-                    non-toxic plasticizers in medical-grade plastics ensures
-                    compliance with stringent health and safety regulations.
+                    <span className="font-bold">catheters,</span> where
+                    flexible, biocompatible materials are critical. The use of
+                    specialized, non-toxic plasticizers in medical-grade
+                    plastics ensures compliance with stringent health and safety
+                    regulations.
                   </li>
                 </ul>
               </li>
@@ -183,9 +186,9 @@ function Plasticizers() {
                 <ul className="list-[circle] list-inside space-y-4 font-normal">
                   <li>
                     Plasticizers increase a polymer's ability to resist wear,
-                    fatigue, and degradation under mechanical stress, UV exposure,
-                    and extreme temperatures, prolonging the lifespan of the
-                    material.
+                    fatigue, and degradation under mechanical stress, UV
+                    exposure, and extreme temperatures, prolonging the lifespan
+                    of the material.
                   </li>
                 </ul>
               </li>
@@ -195,8 +198,9 @@ function Plasticizers() {
                   <li>
                     During the extrusion, molding, or calendering of polymers,
                     plasticizers act as process aids by lowering the glass
-                    transition temperature and enhancing the flow characteristics,
-                    leading to faster cycle times and energy efficiency.
+                    transition temperature and enhancing the flow
+                    characteristics, leading to faster cycle times and energy
+                    efficiency.
                   </li>
                 </ul>
               </li>
@@ -240,23 +244,23 @@ function Plasticizers() {
         <div className="px-20 pb-10">
           <div className="flex justify-between pt-10 pb-10">
             <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-            <button
+            <a
+              href={`all-products/Plasticizers`}
               className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-              onClick={() => {
-                setLimit(limit + 100);
-                setSearchParams({ page: page, limit: limit + 100 });
-                // queryClient.invalidateQueries(["uvabsorbers"]);
-              }}
             >
               View All <FaArrowRightLong className="text-[#8AA823]" />
-            </button>
+            </a>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data?.products?.map((product, index) => (
               <a href={`/available-stocks/${product._id}`} key={product._id}>
                 <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                  <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                  <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                    {product.name}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {product.cas_no}
+                  </p>
                 </div>
               </a>
             ))}
@@ -264,12 +268,14 @@ function Plasticizers() {
 
           {data?.products?.length === 0 && (
             <div className="flex justify-center items-center mt-10">
-              <p className="text-2xl font-semibold dark:text-white">No Products Found</p>
+              <p className="text-2xl font-semibold dark:text-white">
+                No Products Found
+              </p>
             </div>
           )}
 
           {/* Pagination Controls */}
-          {data && data.totalPages > 1 && (
+          {/* {data && data.totalPages > 1 && (
             <div className="flex justify-center items-center mt-10 gap-4">
               <button
                 onClick={() => handlePageChange(page - 1)}
@@ -289,7 +295,7 @@ function Plasticizers() {
                 Next
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

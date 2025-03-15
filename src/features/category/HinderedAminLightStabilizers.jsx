@@ -18,7 +18,7 @@ function HinderedAminLightStabilizers() {
     queryKey: ["hals", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=hals`,
+        `/products/?page=${page}&limit=${limit}&categoryName=Hindered Amine Light Stabilizers (HALS)`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -82,8 +82,8 @@ function HinderedAminLightStabilizers() {
               products. It provides long-lasting UV protection and reduces
               photooxidation. <span className="font-bold">Omniquan LS 770</span>{" "}
               is a well-known HALS product, it is highly effective in preventing
-              the degradation of plastics and coatings exposed to UV radiation. It
-              is commonly used in polyolefins, polyurethanes, and styrene.
+              the degradation of plastics and coatings exposed to UV radiation.
+              It is commonly used in polyolefins, polyurethanes, and styrene.
             </p>
             <h3 className="text-xl font-semibold p-4 text-[#023B3B] dark:text-white">
               Key benifits
@@ -113,24 +113,26 @@ function HinderedAminLightStabilizers() {
         {/* Products */}
         <div className="px-20 pb-10">
           <div className="flex justify-between pt-10 pb-10">
-            <h3 className="text-3xl font-bold text-[#8AA823] dark:text-white">Products</h3>
-            <button
+            <h3 className="text-3xl font-bold text-[#8AA823] dark:text-white">
+              Products
+            </h3>
+            <a
+              href={`all-products/Hindered Amine Light Stabilizers (HALS)`}
               className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-              onClick={() => {
-                setLimit(limit + 100);
-                setSearchParams({ page: page, limit: limit + 100 });
-                // queryClient.invalidateQueries(["uvabsorbers"]);
-              }}
             >
               View All <FaArrowRightLong className="text-[#8AA823]" />
-            </button>
+            </a>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data?.products?.map((product, index) => (
               <a href={`/available-stocks/${product._id}`} key={product._id}>
                 <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                  <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                  <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                    {product.name}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {product.cas_no}
+                  </p>
                 </div>
               </a>
             ))}
@@ -138,12 +140,14 @@ function HinderedAminLightStabilizers() {
 
           {data?.products?.length === 0 && (
             <div className="flex justify-center items-center mt-10">
-              <p className="text-2xl font-semibold dark:text-gray-300">No Products Found</p>
+              <p className="text-2xl font-semibold dark:text-gray-300">
+                No Products Found
+              </p>
             </div>
           )}
 
           {/* Pagination Controls */}
-          {data && data.totalPages > 1 && (
+          {/* {data && data.totalPages > 1 && (
             <div className="flex justify-center items-center mt-10 gap-4">
               <button
                 onClick={() => handlePageChange(page - 1)}
@@ -163,7 +167,7 @@ function HinderedAminLightStabilizers() {
                 Next
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>

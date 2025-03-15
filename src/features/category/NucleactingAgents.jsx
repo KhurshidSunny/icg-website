@@ -9,18 +9,18 @@ function NucleactingAgents() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const [page, setPage] = useState(parseInt(searchParams.get("page")) || 1);
-  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 10);
+  const [limit, setLimit] = useState(parseInt(searchParams.get("limit")) || 8);
 
   useEffect(() => {
     if (page < 1 || isNaN(page)) setPage(1);
-    if (limit < 1 || isNaN(limit)) setLimit(10);
+    if (limit < 1 || isNaN(limit)) setLimit(8);
   }, [page, limit]);
 
   const { data, isLoading, error } = useQuery({
     queryKey: ["nucleactingagents", page, limit],
     queryFn: async () => {
       const data = await axiosInstance.get(
-        `/products/?page=${page}&limit=${limit}&categoryName=nucleactingagents`,
+        `/products/?page=${page}&limit=${limit}&categoryName=Nucleating Agents`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -68,22 +68,25 @@ function NucleactingAgents() {
               industrial applications, promoting the formation of nuclei in
               supersaturated solutions or molten systems. These agents serve as
               catalysts, accelerating nucleation—the critical stage in phase
-              transitions where small clusters of a new crystalline or solid phase
-              emerge within the original matrix. NAs enhance crystallization
-              kinetics, particularly in polymers, and improve material properties
-              such as clarity, mechanical strength, and thermal resistance. Their
-              role is vital in polymer technology, materials science, and related
-              sectors, where controlled nucleation is essential for optimizing
-              performance and processing efficiency.
+              transitions where small clusters of a new crystalline or solid
+              phase emerge within the original matrix. NAs enhance
+              crystallization kinetics, particularly in polymers, and improve
+              material properties such as clarity, mechanical strength, and
+              thermal resistance. Their role is vital in polymer technology,
+              materials science, and related sectors, where controlled
+              nucleation is essential for optimizing performance and processing
+              efficiency.
               <br />
               Nucleating agents can be categorized based on their chemical
-              composition, physical state, and the nucleation process they induce
-              such as organic, inorganic hybrid, and specialized nucleating
-              agents.
+              composition, physical state, and the nucleation process they
+              induce such as organic, inorganic hybrid, and specialized
+              nucleating agents.
             </p>
           </div>
           <div>
-            <h3 className="text-xl font-bold pb-4 text-[#023B3B] dark:text-white">Types:</h3>
+            <h3 className="text-xl font-bold pb-4 text-[#023B3B] dark:text-white">
+              Types:
+            </h3>
             <ol className="list-decimal list-inside space-y-2 font-semibold dark:text-gray-300">
               <li>Organic nucleating agents</li>
               <li>Inorganic Nucleating Agents</li>
@@ -102,17 +105,18 @@ function NucleactingAgents() {
                 </span>{" "}
                 Omniquan NA 2988{" "}
                 <span className="font-normal">
-                  is a first-generation sorbitol-based nucleating agent, designed
-                  to improve the transparency and surface gloss of polypropylene.
-                  It also enhances overall polymer performance by promoting faster
-                  crystallization, making it ideal for applications where optical
-                  clarity and smooth finishes are critical.
+                  is a first-generation sorbitol-based nucleating agent,
+                  designed to improve the transparency and surface gloss of
+                  polypropylene. It also enhances overall polymer performance by
+                  promoting faster crystallization, making it ideal for
+                  applications where optical clarity and smooth finishes are
+                  critical.
                 </span>{" "}
                 Omniquan NA 5988:{" "}
                 <span className="font-normal">
-                  This secondgeneration sorbitol-based agent offers better thermal
-                  stability and increased crystallization rates compared to its
-                  predecessor. It improves the mechanical properties of
+                  This secondgeneration sorbitol-based agent offers better
+                  thermal stability and increased crystallization rates compared
+                  to its predecessor. It improves the mechanical properties of
                   polypropylene, such as stiffness and impact resistance, making
                   it suitable for demanding industrial uses that require
                   durability and heat resistance.
@@ -121,11 +125,11 @@ function NucleactingAgents() {
                 Omniquan NA 8000
                 <span className="font-normal">
                   {" "}
-                  delivers superior optical properties, including enhanced clarity
-                  and reduced haze, while significantly shortening cycle times
-                  during polymer processing. This makes it ideal for high-speed
-                  production environments where both quality and efficiency are
-                  paramount.
+                  delivers superior optical properties, including enhanced
+                  clarity and reduced haze, while significantly shortening cycle
+                  times during polymer processing. This makes it ideal for
+                  high-speed production environments where both quality and
+                  efficiency are paramount.
                 </span>
               </li>
               <li>
@@ -149,9 +153,9 @@ function NucleactingAgents() {
                 <span className="font-normal">
                   {" "}
                   An organometallic salt-based nucleator that enhances product
-                  rigidity, heat resistance, and boosts crystallization efficiency
-                  and mechanical properties, ideal for high-performance
-                  applications.
+                  rigidity, heat resistance, and boosts crystallization
+                  efficiency and mechanical properties, ideal for
+                  high-performance applications.
                 </span>
               </li>
             </ol>
@@ -159,8 +163,9 @@ function NucleactingAgents() {
           <div className="pb-6">
             <p className=" dark:text-gray-300">
               A range of specialized nucleating agents designed to enhance the
-              crystallization morphology and macroscopic mechanical properties of
-              polypropylene. <span className="font-bold"> Omniquan NA 101: </span>
+              crystallization morphology and macroscopic mechanical properties
+              of polypropylene.{" "}
+              <span className="font-bold"> Omniquan NA 101: </span>
               Enhances crystallization in polypropylene, leading to improved
               mechanical strength and thermal stability.{" "}
               <span className="font-bold">Omniquan NA 11</span> improves clarity
@@ -199,8 +204,8 @@ function NucleactingAgents() {
                 pharmaceutical applications.
               </li>
               <li>
-                Uniform grain structure in metals, leads to increased strength and
-                durability
+                Uniform grain structure in metals, leads to increased strength
+                and durability
               </li>
               <li>
                 Enhanced texture, consistency, and shelf life of food products
@@ -228,23 +233,23 @@ function NucleactingAgents() {
         <div className="px-20 pb-10">
           <div className="flex justify-between pt-10 pb-10">
             <h3 className="text-3xl font-bold text-[#8AA823]">Products</h3>
-            <button
+            <a
+              href={`all-products/Nucleating Agents`}
               className="flex justify-around items-center border-[2px] border-[#8AA823] w-[138px] h-[47px] rounded dark:text-[#8AA823]"
-              onClick={() => {
-                setLimit(limit + 100);
-                setSearchParams({ page: page, limit: limit + 100 });
-                // queryClient.invalidateQueries(["uvabsorbers"]);
-              }}
             >
               View All <FaArrowRightLong className="text-[#8AA823]" />
-            </button>
+            </a>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {data?.products?.map((product, index) => (
               <a href={`/available-stocks/${product._id}`} key={product._id}>
                 <div className="border border-gray-300 rounded-lg p-4 bg-white shadow-sm text-center dark:bg-gray-800 dark:border-gray-700">
-                  <h4 className="font-semibold text-lg mb-2 dark:text-white">{product.name}</h4>
-                  <p className="text-gray-600 dark:text-gray-300">{product.cas_no}</p>
+                  <h4 className="font-semibold text-lg mb-2 dark:text-white">
+                    {product.name}
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">
+                    {product.cas_no}
+                  </p>
                 </div>
               </a>
             ))}
@@ -252,12 +257,14 @@ function NucleactingAgents() {
 
           {data?.products?.length === 0 && (
             <div className="flex justify-center items-center mt-10">
-              <p className="text-2xl font-semibold dark:text-gray-300">No Products Found</p>
+              <p className="text-2xl font-semibold dark:text-gray-300">
+                No Products Found
+              </p>
             </div>
           )}
 
           {/* Pagination Controls */}
-          {data && data.totalPages > 1 && (
+          {/* {data && data.totalPages > 1 && (
             <div className="flex justify-center items-center mt-10 gap-4">
               <button
                 onClick={() => handlePageChange(page - 1)}
@@ -277,7 +284,7 @@ function NucleactingAgents() {
                 Next
               </button>
             </div>
-          )}
+          )} */}
         </div>
       </div>
     </div>
