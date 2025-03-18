@@ -50,6 +50,7 @@ function FindProductSection() {
     cacheTime: 10 * 60 * 1000, // Keep in cache for 10 minutes
   });
   fetchAllProducts().then(data => console.log(data))
+ 
 
   // Pure function to filter products
   const filterProducts = (term, industry, chemicalSolution, productList) => {
