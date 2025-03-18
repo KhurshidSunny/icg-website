@@ -1,14 +1,16 @@
 /* eslint-disable react/prop-types */
+import { parseParagraph } from "./../../utils/ParagraphParser";
+
 function IcgSection1({
   section1Heading1,
   section1Paragraph1,
   section1Heading2,
   section1Paragraph2,
   image1,
+  productMap,
 }) {
   return (
     <div className="flex flex-col lg:flex-row items-center justify-between mb-12 gap-6 lg:gap-10">
-      {/* Left Box */}
       <div className="w-full lg:w-1/2 space-y-6">
         {section1Heading1 && (
           <div className="space-y-2">
@@ -16,7 +18,7 @@ function IcgSection1({
               {section1Heading1}
             </h2>
             <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 text-justify">
-              {section1Paragraph1}
+              {parseParagraph(section1Paragraph1, productMap)}
             </p>
           </div>
         )}
@@ -26,12 +28,11 @@ function IcgSection1({
               {section1Heading2}
             </h2>
             <p className="text-sm sm:text-base lg:text-lg text-gray-600 dark:text-gray-400 text-justify">
-              {section1Paragraph2}
+              {parseParagraph(section1Paragraph2, productMap)}
             </p>
           </div>
         )}
       </div>
-      {/* Right Box */}
       <div className="w-full lg:w-1/2 flex justify-center">
         <img
           src={image1}

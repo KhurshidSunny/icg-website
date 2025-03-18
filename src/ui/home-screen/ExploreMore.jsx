@@ -119,6 +119,11 @@ const categories = [
     img: "./assets/mast.png",
     link: "/products-and-solutions/masterbatch",
   },
+  {
+    title: "Compounds",
+    img: "./assets/compound.png",
+    link: "/products-and-solutions/compound",
+  },
 ];
 
 function ExploreMore() {

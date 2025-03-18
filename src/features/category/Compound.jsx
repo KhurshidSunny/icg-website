@@ -43,7 +43,7 @@ function Compound() {
       <div className="container mx-auto px-6 lg:px-16 py-10">
         <div
           className="relative m-auto h-[419px] bg-cover bg-center"
-          style={{ backgroundImage: `url('/assets/mast.png')` }}
+          style={{ backgroundImage: `url('/assets/compound.png')` }}
         >
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-[#000000] to-[#010101] opacity-20 rounded-xl"></div>
