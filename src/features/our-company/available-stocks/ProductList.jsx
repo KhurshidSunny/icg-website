@@ -8,7 +8,7 @@
   // Function to fetch products with pagination
   const fetchProducts = async ({ queryKey }) => {
     const [, { page, limit }] = queryKey;
-    const url = `/products?page=${page}&limit=${limit}`;
+    const url = `http://208.109.240.175:3000/api/api/external/products?page=${page}&limit=${limit}`;
     console.log("Fetching from:", `${axiosInstance.defaults.baseURL}${url}`);
     const response = await axiosInstance.get(url);
     return response.data;
