@@ -1,21 +1,30 @@
+/* eslint-disable react/prop-types */
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { axiosInstance } from "../../../axios"; // Adjust path to your axios config
 import RequestFileForm from "./RequestFileForm"; // Import the RequestFileForm component
 
-// Fetch product details based on the productId
+// Fetch product details based on the productId using axiosInstance
 const fetchProductDetails = async ({ queryKey }) => {
   const [, productId] = queryKey;
-  const apiUrl = import.meta.env.VITE_TARGETED_URL
-  const url = `${apiUrl}/products/${productId}`;
+  const apiUrl = import.meta.env.VITE_TARGETED_URL;
 
-  const response = await fetch(url);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch product: ${response.statusText}`);
+  if (!apiUrl) {
+    throw new Error("VITE_TARGETED_URL is not defined in .env");
   }
 
-  const data = await response.json();
-  return data;
+  const url = `${apiUrl}/products/${productId}`;
+  console.log("Fetching product from:", url); // Debug URL
+
+  try {
+    const response = await axiosInstance.get(`/products/${productId}`);
+    console.log("Product Details Response:", response.data); // Debug response
+    return response.data;
+  } catch (error) {
+    console.error("Fetch Product Error:", error.response?.data || error.message);
+    throw new Error(`Failed to fetch product: ${error.response?.statusText || error.message}`);
+  }
 };
 
 const ProductDetails = () => {
@@ -36,7 +45,7 @@ const ProductDetails = () => {
     return <div>Error: {error.message}</div>;
   }
 
-  const product = data?.data.product;
+  const product = data?.data?.product; // Adjust based on your API response structure
 
   // Function to handle TDS button click
   const handleTDSDownload = () => {
