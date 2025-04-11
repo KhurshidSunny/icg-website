@@ -51,6 +51,7 @@ const ProductList = () => {
     refetchOnWindowFocus: false,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const { products = [], total = 0 } = data?.data || {};
   console.log("Fetched Products:", products);
 
