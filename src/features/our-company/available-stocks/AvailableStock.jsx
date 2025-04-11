@@ -10,9 +10,9 @@ function AvailableStock() {
       {/* Image */}
       <img
         src="./availablestock.png"
-        alt="About ICG"
+        alt="Available Stock"
         className="w-full rounded-xl object-cover object-center h-full"
-        style={{ width: "1235.96px", height: "427.22px" }}
+        // style={{ width: "1235.96px", height: "427.22px" }}
       />
   
       {/* Dark Overlay */}

@@ -8,13 +8,8 @@ import RequestFileForm from "./RequestFileForm"; // Import the RequestFileForm c
 // Fetch product details based on the productId using axiosInstance
 const fetchProductDetails = async ({ queryKey }) => {
   const [, productId] = queryKey;
-  const apiUrl = import.meta.env.VITE_TARGETED_URL;
+  const url = `http://208.109.240.175:3000/api/api/external/products/${productId}`;
 
-  if (!apiUrl) {
-    throw new Error("VITE_TARGETED_URL is not defined in .env");
-  }
-
-  const url = `${apiUrl}/products/${productId}`;
   console.log("Fetching product from:", url); // Debug URL
 
   try {
