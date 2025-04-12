@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { PiCaretUpDownFill } from "react-icons/pi";
 import { axiosInstance } from "../../../axios"; // Adjust path
 
+
 // Function to fetch all products across all pages
 const fetchAllProducts = async () => {
   let allProducts = [];
@@ -51,6 +52,7 @@ const ProductList = () => {
     refetchOnWindowFocus: false,
   });
 
+  // eslint-disable-next-line no-unused-vars
   const { products = [], total = 0 } = data?.data || {};
   console.log("Fetched Products:", products);
 
@@ -251,6 +253,7 @@ const ProductList = () => {
         )}
       </div>
 
+
       {/* Pagination */}
       {totalFilteredItems > 0 && (
         <div className="flex items-center justify-center mt-8 mx-4 space-x-2">
@@ -299,3 +302,4 @@ const ProductList = () => {
 
 
 export default ProductList;
+
