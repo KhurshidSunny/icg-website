@@ -33,7 +33,9 @@ const ProductDetails = () => {
   });
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>
+       ...Loading
+    </div>
   }
 
   if (error) {
@@ -46,6 +48,8 @@ const ProductDetails = () => {
   const handleTDSDownload = () => {
     setFormOpen(true); // Open the form modal
   };
+
+  // console.log(product)
 
   return (
     <div className="container mx-auto px-6 lg:px-16 py-10 mb-8">
