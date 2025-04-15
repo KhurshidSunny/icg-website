@@ -7,7 +7,7 @@ import RequestFileForm from "./RequestFileForm"; // Import the RequestFileForm c
 const fetchProductDetails = async ({ queryKey }) => {
   const [, productId] = queryKey;
   const apiUrl = import.meta.env.VITE_TARGETED_URL;
-  const url = `${apiUrl}/products/${productId}`;
+  const url = `${apiUrl}/products/${productId}`; 
 
   const response = await fetch(url);
   if (!response.ok) {
