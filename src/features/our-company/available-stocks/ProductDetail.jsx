@@ -6,7 +6,7 @@ import RequestFileForm from "./RequestFileForm"; // Import the RequestFileForm c
 // Fetch product details based on the productId
 const fetchProductDetails = async ({ queryKey }) => {
   const [, productId] = queryKey;
-  const apiUrl = import.meta.env.VITE_TARGETED_URL
+  const apiUrl = import.meta.env.VITE_TARGETED_URL;
   const url = `${apiUrl}/products/${productId}`;
 
   const response = await fetch(url);
@@ -71,23 +71,27 @@ const ProductDetails = () => {
           <ul className="list-disc list-inside space-y-4 marker:text-[#8AA823] px-4">
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">CAS Number</h3>
-              <p className="text-gray-700">{product?.cas_number}</p>
+              <p className="text-gray-700">{product?.cas_no || "N/A"}</p>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Chemical Name</h3>
-              <p className="text-gray-700">{product?.chemical_name}</p>
+              <p className="text-gray-700">{product?.chemical_name || "N/A"}</p>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Molecular Formula</h3>
-              <p className="text-gray-700">{product?.molecular_formula}</p>
+              <p className="text-gray-700">
+                {product?.molecular_formula || "N/A"}
+              </p>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Molecular Weight (g/mol)</h3>
-              <p className="text-gray-700">{product?.molecular_weight}</p>
+              <p className="text-gray-700">
+                {product?.molecular_weight || "N/A"}
+              </p>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Product Form</h3>
-              <p className="text-gray-700">{product?.product_form}</p>
+              <p className="text-gray-700">{product?.product_form || "N/A"}</p>
             </li>
           </ul>
         </div>
