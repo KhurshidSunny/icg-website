@@ -24,11 +24,7 @@ const fetchProducts = async ({ queryKey }) => {
   // Construct the URL with all necessary query parameters
   const url = `/products?${queryParams}`;
   
-  console.log("API Request URL:", url);
-  
   const response = await axiosInstance.get(url);
-
-  console.log("response", response.data);
 
   return response.data;
 };
