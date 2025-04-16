@@ -1,60 +1,64 @@
-import { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { PiCaretUpDownFill } from "react-icons/pi";
-import { axiosInstance } from "../../../axios"; // Adjust path
+import { axiosInstance } from "../../../axios";
 
-
-// Function to fetch all products across all pages
-const fetchAllProducts = async () => {
-  let allProducts = [];
-  let currentPage = 1;
-  const limit = 50; // Higher limit to reduce API calls (adjust if API has a max)
-
-  while (true) {
-    const url = `/products?page=${currentPage}&limit=${limit}`;
-    console.log("Fetching from:", `${axiosInstance.defaults.baseURL}${url}`);
-    const response = await axiosInstance.get(url);
-    const { products, total } = response.data.data || {};
-
-    if (!products || products.length === 0) break;
-    allProducts = [...allProducts, ...products];
-
-    // If we've fetched all products, stop
-    if (allProducts.length >= total) break;
-
-    currentPage++;
+// Function to fetch products with pagination and filters
+const fetchProducts = async ({ queryKey }) => {
+  const [, { page, filters }] = queryKey;
+  const limit = 6;
+  
+  // Build query parameters
+  let queryParams = `page=${page}&limit=${limit}`;
+  
+  if (filters.market) {
+    queryParams += `&industryName=${filters.market}`;
   }
+  
+  if (filters.category) {
+    queryParams += `&categoryName=${filters.category}`;
+  }
+  
+  // Construct the URL with all necessary query parameters
+  const url = `/products?${queryParams}`;
+  
+  const response = await axiosInstance.get(url);
 
-  console.log("All Fetched Products:", allProducts);
-  return { data: { products: allProducts, total: allProducts.length } };
+  return response.data;
 };
 
 const ProductList = () => {
   // Pagination state
   const [page, setPage] = useState(1);
-  const limit = 6; // 6 products per page, handled client-side
+  const [totalPages, setTotalPages] = useState(1);
+  const limit = 6;
 
   // Filter and sort state
   const [filters, setFilters] = useState({
-    sortAZ: false,
-    sortZA: false,
+    sortBy: "", // "asc" or "desc" for A-Z or Z-A sorting
     market: "",
-    category: "",
+    category: ""
   });
 
-  // Fetch all products
-  const { data, error, isLoading } = useQuery({
-    queryKey: ["allProducts"],
-    queryFn: fetchAllProducts,
+  // Fetch products with query params
+  const { data, error, isLoading, refetch } = useQuery({
+    queryKey: ["products", { page, filters }],
+    queryFn: fetchProducts,
     keepPreviousData: true,
     refetchOnWindowFocus: false,
   });
 
-  // eslint-disable-next-line no-unused-vars
+  // Extract data from the API response
   const { products = [], total = 0 } = data?.data || {};
-  console.log("Fetched Products:", products);
+  
+  // Update total pages whenever data changes
+  useEffect(() => {
+    if (data) {
+      setTotalPages(Math.max(1, Math.ceil(total / limit)));
+    }
+  }, [data, total, limit]);
 
   // Reset to page 1 when filters change
   useEffect(() => {
@@ -63,91 +67,83 @@ const ProductList = () => {
 
   // Handle filter changes
   const handleFilterChange = (name, value) => {
-    setFilters((prev) => {
-      if (name === "sortAZ" && value === true) {
-        return { ...prev, sortAZ: true, sortZA: false };
-      } else if (name === "sortZA" && value === true) {
-        return { ...prev, sortAZ: false, sortZA: true };
-      } else {
-        return { ...prev, [name]: value };
-      }
-    });
+    if (name === "sortBy") {
+      setFilters(prev => ({ ...prev, sortBy: value }));
+    } else {
+      setFilters(prev => ({ ...prev, [name]: value }));
+    }
   };
 
-  // Apply filters and sorting
-  const filteredProducts = useMemo(() => {
-    let result = [...products];
-
-    // Apply market filter
-    if (filters.market) {
-      result = result.filter(
-        (product) => product.industry_name?.toLowerCase() === filters.market.toLowerCase()
-      );
+  // Sort products client-side for A-Z and Z-A
+  const sortedProducts = [...(products || [])].sort((a, b) => {
+    if (!filters.sortBy) return 0;
+    
+    if (filters.sortBy === "asc") {
+      return a.name.localeCompare(b.name);
+    } else if (filters.sortBy === "desc") {
+      return b.name.localeCompare(a.name);
     }
-
-    // Apply category filter
-    if (filters.category) {
-      result = result.filter(
-        (product) => product.category_name?.toLowerCase() === filters.category.toLowerCase()
-      );
-    }
-
-    // Apply sorting
-    if (filters.sortAZ) {
-      result.sort((a, b) => a.name.localeCompare(b.name));
-    } else if (filters.sortZA) {
-      result.sort((a, b) => b.name.localeCompare(a.name));
-    }
-
-    return result;
-  }, [products, filters]);
-
-  // Paginate filtered products
-  const showProducts = useMemo(() => {
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    return filteredProducts.slice(startIndex, endIndex);
-  }, [filteredProducts, page, limit]);
-
-  // Calculate total pages based on filtered products
-  const totalFilteredItems = filteredProducts.length;
-  const totalPages = Math.max(1, Math.ceil(totalFilteredItems / limit));
+    
+    return 0;
+  });
 
   // Generate pagination items
-  const paginationItems = useMemo(() => {
+  const getPaginationItems = () => {
     const items = [];
+
     if (totalPages <= 5) {
+      // If 5 or fewer pages, show all page numbers
       for (let i = 1; i <= totalPages; i++) {
         items.push(i);
       }
     } else {
+      // Always include first page
       items.push(1);
+
+      // Logic for pages around current page
       let startPage = Math.max(2, page - 1);
       let endPage = Math.min(totalPages - 1, page + 1);
 
+      // Adjust to show 5 pages when possible
       if (page <= 3) {
         endPage = Math.min(5, totalPages - 1);
       } else if (page >= totalPages - 2) {
         startPage = Math.max(totalPages - 4, 2);
       }
 
-      if (startPage > 2) items.push("...");
+      // Add ellipsis if needed on left side
+      if (startPage > 2) {
+        items.push("...");
+      }
+
+      // Add pages around current page
       for (let i = startPage; i <= endPage; i++) {
         items.push(i);
       }
-      if (endPage < totalPages - 1) items.push("...");
-      if (endPage < totalPages) items.push(totalPages);
-    }
-    return items;
-  }, [page, totalPages]);
 
+      // Add ellipsis if needed on right side
+      if (endPage < totalPages - 1) {
+        items.push("...");
+      }
+
+      // Always include last page if not already included
+      if (endPage < totalPages) {
+        items.push(totalPages);
+      }
+    }
+
+    return items;
+  };
+
+  // Loading state
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div className="max-w-6xl mx-auto p-4 text-center">Loading...</div>;
   }
 
+  // Error state
   if (error) {
     return (
-      <div>
+      <div className="max-w-6xl mx-auto p-4 text-center text-red-500">
         Error: {error.message}. Please try again later or contact support if the issue persists.
       </div>
     );
@@ -164,8 +160,10 @@ const ProductList = () => {
         {/* A-Z Sorting */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
-            onClick={() => handleFilterChange("sortAZ", true)}
-            className={`w-full focus:outline-none dark:text-text-dark ${filters.sortAZ ? "font-bold" : ""}`}
+            onClick={() => handleFilterChange("sortBy", filters.sortBy === "asc" ? "" : "asc")}
+            className={`w-full focus:outline-none dark:text-text-dark ${
+              filters.sortBy === "asc" ? "font-bold" : ""
+            }`}
           >
             A-Z
           </button>
@@ -175,8 +173,10 @@ const ProductList = () => {
         {/* Z-A Sorting */}
         <div className="flex items-center border-gray-300 border-2 py-1 px-2 rounded-md w-full md:flex-grow min-w-[120px] dark:border-gray-700">
           <button
-            onClick={() => handleFilterChange("sortZA", true)}
-            className={`w-full focus:outline-none dark:text-text-dark ${filters.sortZA ? "font-bold" : ""}`}
+            onClick={() => handleFilterChange("sortBy", filters.sortBy === "desc" ? "" : "desc")}
+            className={`w-full focus:outline-none dark:text-text-dark ${
+              filters.sortBy === "desc" ? "font-bold" : ""
+            }`}
           >
             Z-A
           </button>
@@ -200,6 +200,7 @@ const ProductList = () => {
             <option value="paints and coating">Paints and Coating</option>
             <option value="building and construction">Building and Construction</option>
             <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
+            <option value="antioxidants">Antioxidants</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
@@ -222,8 +223,8 @@ const ProductList = () => {
             <option value="polymers and resins">Polymers and Resins</option>
             <option value="plasticizers">Plasticizers</option>
             <option value="nucleating agent">Nucleating Agent</option>
-            <option value="polymer processing additives">Polymer Processing Additives</option>
-            <option value="masterbatches">Masterbatches</option>
+            <option value="polymer processing aids">Polymer Processing Additives</option>
+            <option value="masterbatch">Masterbatches</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
@@ -231,8 +232,8 @@ const ProductList = () => {
 
       {/* Product List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {showProducts.length > 0 ? (
-          showProducts.map((product) => (
+        {sortedProducts.length > 0 ? (
+          sortedProducts.map((product) => (
             <Link
               key={product._id}
               to={`/available-stocks/${product._id}`}
@@ -242,20 +243,21 @@ const ProductList = () => {
                 <h3 className="text-lg font-semibold mt-4 text-text-light dark:text-text-dark">
                   {product.name}
                 </h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">{product.cas_no}</p>
+                <p className="text-sm text-gray-600 dark:text-gray-400">
+                  {product.cas_no}
+                </p>
               </div>
             </Link>
           ))
         ) : (
           <div className="text-center col-span-3 text-text-light dark:text-text-dark">
-            No products available.
+            No products available. Try adjusting your filters.
           </div>
         )}
       </div>
 
-
-      {/* Pagination */}
-      {totalFilteredItems > 0 && (
+      {/* Pagination - Only show if there are products */}
+      {total > 0 && (
         <div className="flex items-center justify-center mt-8 mx-4 space-x-2">
           <button
             className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 disabled:opacity-50 dark:bg-gray-700 dark:hover:bg-gray-600"
@@ -266,9 +268,12 @@ const ProductList = () => {
           </button>
 
           <div className="flex items-center space-x-2">
-            {paginationItems.map((item, index) =>
+            {getPaginationItems().map((item, index) =>
               item === "..." ? (
-                <span key={`ellipsis-${index}`} className="text-gray-600 dark:text-gray-400">
+                <span
+                  key={`ellipsis-${index}`}
+                  className="text-gray-600 dark:text-gray-400"
+                >
                   ...
                 </span>
               ) : (
@@ -300,6 +305,4 @@ const ProductList = () => {
   );
 };
 
-
 export default ProductList;
-
