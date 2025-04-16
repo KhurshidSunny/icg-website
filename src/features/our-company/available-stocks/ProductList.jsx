@@ -200,7 +200,6 @@ const ProductList = () => {
             <option value="paints and coating">Paints and Coating</option>
             <option value="building and construction">Building and Construction</option>
             <option value="medical and pharmaceutical">Medical and Pharmaceutical</option>
-            <option value="antioxidants">Antioxidants</option>
           </select>
           <PiCaretUpDownFill className="cursor-pointer text-gray-300 dark:text-gray-400" />
         </div>
