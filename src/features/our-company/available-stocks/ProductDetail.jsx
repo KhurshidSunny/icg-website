@@ -87,7 +87,15 @@ const ProductDetails = () => {
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Molecular Formula</h3>
-              <p className="text-gray-700">{product?.molecular_formula}</p>
+              <p className="text-gray-700">
+                {product?.molecular_formula ? (
+                  <span dangerouslySetInnerHTML={{ 
+                    __html: product.molecular_formula.replace(/(\d+)/g, '<sub>$1</sub>') 
+                  }} />
+                ) : (
+                  "N/A"
+                )}
+              </p>
             </li>
             <li className="flex flex-col sm:flex-row sm:items-center sm:space-x-6">
               <h3 className="font-bold w-48">Molecular Weight (g/mol)</h3>
