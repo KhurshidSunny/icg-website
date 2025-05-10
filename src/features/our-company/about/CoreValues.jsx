@@ -40,20 +40,20 @@ const CoreValues = () => {
   return (
     <section
       className="relative w-full max-w-screen-xl mx-auto bg-cover bg-center py-16 px-4"
-      //   style={{
-      //     backgroundImage: "url('./core-values-bg.png')",
-      //     backgroundSize: "cover",
-      //     backgroundPosition: "center",
-      //     backgroundRepeat: "no-repeat",
-      //     position: "relative",
-      //     zIndex: 3,
-      //   }}
+    //   style={{
+    //     backgroundImage: "url('./core-values-bg.png')",
+    //     backgroundSize: "cover",
+    //     backgroundPosition: "center",
+    //     backgroundRepeat: "no-repeat",
+    //     position: "relative",
+    //     zIndex: 3,
+    //   }}
     >
-      <h2 className="text-center text-3xl md:text-4xl font-bold text-teal-900 mb-12">
+      <h2 className="text-center text-3xl md:text-4xl font-bold text-teal-900 mb-12 dark:text-white">
         Our Core Values
       </h2>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-items-center max-w-7xl mx-auto">
         {values.map((value, index) => (
           <div
             key={index}
@@ -70,7 +70,7 @@ const CoreValues = () => {
               />
             </div>
             <h5
-              className="font-bold text-lg text-teal-900"
+              className="font-bold text-lg text-teal-900 dark:text-white"
               style={{
                 fontFamily: "Albert Sans",
                 fontSize: "20px",
@@ -81,7 +81,7 @@ const CoreValues = () => {
               {value.heading}
             </h5>
             <p
-              className="text-base text-teal-900"
+              className="text-base text-teal-900 dark:text-white"
               style={{
                 fontFamily: "Albert Sans",
                 fontSize: "16px",
