@@ -70,9 +70,9 @@ function Footer() {
               />
             </a>
 
-            {/* Twitter */}
+            {/* Twitter / X */}
             <a
-              href="https://www.twitter.com"
+              href="https://x.com/ICGchemicals"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer"
@@ -86,7 +86,7 @@ function Footer() {
 
             {/* Instagram */}
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/icgchemicals?igsh=MXFpZDF1N3owbDh2eg=="
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer"
@@ -100,7 +100,7 @@ function Footer() {
 
             {/* LinkedIn */}
             <a
-              href="https://www.linkedin.com"
+              href="https://www.linkedin.com/company/icgspecialtychemicalsfzco/"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer"
@@ -114,7 +114,7 @@ function Footer() {
 
             {/* Pinterest */}
             <a
-              href="https://www.pinterest.com"
+              href="https://www.pinterest.com/ICGSpecialtyChemicalsFZCO/"
               target="_blank"
               rel="noopener noreferrer"
               className="cursor-pointer"
