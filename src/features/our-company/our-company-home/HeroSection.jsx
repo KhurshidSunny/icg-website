@@ -10,6 +10,7 @@ function HeroSection() {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  console.log(searchTerm)
 
   useEffect(() => {
     const fetchAllProducts = async () => {
@@ -56,7 +57,7 @@ function HeroSection() {
   };
 
   const handleSearchChange = (event) => {
-    const term = event.target.value.trim().toLowerCase();
+    const term = event.target.value.toLowerCase();
     setSearchTerm(term);
 
     if (term.length > 0) {
